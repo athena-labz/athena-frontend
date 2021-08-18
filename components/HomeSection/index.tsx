@@ -9,6 +9,7 @@ import {
     Icon,
     IconProps,
   } from '@chakra-ui/react';
+import Image from 'next/image';
   
 export default function HomeSection() {
     return (
@@ -44,8 +45,7 @@ export default function HomeSection() {
           </Button>
         </Stack>
 
-        <img alt="pessoas" src="/Digiservices.png" style={{width:"35rem"}} />
-  
+        <Image src="/Digiservices.png" width="540rem" height="350rem" />
       </Stack>
 
         

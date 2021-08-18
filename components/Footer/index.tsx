@@ -12,11 +12,13 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react';
   import { ReactNode } from 'react';
+  import Image from 'next/image'
+
   import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
   
   const Logo = (props: any) => {
     return (
-        <img src="/logo.png" style={{width:"11rem"}} /> 
+        <Image src="/logo.png" width="200rem" height="80rem" /> 
     );
   };
   

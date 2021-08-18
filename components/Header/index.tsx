@@ -35,6 +35,7 @@ import {
     PhoneIcon,
 } from '@chakra-ui/icons';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const Header: NextPage = () => {
     const { isOpen, onToggle } = useDisclosure();
@@ -69,7 +70,7 @@ const Header: NextPage = () => {
             <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}  >
             
             <Box ml={10}>            
-                <img src="/logo.png" style={{width:"13rem"}} />              
+              <Image src="/logo.png" width="200rem" height="80rem" />              
             </Box>
                 
             <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
