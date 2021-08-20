@@ -89,12 +89,11 @@ const Header: NextPage = () => {
               spacing={6}>
                 
               <Button
-                as={'a'}
-                onClick={(e) => setstate(!state)}
+                as={'a'}                
                 fontSize={'md'}
                 fontWeight={400}
                 variant={'link'}
-                href={'#'}>
+                href={'/login'}>
                 Sign In
               </Button>
 
@@ -104,6 +103,7 @@ const Header: NextPage = () => {
                 fontWeight={600}
                 color={'white'}
                 bg={'blue.500'}
+                onClick={(e) => setstate(!state)}
                 href={'#'}
                 _hover={{
                   bg: 'blue.300',
@@ -320,7 +320,7 @@ const Header: NextPage = () => {
     const NAV_ITEMS: Array<NavItem> = [
       {
         label: 'Discover',
-        
+        href:"/"
       },
       {
         label: 'How it work',
