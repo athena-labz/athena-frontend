@@ -68,7 +68,7 @@ The app will be available for access on your browser at `http://localhost:3000`
 
 ## 🤝 Colaboradores
 
-Agradecemos às seguintes pessoas que contribuíram para este projeto:
+We thank the following people who contributed to this project:
 
 <table>
   <tr>
