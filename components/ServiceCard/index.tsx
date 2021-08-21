@@ -16,7 +16,7 @@ import {
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
 
-const IMAGE =
+const RANDOM_IMAGE =
     'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80';
 
 type ServiceCardProps ={
@@ -28,21 +28,14 @@ type ServiceCardProps ={
     price?: number;
     deadline?: number;
     badge_color:string;
+    image?:string;
 }
 
 interface RatingProps {
     rating: number;
     numReviews: number;
 }
-const data = {
-    isNew: true,
-    imageURL:
-      'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80',
-    name: 'Wayfarer Classic',
-    price: 4.5,
-    rating: 4.2,
-    numReviews: 34,
-  };
+
 
 function Rating({ rating, numReviews }: RatingProps) {
     return (
@@ -73,8 +66,9 @@ function Rating({ rating, numReviews }: RatingProps) {
   }
 
   export default function ServiceCard(props:ServiceCardProps) {
+    const IMAGE = props.image ? props.image :RANDOM_IMAGE;
     return (
-    <Flex p={10} w="full" alignItems="center" justifyContent="center">
+    <Flex p={5} w="full" alignItems="center" justifyContent="center">
         <Box
           role={'group'}
           p={6}
@@ -135,7 +129,7 @@ function Rating({ rating, numReviews }: RatingProps) {
           <Flex justifyContent="space-between" alignContent="center" marginTop="0.3rem">
             <Rating rating={props.trust/1000/12} numReviews={props.trust} />
 
-            <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+            <Box fontSize="lg" color={useColorModeValue('gray.800', 'white')}>
               {props.price && <Box as="span" color={'gray.600'} fontSize="lg">
                 $ {" "}
               </Box>}

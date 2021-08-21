@@ -5,6 +5,8 @@ import HomeSection from '../components/HomeSection'
 import FeaturesSection from '../components/FeatureSection'
 import { api } from '../services/api'
 import ServiceCard from '../components/ServiceCard'
+import { services } from './api/services'
+import BestServicesSection from '../components/BestServicesSection'
 
 
 type Service= {
@@ -16,6 +18,7 @@ type Service= {
   price?: number;
   deadline?: number;
   badge_color:string;
+  image?:string;
 }
 
 
@@ -39,28 +42,7 @@ const Home = ({services}:Homeprops) => {
 
         <FeaturesSection />
 
-        <h1>-----Services: --------</h1>
-        <ul>
-
-          {services.map((service)=>(
-            <li key={service.title}>
-             
-               <ServiceCard
-                type={service.type}
-                badge_color={service.badge_color}
-                publisher={service.publisher}
-                title={service.title}
-                description={service.description}
-                trust={service.trust}
-                price={service.price}
-                deadline={service.deadline}
-               />
-
-            </li>
-          ))}
-
-        </ul>
-      
+        <BestServicesSection services={services} />
         
        </section >
  
@@ -70,7 +52,8 @@ const Home = ({services}:Homeprops) => {
 
 export const getStaticProps:GetStaticProps = async () => {
   
-  const {data} =  await api("services",{});
+  //const {data} =  await api("services",{});
+  const data = services();
 
   return {
     props:{
