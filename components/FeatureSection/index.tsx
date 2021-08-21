@@ -47,9 +47,37 @@ export default function FeaturesSection() {
   return (
     <Box p={2}>
       <Stack spacing={3} as={Container} maxW={'8xl'} textAlign={'center'} >
-        <Heading fontSize={'5xl'}>How it work</Heading>
+       
+        <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+          <Heading
+            lineHeight={1.1}
+            fontWeight={600}
+            fontSize={{ base: '3xl', sm: '4xl', lg: '5xl' }}>
+            <Text
+              as={'span'}
+              position={'relative'}
+              _after={{
+                content: "''",
+                width: 'full',
+                height: '30%',
+                position: 'absolute',
+                bottom: 1,
+                left: 0,
+                bg: 'blue.400',
+                zIndex: -1,
+              }}>
+              Write once,
+            </Text>
+            <br />
+            <Text as={'span'} color={'blue.400'}>
+              use everywhere!
+            </Text>
+          </Heading>
+         
+          
+        </Stack>
         <Text color={'gray.600'} fontSize={'xl'} textAlign={'justify'}>
-        In order to ensure that dishonest behavior is penalized, DigiServices makes it possible for service providers to lock an arbitrary amount of tokens inside their proposal in the marketplace and require the same by their client. 
+        Write smart contrats what in order to ensure that dishonest behavior is penalized, we makes it possible for service providers to lock an arbitrary amount of tokens inside their proposal in the marketplace and require the same by their client. 
         These act as commitment as well as pledge in case there is a conflict.
        
         </Text>
