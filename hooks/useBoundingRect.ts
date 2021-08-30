@@ -1,4 +1,4 @@
-import {useState, useCallback, useLayoutEffect} from "react"
+import {useState, useCallback, useEffect} from "react"
 import {debounce} from "../utils"
 
 function getDimensionObject(node:HTMLElement|null) {
@@ -23,7 +23,7 @@ export default function useBoundingRect(limit:number|null) {
 
   const ref = useCallback((node) => setNode(node), [])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if ("undefined" !== typeof window && node) {
       const measure = () =>
         window.requestAnimationFrame(() => {

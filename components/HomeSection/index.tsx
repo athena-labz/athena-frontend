@@ -32,15 +32,18 @@ export default function HomeSection() {
         Building trust among peers through blockchain technology
         </Text>
         <Stack spacing={6} direction={'row'}>
-          <Button
+          {/*<Button
             rounded={'full'}
             px={6}
             colorScheme={'blue'}
             bg={'blue.400'}
             _hover={{ bg: 'blue.500' }}>
             Get started
-          </Button>
-          <Button rounded={'full'} px={6}>
+          </Button>*/}
+          <Button 
+            as={'a'} 
+            rounded={'full'} px={6}
+                href={'/solution'} >
             Learn more
           </Button>
         </Stack>

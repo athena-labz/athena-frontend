@@ -1,21 +1,26 @@
 // Using a style object
 import { extendTheme } from "@chakra-ui/react"
 
-export const theme = extendTheme({
-  components: {
-    Divider:{
-      baseStyle: {
-        color: "#1a202c",
-      },
-    }
-  },
-    colors: {
-      brand: {
-        100: "#f7fafc",
-        // ...
-        900: "#1a202c",
+const customtheme = extendTheme({
+    components: {
+      Input : {
+        // 1. We can update the base styles
+        baseStyle: {
+          field: {
+            color: "gray.600"
+          },
+          placeholder:{
+            color: "gray.800"
+          }
+        },
+       
+        
+        // 3. We can add a new visual variant
+        variants: {
+          
+        },
       },
     },
   })
   
-
+  export default customtheme

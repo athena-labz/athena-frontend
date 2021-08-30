@@ -70,7 +70,9 @@ const Header: NextPage = () => {
             <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}  >
             
             <Box ml={10}>            
-              <Image src="/logo.png" width="200rem" height="80rem" />              
+              <a href={'/'} >
+                <Image src="/logo.png" width="200rem" height="80rem" /> 
+              </a>             
             </Box>
                 
             <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -320,20 +322,22 @@ const Header: NextPage = () => {
     const NAV_ITEMS: Array<NavItem> = [
       {
         label: 'Discover',
-        href:"/"
+        href:"/discover"
       },
       {
-        label: 'How it work',
+        label: 'Roadmap',
+        href:"/roadmap"
 
       },
       {
-        label: 'How it work',
+        label: 'Token',
+        href:"/token"
 
       },
       {
-        label: 'How it work',
+        label: 'FAQ',
 
-      },
+      }
      
     ];
 export default Header

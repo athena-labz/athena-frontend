@@ -1,15 +1,10 @@
 import {
     Box,
-    Center,
     useColorModeValue,
     Heading,
-    Text,
     Stack,
     Image,
     Badge,
-    Tooltip,
-    Icon,
-    chakra,
     Flex
 } from '@chakra-ui/react';
 
@@ -86,30 +81,14 @@ function Rating({ rating, numReviews }: RatingProps) {
             mt={-10}
             pos={'relative'}
             height={'15rem'}
-            _after={{
-              transition: 'all .3s ease',
-              content: '""',
-              w: 'full',
-              h: 'full',
-              pos: 'absolute',
-              top: 3,
-              left: 0,
-              alignSelf:'center',
-              backgroundImage: `url(${IMAGE})`,
-              filter: 'blur(15px)',
-              zIndex: -1,
-            }}
-            _groupHover={{
-              _after: {
-                filter: 'blur(20px)',
-              },
-            }}>
+           
+          >
             <Image
               rounded={'lg'}
               height={'15rem'}
               width={'20rem'}
               alignSelf="center"
-              objectFit={'cover'}
+              
               src={IMAGE}
             />
           </Flex>
@@ -120,7 +99,7 @@ function Rating({ rating, numReviews }: RatingProps) {
                 {props.type}
               </Badge>
 
-            <Heading fontSize={'lg'} fontFamily={'body'} textAlign="center" fontWeight={500}>
+            <Heading fontSize={'lg'} fontFamily={'body'} textAlign="center" fontWeight={500} color="gray.700">
               {props.title}
             </Heading>
 

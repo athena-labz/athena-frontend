@@ -76,7 +76,7 @@ import {
                 <Logo color={useColorModeValue('gray.700', 'white')} />
               </Box>
               <Text fontSize={'sm'}>
-                © 2021 Digi Services. All rights reserved
+                © 2021 Digi Services. 
               </Text>
               <Stack direction={'row'} spacing={6}>
                 <SocialButton label={'Twitter'} href={'#'}>

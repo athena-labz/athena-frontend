@@ -3,8 +3,6 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import HomeSection from '../components/HomeSection'
 import FeaturesSection from '../components/FeatureSection'
-import { api } from '../services/api'
-import ServiceCard from '../components/ServiceCard'
 import { services } from './api/services'
 import BestServicesSection from '../components/BestServicesSection'
 
