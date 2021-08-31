@@ -96,7 +96,7 @@ const TokenPage = () => {
 
         <Heading as="h4" size="md"  paddingTop="1rem">Network</Heading>
         <Text as="p" fontSize="lg" textAlign="justify">
-        Users'activiy is rewarded: inviting new members, acting as a judge, scoring a high CAS provide benefit for the member and for the platform as a whole.
+        Users{"'"}activiy is rewarded: inviting new members, acting as a judge, scoring a high CAS provide benefit for the member and for the platform as a whole.
         </Text>
 
       </VStack>

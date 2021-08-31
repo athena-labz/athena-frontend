@@ -93,8 +93,8 @@ const SolutionPage = () => {
         DigiServices proposes an easy-to-use platform to create contract templates. This will eliminate the
         current need for expensive lawyers to write contracts. Trust between mediators, service providers,
         and clients will me measured by a review system that is powered by DSET tokens which represent a
-        "trust score". This system, when combined with other components, will be used to determine a
-        user's periodical reward.    
+        {'"'}trust score{'"'}. This system, when combined with other components, will be used to determine a
+        user{"'"}s periodical reward.    
         </Text>
 
         <Text as="p" fontSize="lg" textAlign="justify">
@@ -113,7 +113,7 @@ const SolutionPage = () => {
         <Heading  as="h4" size="md" paddingTop="1rem">A. Ease of Use</Heading>        
         <Text as="p" fontSize="lg" textAlign="justify">
         Users should be able to create Smart Contracts in a few clicks using an advanced interactive drag
-        and drop editor. Contract templates should provide an easy way to offer services that don't require
+        and drop editor. Contract templates should provide an easy way to offer services that don{"'"}t require
         much flexibility.
         </Text>
 
