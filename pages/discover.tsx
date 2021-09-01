@@ -53,7 +53,7 @@ const Discover = ({services}:Discoverprops) => {
     const new_coordenada = state.xoffset-(value-new_value)*2
       setState({
         ...state,
-         [xoffset]:new_coordenada});
+         ['xoffset']:new_coordenada});
    
 
     setValue(new_value)
