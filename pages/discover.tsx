@@ -74,7 +74,7 @@ const Discover = ({services}:Discoverprops) => {
         <Wrap w="100%">
           <WrapItem p={2} display="flex" flexDirection='row'>
              
-              <Box w="100%" h="10" h="100%" >
+              <Box w="100%" h="100%" >
 
                 <Box w="100%" p={2} marginTop={'0.5rem'}>
 
