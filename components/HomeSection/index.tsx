@@ -32,14 +32,16 @@ export default function HomeSection() {
         Building trust among peers through blockchain technology
         </Text>
         <Stack spacing={6} direction={'row'}>
-          {/*<Button
+          <Button
+            as={'a'} 
             rounded={'full'}
             px={6}
             colorScheme={'blue'}
             bg={'blue.400'}
+             href={'https://github.com/mateusap1/DigiServic'} 
             _hover={{ bg: 'blue.500' }}>
-            Get started
-          </Button>*/}
+            White Paper
+          </Button>
           <Button 
             as={'a'} 
             rounded={'full'} px={6}
