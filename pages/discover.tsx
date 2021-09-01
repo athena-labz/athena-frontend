@@ -51,7 +51,9 @@ const Discover = ({services}:Discoverprops) => {
 
   const onChange = (new_value:number) => {
     const new_coordenada = state.xoffset-(value-new_value)*2
-      setState({ xoffset:new_coordenada});
+      setState({
+        ...state,
+         [xoffset]:new_coordenada});
    
 
     setValue(new_value)
