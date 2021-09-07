@@ -3,29 +3,24 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import HomeSection from '../components/HomeSection'
 import FeaturesSection from '../components/FeatureSection'
-import { services } from './api/services'
-import BestServicesSection from '../components/BestServicesSection'
+import { judges } from './api/judges'
+import BestJudgesSection from '../components/BestJudgesSection'
 
 
-type Service= {
-  type: string;
-  publisher: string;
-  title: string;
+type Judge= {
+  name: string;
   description: string;
   trust: number;
   price?: number;
-  deadline?: number;
-  badge_color:string;
   image?:string;
 }
 
-
 type Homeprops ={
-  services: Service[]
+  judges: Judge[]
 }
 
 
-const Home = ({services}:Homeprops) => {
+const Home = ({judges}:Homeprops) => {
 
   return (
     <div className={styles.container}>
@@ -40,7 +35,7 @@ const Home = ({services}:Homeprops) => {
 
         <FeaturesSection />
 
-        <BestServicesSection services={services} />
+        <BestJudgesSection judges={judges} />
         
        </section >
  
@@ -51,11 +46,11 @@ const Home = ({services}:Homeprops) => {
 export const getStaticProps:GetStaticProps = async () => {
   
   //const {data} =  await api("services",{});
-  const data = services();
+  const data = judges();
 
   return {
     props:{
-      services:data.services
+      judges:data.judges
       
     },
    

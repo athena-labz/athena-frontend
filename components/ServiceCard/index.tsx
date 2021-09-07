@@ -1,17 +1,19 @@
 import {
-    Box,
-    useColorModeValue,
-    Heading,
-    Stack,
-    Image,
-    Badge,
-    Flex
+  Heading,
+  Avatar,
+  Box,
+  Center,
+  Text,
+  Stack,
+  Button,
+  Link,
+  Image,
+  Badge,
+  useColorModeValue,
+  AspectRatio
 } from '@chakra-ui/react';
 
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
-
-const RANDOM_IMAGE =
-    'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80';
 
 type ServiceCardProps ={
     type: string;
@@ -59,65 +61,73 @@ function Rating({ rating, numReviews }: RatingProps) {
     );
   }
 
-  export default function ServiceCard(props:ServiceCardProps) {
-    const IMAGE = props.image ? props.image :RANDOM_IMAGE;
-    return (
-    <Flex p={4} w="95%" alignItems="center" justifyContent="center">
-        <Box
-          role={'group'}
-          p={2}
-          maxW={'md'}
-          w={'full'}
-          bg={useColorModeValue('white', 'gray.800')}
-          boxShadow={'2xl'}
-          rounded={'lg'}
-          pos={'relative'}
-          zIndex={1}>
-          <Flex
-            alignItems="center" 
-            justifyContent="center"
-            rounded={'lg'}
-            mt={-10}
-            pos={'relative'}
-            height={'15rem'}
-           
-          >
-            <Image
-            boxSize="100px"
+
+export default function ServiceCard(props:ServiceCardProps)  {
+  const RANDOM_IMAGE =
+    'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80';
+
+  const IMAGE = props.image ? props.image :RANDOM_IMAGE;
+
+  return (
+    <Center py={6} mx={1} >
+      <Box
+        w={'22rem'}
+        h={'28.5rem'}
+        bg={useColorModeValue('white', 'gray.900')}
+        boxShadow={'2xl'}
+        rounded={'lg'}
+        p={6}
+        overflow="hidden"
+        textAlign={'center'}>
+
+         <Box>
+
+          <AspectRatio maxW="300px" ratio={4 / 3}>
+          <Image
               rounded={'lg'}
-               objectFit="cover"
+              objectFit="cover" 
               alt={props.title}
               src={IMAGE}
             />
-          </Flex>
+          </AspectRatio>
 
-          <Stack pt={10} align={'center'}>
+          
+          
+        </Box>
 
-              <Badge rounded="full" px="2" fontSize="0.8em" colorScheme={props.badge_color}>
-                {props.type}
-              </Badge>
+        
+        <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+          <Badge
+            m={1}
+            rounded="full" px="2" fontSize="0.8em" colorScheme={props.badge_color}
+            fontWeight={'400'}>
+            {props.type}
+          </Badge>
+        </Stack>
 
-            <Heading fontSize={'lg'} fontFamily={'body'} textAlign="center" fontWeight={500} color="gray.700">
-              {props.title}
-            </Heading>
+        <Heading fontSize={'lg'} fontFamily={'body'}>
+            {props.title}
+        </Heading>
+       
+        <Text
+          textAlign={'center'}
+          color={useColorModeValue('gray.700', 'gray.400')}
+          px={3}>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        </Text>
 
-          </Stack>
+        
 
-          <Flex justifyContent="space-between" alignContent="center" marginTop="0.3rem">
-            <Rating rating={props.trust/1000/12} numReviews={props.trust} />
+        <Stack mt={5} direction={'row'} spacing={4}>
+          <Rating rating={props.trust/1000/12} numReviews={props.trust} />
+          
+         <Box fontSize="sm" color={useColorModeValue('gray.800', 'white')}>
+              {props.price &&  "$  "}
 
-            <Box fontSize="lg" color={useColorModeValue('gray.800', 'white')}>
-              {props.price &&
-               <Box as="span" color={'gray.600'} fontSize="lg">
-                $ {" "}
-              </Box>}
-              
               {props.price?.toFixed(2)}
             </Box>
-          </Flex>  
-         
-        </Box>
-       
-      </Flex>
-    );
-  }
+        </Stack>
+      </Box>
+    </Center>
+  );
+}
