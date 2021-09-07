@@ -5,7 +5,7 @@ type Judge= {
   name: string;
   description: string;
   trust: number;
-  price?: number;
+  price: number;
   image?:string;
 }
 

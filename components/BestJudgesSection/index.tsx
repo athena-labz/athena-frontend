@@ -21,7 +21,7 @@ type Judge= {
   name: string;
   description: string;
   trust: number;
-  price?: number;
+  price: number;
   image?:string;
 }
 
@@ -72,15 +72,11 @@ export default function BestJudgesSection({judges}:BestJudgesSectionprops) {
         <ChakraCarousel gap={3}>
           {judges.map((judge, index) => (
             <JudgeCard
-            key={index.toString()+judge.title}
+            key={index.toString()+judge.name}
             name={judge.name}
-            badge_color={judge.badge_color}
-            publisher={judge.publisher}
-            title={judge.title}
             description={judge.description}
             trust={judge.trust}
             price={judge.price}
-            deadline={judge.deadline}
             image={judge.image}
            />
           ))}

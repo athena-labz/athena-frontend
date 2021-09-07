@@ -11,7 +11,7 @@ type Judge= {
   name: string;
   description: string;
   trust: number;
-  price?: number;
+  price: number;
   image?:string;
 }
 
@@ -35,7 +35,7 @@ const Home = ({judges}:Homeprops) => {
 
         <FeaturesSection />
 
-        <BestJudgesSection judges={judges} />
+       {judges.length > 0 && <BestJudgesSection judges={judges} />}
         
        </section >
  

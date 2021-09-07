@@ -13,17 +13,17 @@ import {
 
 const RANDOM_IMAGE = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
 
-type Judge= {
+type JudgeCardProps= {
   name: string;
   description: string;
   trust: number;
-  price?: number;
+  price: number;
   image?:string;
 }
 
 
 
-export default function JudgeCard(props:ServiceCardProps) {
+export default function JudgeCard(props:JudgeCardProps) {
 
     const IMAGE = props.image ? props.image :RANDOM_IMAGE;
 

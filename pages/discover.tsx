@@ -203,18 +203,19 @@ const Discover = ({services}:Discoverprops) => {
              <GridItem colSpan={4}  >
                 <Wrap>
                   {services.map((service, index) => (
-                    <WrapItem><ServiceCard2
-                    key={index.toString()+service.title}
-                    type={service.type}
-                    badge_color={service.badge_color}
-                    publisher={service.publisher}
-                    title={service.title}
-                    description={service.description}
-                    trust={service.trust}
-                    price={service.price}
-                    deadline={service.deadline}
-                    image={service.image}
-                   /> </WrapItem>
+                    <WrapItem key={index.toString()+service.title}>
+                      <ServiceCard 
+                        type={service.type}
+                        badge_color={service.badge_color}
+                        publisher={service.publisher}
+                        title={service.title}
+                        description={service.description}
+                        trust={service.trust}
+                        price={service.price}
+                        deadline={service.deadline}
+                        image={service.image}
+                      /> 
+                     </WrapItem>
                   ))}
 
                 </Wrap>
