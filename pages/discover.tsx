@@ -2,7 +2,7 @@ import type { GetStaticProps, NextPage } from 'next'
 import {useState, useCallback} from 'react';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import ServiceCard2 from '../components/ServiceCard2'
+import ServiceCard from '../components/ServiceCard'
 import { services } from './api/services'
 import SearchSection from '../components/SearchSection'
 import { 
