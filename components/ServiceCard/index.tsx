@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react';
 
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
-import { FiShoppingCart } from 'react-icons/fi';
 
 const RANDOM_IMAGE =
     'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80';
@@ -63,11 +62,11 @@ function Rating({ rating, numReviews }: RatingProps) {
   export default function ServiceCard(props:ServiceCardProps) {
     const IMAGE = props.image ? props.image :RANDOM_IMAGE;
     return (
-    <Flex p={5} w="full" alignItems="center" justifyContent="center">
+    <Flex p={4} w="95%" alignItems="center" justifyContent="center">
         <Box
           role={'group'}
-          p={6}
-          maxW={'sm'}
+          p={2}
+          maxW={'md'}
           w={'full'}
           bg={useColorModeValue('white', 'gray.800')}
           boxShadow={'2xl'}
@@ -84,11 +83,10 @@ function Rating({ rating, numReviews }: RatingProps) {
            
           >
             <Image
+            boxSize="100px"
               rounded={'lg'}
-              height={'15rem'}
-              width={'20rem'}
-              alignSelf="center"
-              
+               objectFit="cover"
+              alt={props.title}
               src={IMAGE}
             />
           </Flex>
@@ -109,9 +107,11 @@ function Rating({ rating, numReviews }: RatingProps) {
             <Rating rating={props.trust/1000/12} numReviews={props.trust} />
 
             <Box fontSize="lg" color={useColorModeValue('gray.800', 'white')}>
-              {props.price && <Box as="span" color={'gray.600'} fontSize="lg">
+              {props.price &&
+               <Box as="span" color={'gray.600'} fontSize="lg">
                 $ {" "}
               </Box>}
+              
               {props.price?.toFixed(2)}
             </Box>
           </Flex>  

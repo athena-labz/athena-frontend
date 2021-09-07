@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import ChakraCarousel from "../ChacraCarrousel";
 import { useEffect, useState } from 'react';
-import ServiceCard from '../ServiceCard';
+import ServiceCard2 from '../ServiceCard2';
 
 type Service= {
   type: string;
@@ -83,7 +83,7 @@ export default function BestServicesSection({services}:BestServicesSectionprops)
       >
         <ChakraCarousel gap={10}>
           {services.map((service, index) => (
-            <ServiceCard
+            <ServiceCard2
             key={index.toString()+service.title}
             type={service.type}
             badge_color={service.badge_color}

@@ -2,7 +2,7 @@ import type { GetStaticProps, NextPage } from 'next'
 import {useState, useCallback} from 'react';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import ServiceCard from '../components/ServiceCard'
+import ServiceCard2 from '../components/ServiceCard2'
 import { services } from './api/services'
 import SearchSection from '../components/SearchSection'
 import { 
@@ -18,7 +18,9 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
-  Badge
+  Badge,
+  Grid,
+  GridItem ,
  } from '@chakra-ui/react'
 
 
@@ -61,18 +63,24 @@ const Discover = ({services}:Discoverprops) => {
 
 
   return (
-    <div className={styles.container}>
+    <div >
       <Head>
         <title>DigiServices</title>
       </Head>
 
      
-      <section >
+      <section>
 
         <SearchSection/>
 
-        <Wrap w="100%">
-          <WrapItem p={2} display="flex" flexDirection='row'>
+         <Grid
+            templateRows="repeat(2, 1fr)"
+            templateColumns="repeat(5, 1fr)"
+            gap={2}
+            px={"3rem"}
+          >       
+
+          <GridItem rowSpan={2} colSpan={1} > 
              
               <Box w="100%" h="100%" >
 
@@ -190,18 +198,31 @@ const Discover = ({services}:Discoverprops) => {
 
               </Box>
 
-          </WrapItem>
+              </GridItem  >
 
+             <GridItem colSpan={4}  >
+                <Wrap>
+                  {services.map((service, index) => (
+                    <WrapItem><ServiceCard2
+                    key={index.toString()+service.title}
+                    type={service.type}
+                    badge_color={service.badge_color}
+                    publisher={service.publisher}
+                    title={service.title}
+                    description={service.description}
+                    trust={service.trust}
+                    price={service.price}
+                    deadline={service.deadline}
+                    image={service.image}
+                   /> </WrapItem>
+                  ))}
 
-          <WrapItem  bg="green.200">
-            <Text w="180px" h="80px" >
-              services
-            </Text>
-          </WrapItem>
+                </Wrap>
 
-        </Wrap>
+              </GridItem  >
 
-
+           
+          </Grid>
 
         
        </section >
