@@ -4,5 +4,10 @@
 }
 
 .custom_line::before {
-  background: #424242;
+  background: #2194f3;
+}
+
+.custom_item{
+ margin-right: 1rem;
+ margin-left: 1rem;
 }

@@ -49,13 +49,16 @@ const Home = ({judges}:Homeprops) => {
 
       <Divider marginTop="2" marginBottom="3"/>
 
+
+        {/*mover isso para um componente*/}
         <VerticalTimeline className={styles.custom_line}>
            <VerticalTimelineElement
-            className="vertical-timeline-element--work"
+            className={styles.custom_item}
             contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
             date="September – November 2021"
             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
             icon={<GiSpellBook />}
+            
           >
             <h2>
              Overall Proof-of-Concept
@@ -89,9 +92,9 @@ const Home = ({judges}:Homeprops) => {
             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
             icon={<GiShare />}
           >
-            <p>
+            <h2>
               Prototype roll out and marketing partner selection
-            </p>
+            </h2>
           </VerticalTimelineElement>
 
 
@@ -102,9 +105,9 @@ const Home = ({judges}:Homeprops) => {
             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
             icon={<GiRocketThruster />}
           >
-            <p>
+            <h2>
              First go-live V1,10’000 members enrollment
-            </p>
+            </h2>
           </VerticalTimelineElement>
           
 
