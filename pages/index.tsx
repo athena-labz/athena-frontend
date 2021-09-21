@@ -54,11 +54,11 @@ const Home = ({judges}:Homeprops) => {
         <VerticalTimeline className={styles.custom_line}>
            <VerticalTimelineElement
             className={styles.custom_item}
-            contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+            contentArrowStyle={{ borderRight: '7px solid  rgb(255, 255, 255)' }}
             date="September – November 2021"
             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
             icon={<GiSpellBook />}
-            
+
           >
             <h2>
              Overall Proof-of-Concept
@@ -70,8 +70,8 @@ const Home = ({judges}:Homeprops) => {
           </VerticalTimelineElement>
 
           <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+            className={styles.custom_item}
+            contentArrowStyle={{ borderRight: '7px solid  rgb(255, 255, 255)' }}
             date="December 2021"
             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
             icon={<GiSpanner />}
@@ -86,8 +86,8 @@ const Home = ({judges}:Homeprops) => {
 
 
           <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+            className={styles.custom_item}
+            contentArrowStyle={{ borderRight: '7px solid rgb(255, 255, 255)' }}
             date="June 2022"
             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
             icon={<GiShare />}
@@ -99,8 +99,8 @@ const Home = ({judges}:Homeprops) => {
 
 
           <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+            className={styles.custom_item}
+            contentArrowStyle={{ borderRight: '7px solid  rgb(255, 255, 255)' }}
             date="July 2022"
             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
             icon={<GiRocketThruster />}
