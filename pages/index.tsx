@@ -41,9 +41,9 @@ const Home = ({judges}:Homeprops) => {
 
         <HomeSection />
 
-        <ProblemSection id="section1"/>
+        <ProblemSection />
 
-        <FeaturesSection id="section2"/>
+        <FeaturesSection />
 
         <Heading as="h1">Project’s Development Road Map</Heading>  
 
