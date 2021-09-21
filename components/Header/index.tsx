@@ -61,7 +61,7 @@ const Header: NextPage = () => {
         <Box w="100%" >
           <Flex
             as={'header'}
-            pos={yPos > 60?"fixed" :""}
+            pos={yPos > 70?"fixed" :"static"}
             top="0"
             w={'full'}
             boxShadow={'sm'}
