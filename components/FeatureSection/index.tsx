@@ -66,12 +66,9 @@ export default function FeaturesSection() {
                 bg: 'blue.400',
                 zIndex: -1,
               }}>
-              Write once,
+              Solution 
             </Text>
-            <br />
-            <Text as={'span'} color={'blue.400'}>
-              use everywhere!
-            </Text>
+                        
           </Heading>
          
           

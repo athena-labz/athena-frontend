@@ -2,3 +2,7 @@
   padding: 0 4rem;
 
 }
+
+.custom_line::before {
+  background: #424242;
+}
