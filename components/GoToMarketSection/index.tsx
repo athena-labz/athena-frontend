@@ -44,7 +44,7 @@ function StatsCard(props: StatsCardProps) {
 
 export default function GoToMarketSection() {
   return (
-    <Box maxW="4xl" mx={'auto'} pt={4} px={{ base: 2, sm: 12, md: 17 }} marginTop={2} marginBottom={10}>
+    <Box maxW="4xl" mx={'auto'} pt={4} px={{ base: 2, sm: 12, md: 17 }} marginTop={0} marginBottom={10}>
       <chakra.h1
         textAlign={'center'}
         fontSize={'3xl'}
