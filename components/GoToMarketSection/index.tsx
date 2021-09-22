@@ -17,11 +17,10 @@ import { GoLocation } from 'react-icons/go';
 
 interface StatsCardProps {
   title: string;
-  stat: string;
-  icon: ReactNode;
+  helpText: string;
 }
 function StatsCard(props: StatsCardProps) {
-  const { title, icon } = props;
+  const { title } = props;
   return (
     <Stat
       px={{ base: 2, md: 4 }}
@@ -56,16 +55,19 @@ export default function GoToMarketSection() {
       <SimpleGrid columns={{ base: 1, md: 2}} spacing={{ base: 5, lg: 8 }}>
       <StatsCard
           title={'Initial funding secured'}
+          helpText={"---"}
         />
         <StatsCard
           title={'Social/Blockchain platforms channels selection'}
+          helpText={"---"}
         />
         <StatsCard
           title={'Marketing partner selection'}
+          helpText={"---"}
         />
         <StatsCard
           title={'First Stage Members enrollment June 2022'}
-          
+          helpText={"---"}
         />
       </SimpleGrid>
     </Box>

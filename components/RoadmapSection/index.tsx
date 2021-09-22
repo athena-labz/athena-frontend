@@ -9,7 +9,7 @@ import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timel
 import 'react-vertical-timeline-component/style.min.css';
 
 
-export default function BestJudgesSection({judges}:BestJudgesSectionprops) {
+export default function RoadmapSection() {
 
   return (
     <Container maxW={'7xl'}>
