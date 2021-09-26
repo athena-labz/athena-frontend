@@ -34,20 +34,49 @@ import {
     ChevronRightIcon,
     PhoneIcon,
 } from '@chakra-ui/icons';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Image from 'next/image';
 
 const Header: NextPage = () => {
     const { isOpen, onToggle } = useDisclosure();
 
     const [state, setstate] = useState(true)
+    const [yPos, setYPos] = useState(0)
+
+    useEffect(function mount() {
+
+    function onScroll() {
+      setYPos(window.pageYOffset);
+    }
+
+    window.addEventListener("scroll", onScroll);
+
+    return function unMount() {
+      window.removeEventListener("scroll", onScroll);
+    };
+  });
+
 
     return (
         <Box w="100%" >
           <Flex
+            as={'header'}
+            pos={yPos > 70?"fixed" :"static"}
+            top="0"
+            w={'full'}
+            boxShadow={'sm'}
+            zIndex="999"
+            justify={'center'}
+            css={{
+              backdropFilter: 'saturate(180%) blur(5px)',
+              backgroundColor: useColorModeValue(
+                'rgba(255, 255, 255, 0.8)',
+                'rgba(26, 32, 44, 0.8)'
+              ),
+            }}
             bg={useColorModeValue('white', 'gray.800')}
             color={useColorModeValue('gray.600', 'white')}
-            minH={'6rem'}
+            minH={'4rem'}
             py={{ base: 2 }}
             px={{ base: 4 }}
             borderBottom={1}
@@ -320,13 +349,19 @@ const Header: NextPage = () => {
     }
     
     const NAV_ITEMS: Array<NavItem> = [
+    {
+        label: 'The Problem',
+        href:"#"
+
+      },
       {
-        label: 'Discover',
-        href:"/discover"
+        label: 'Solution',
+        href:"#"
+
       },
       {
         label: 'Roadmap',
-        href:"/roadmap"
+        href:"#"
 
       },
       {
@@ -337,7 +372,11 @@ const Header: NextPage = () => {
       {
         label: 'FAQ',
 
-      }
+      },
+      {
+        label: 'Discover',
+        href:"/discover"
+      },
      
     ];
 export default Header

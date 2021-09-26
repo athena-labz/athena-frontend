@@ -4,8 +4,10 @@ import styles from '../styles/Home.module.css'
 import HomeSection from '../components/HomeSection'
 import FeaturesSection from '../components/FeatureSection'
 import { judges } from './api/judges'
-import BestJudgesSection from '../components/BestJudgesSection'
-
+import ProblemSection from '../components/ProblemSection'
+import RoadmapSection from '../components/RoadmapSection'
+import GoToMarketSection from '../components/GoToMarketSection'
+import FaqSection from '../components/FaqSection'
 
 type Judge= {
   name: string;
@@ -33,9 +35,15 @@ const Home = ({judges}:Homeprops) => {
 
         <HomeSection />
 
+        <ProblemSection />
+
         <FeaturesSection />
 
-       {judges.length > 0 && <BestJudgesSection judges={judges} />}
+        <RoadmapSection />
+
+        <GoToMarketSection />
+
+        <FaqSection />
         
        </section >
  
