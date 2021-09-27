@@ -150,6 +150,17 @@ const Header: NextPage = () => {
             direction={'row'}
             marginRight="6rem"
             spacing={6}>
+
+            <Button
+               as={'a'}                
+                bg={'blue.400'}
+                color={'white'}
+                marginTop={1}
+                _hover={{
+                  bg: 'blue.500',
+                }}>
+              <Text marginRight="0.3rem"  marginLeft="0.5rem">Create a contract</Text>
+            </Button>
            
            <Popover >
               <PopoverTrigger >                
