@@ -164,7 +164,7 @@ export default function Component({service}:{service:ServiceProps}) {
                 </Flex>
                 {service.questions && <SimpleGrid columns={[1,  2, 1, 2]} spacingY={4}>
                   {service.questions.map(q => (
-                     <Feature>{q}</Feature>
+                     <Feature key={q}>{q}</Feature>
                     )
                   )}
                 </SimpleGrid>}
