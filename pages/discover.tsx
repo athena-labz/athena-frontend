@@ -25,6 +25,7 @@ import {
 
 
 type Service= {
+  id:number;
   type: string;
   publisher: string;
   title: string;
@@ -205,6 +206,7 @@ const Discover = ({services}:Discoverprops) => {
                   {services.map((service, index) => (
                     <WrapItem key={index.toString()+service.title}>
                       <ServiceCard 
+                        id={service.id}
                         type={service.type}
                         badge_color={service.badge_color}
                         publisher={service.publisher}

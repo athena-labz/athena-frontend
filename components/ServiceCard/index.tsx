@@ -16,6 +16,7 @@ import {
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 
 type ServiceCardProps ={
+    id:number;
     type: string;
     publisher: string;
     title: string;
@@ -35,7 +36,7 @@ interface RatingProps {
 
 function Rating({ rating, numReviews }: RatingProps) {
     return (
-      <Box d="flex" alignItems="center">
+      <Box d="flex" alignItems="center"  >
         {Array(5)
           .fill('')
           .map((_, i) => {
@@ -69,7 +70,7 @@ export default function ServiceCard(props:ServiceCardProps)  {
   const IMAGE = props.image ? props.image :RANDOM_IMAGE;
 
   return (
-    <Center py={6} mx={1} >
+    <Center py={6} mx={1} as={'a'} href={`/contract/${props.id}`}>
       <Box
         w={'22rem'}
         h={'28.5rem'}
