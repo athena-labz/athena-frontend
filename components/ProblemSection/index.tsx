@@ -16,7 +16,7 @@ import Image from 'next/image';
 
 export default function ProblemSection() {
   return (
-    <Container maxW={'7xl'}>
+    <Container maxW={'7xl'} id="problem" style={{scrollMarginTop:120}}>
       <Stack
         align={'center'}
         spacing={{ base: 8, md: 10 }}

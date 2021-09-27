@@ -362,26 +362,27 @@ const Header: NextPage = () => {
     const NAV_ITEMS: Array<NavItem> = [
     {
         label: 'The Problem',
-        href:"#"
+        href:"#problem"
 
       },
       {
         label: 'Solution',
-        href:"#"
+        href:"#solution"
 
       },
       {
         label: 'Roadmap',
-        href:"#"
+        href:"#roadmap"
 
       },
       {
         label: 'Token',
-        href:"/token"
+        href:"#token"
 
       },
       {
         label: 'FAQ',
+        href:'#faq'
 
       },
       {

@@ -93,7 +93,7 @@ export default function FaqSection() {
     ]
 
   return (
-    <Container maxW={'6xl'} marginBottom={10}>
+    <Container maxW={'6xl'} marginBottom={10} id="faq" style={{scrollMarginTop:120}}>
      <Heading
         lineHeight={1.1}
         fontWeight={600}
