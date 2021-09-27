@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Service= {
-id:number;
+    id:number;
   "type": string;
   "badge_color":string;
   "publisher": string;

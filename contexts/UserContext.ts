@@ -31,17 +31,19 @@ type UserContextData= {
     
 }
 
+type UserContextProviderProps = {
+    children: ReactNode;
+}
+/*
 export const UserContext = createContext( {} as UserContextData);
 
-export function UserContextProvider({children}){
+export function UserContextProvider({children}:UserContextProviderProps){
     const [runningContracts, setRunningContracts] = useState([]);
     const [endedContracts, setEndedContracts] = useState([]);
 
     const [isLogged, setIsLogged] = useState(false);
-    const [name, setName] = useState(false);
+    const [name, setName] = useState('');
     const [wallet, setWallet] = useState({dsets:0,adas:0});
-
-
 
     function login(username:string,password:string){
       setIsLogged(true)
@@ -64,8 +66,8 @@ export function UserContextProvider({children}){
           //Acusations:boolean;
           //RewardsHistory:boolean;
     
-    login:(username:string,password:string) => void ;
-    logout:() => void;
+          login:(username:string,password:string) => void ;
+          logout:() => void;
         }}>
              {children}
         </UserContext.Provider>
@@ -74,4 +76,4 @@ export function UserContextProvider({children}){
 
 export const useUser = () => {
   return useContext(UserContext)
-}
+}*/

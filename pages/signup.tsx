@@ -67,7 +67,7 @@ export default function JoinOurTeam() {
                   key={avatar.name}
                   name={avatar.name}
                   src={avatar.url}
-                  size={useBreakpointValue({ base: 'md', md: 'lg' })}
+                  size={'md'}
                   position={'relative'}
                   zIndex={2}
                   _before={{

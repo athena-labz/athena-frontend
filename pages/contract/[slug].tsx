@@ -1,5 +1,5 @@
 import { services } from '../api/services'
-
+import {GetStaticPaths, GetStaticProps} from 'next'
 import React from "react";
 import {
   chakra,
@@ -63,10 +63,11 @@ function Rating({ rating, numReviews }: RatingProps) {
     );
   }
 
-export default function Component({service}:ServiceProps) {
-  const topBg = useColorModeValue("gray.100", "gray.700");
+export default function Component({service}:{service:ServiceProps}) {
+  const topBg = useColorModeValue("gray.200", "gray.700");
   const bottomBg = useColorModeValue("white", "gray.800");
-  const Feature = (props) => {
+
+  const Feature = (props:any) => {
     return (
       <Flex align="center">
         <Flex shrink={0}>
@@ -74,7 +75,7 @@ export default function Component({service}:ServiceProps) {
             boxSize={5}
             mt={1}
             mr={2}
-            color={useColorModeValue("brand.500", "brand.300")}
+            
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -86,7 +87,7 @@ export default function Component({service}:ServiceProps) {
           </Icon>
         </Flex>
         <Box ml={4}>
-          <chakra.span mt={2} color={useColorModeValue("gray.500", "gray.400")}>
+          <chakra.span mt={2} >
             {props.children}
           </chakra.span>
         </Box>
@@ -96,7 +97,7 @@ export default function Component({service}:ServiceProps) {
   return (
     <Flex
       boxSize="full"
-      bg={useColorModeValue("#F9FAFB", "gray.600")}
+      bg={"#F9FAFB"}
       p={4}
       alignItems="center"
       justifyContent="center"
@@ -126,8 +127,8 @@ export default function Component({service}:ServiceProps) {
                   {service.title}
                 </Text>
                 <chakra.p
-                  fontSize={["sm", , "md"]}
-                  color={useColorModeValue("gray.600", "gray.400")}
+                  fontSize={["sm", "md"]}
+                  
                 >
                   {service.description}
                 </chakra.p>
@@ -149,7 +150,7 @@ export default function Component({service}:ServiceProps) {
                     borderTopColor={topBg}
                   />
                 </Flex>
-                <SimpleGrid columns={[1, , 2, 1, 2]} spacingY={4}>
+                <SimpleGrid columns={[1,  2, 1, 2]} spacingY={4}>
                   <Feature>Question 1 ?</Feature>
                   <Feature>Question 2 ?</Feature>
                   <Feature>Question 3 ?</Feature>
@@ -161,7 +162,7 @@ export default function Component({service}:ServiceProps) {
                 flex="0.3"
                 justify="center"
                 align="center"
-                bg={useColorModeValue("#F9FAFB", "gray.900")}
+                bg={"#edeff5"}
                 borderRightRadius="md"
               >
                 <Text fontSize="xl" fontWeight="semibold">
@@ -170,7 +171,7 @@ export default function Component({service}:ServiceProps) {
                 {service.price && <Flex
                   align="center"
                   fontSize="5xl"
-                  fontWeight={["bold", , "extrabold"]}
+                  fontWeight={["bold", "extrabold"]}
                   lineHeight="tight"
                 >
                   ${service.price}
@@ -178,7 +179,7 @@ export default function Component({service}:ServiceProps) {
                     ml={2}
                     fontSize="2xl"
                     fontWeight="medium"
-                    color={useColorModeValue("gray.500", "gray.400")}
+                    color={"gray.500"}
                   >
                     {" "}
                     ADA
@@ -198,7 +199,7 @@ export default function Component({service}:ServiceProps) {
                         <Link
                           mx={2}
                           fontWeight="bold"
-                          color={useColorModeValue("gray.700", "gray.200")}
+                          color={"gray.700"}
                           
                         >
                           Jone Doe
@@ -207,7 +208,7 @@ export default function Component({service}:ServiceProps) {
                       <chakra.span
                         mx={1}
                         fontSize="sm"
-                        color={useColorModeValue("gray.600", "gray.300")}
+                        color={"gray.600"}
                       >
                         <Rating rating={service.trust/1000/12} numReviews={service.trust} />
                       </chakra.span>
@@ -236,9 +237,11 @@ export const getStaticPaths:GetStaticPaths = async () => {
     }
 }
 
-export const getStaticProps:GetStaticProps = async (ctx) => {
-    const {slug} = ctx.params;
 
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+    const { slug } = params!;
+
+    if (!slug ) return { notFound: true };
     const data = services();
 
     const service = data.services.filter(service => service.id.toString() === slug.toString())[0] 
