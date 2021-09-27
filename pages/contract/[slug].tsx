@@ -13,6 +13,7 @@ import {
   Link,Image,
   Button,
 } from "@chakra-ui/react";
+import { ArrowBackIcon,LockIcon } from '@chakra-ui/icons'
 
 type ServiceProps= {
   id:number;
@@ -21,10 +22,12 @@ type ServiceProps= {
   title: string;
   description: string;
   trust: number;
+  pledge:number;
   price?: number;
   deadline?: number;
   badge_color:string;
   image?:string;
+  questions?:string[];
 }
 
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
@@ -110,9 +113,16 @@ export default function Component({service}:{service:ServiceProps}) {
         w="full"
         bg={bottomBg}
       >
-        <Box pt={20} rounded="md" bg={topBg}>
+  
+        <Box pt={15} rounded="md" bg={topBg}>
           
           <Box bgGradient={`linear(to-b, ${topBg} 50%, ${bottomBg} 50%)`}>
+            <Flex alignItens="left"> 
+            <Button leftIcon={<ArrowBackIcon />} marginTop={0} variant="outline" as={'a'}  href={'/discover'}>
+              Back
+            </Button>
+
+            </Flex>
             <Flex
               rounded="md"
               mx={10}
@@ -122,6 +132,7 @@ export default function Component({service}:{service:ServiceProps}) {
               textAlign="left"
               direction={{ base: "column", lg: "row" }}
             >
+
               <Stack spacing={8} p="45px" flex="0.7">
                 <Text fontSize="3xl" fontWeight="bold" lineHeight="tight">
                   {service.title}
@@ -133,6 +144,7 @@ export default function Component({service}:{service:ServiceProps}) {
                   {service.description}
                 </chakra.p>
                 <Flex align="center">
+
                   <Text
                     fontFamily="body"
                     whiteSpace="nowrap"
@@ -150,12 +162,12 @@ export default function Component({service}:{service:ServiceProps}) {
                     borderTopColor={topBg}
                   />
                 </Flex>
-                <SimpleGrid columns={[1,  2, 1, 2]} spacingY={4}>
-                  <Feature>Question 1 ?</Feature>
-                  <Feature>Question 2 ?</Feature>
-                  <Feature>Question 3 ?</Feature>
-                  <Feature>Question 4 ?</Feature>
-                </SimpleGrid>
+                {service.questions && <SimpleGrid columns={[1,  2, 1, 2]} spacingY={4}>
+                  {service.questions.map(q => (
+                     <Feature>{q}</Feature>
+                    )
+                  )}
+                </SimpleGrid>}
               </Stack>
               <Stack
                 p="45px"
@@ -185,6 +197,28 @@ export default function Component({service}:{service:ServiceProps}) {
                     ADA
                   </chakra.span>
                 </Flex>}
+
+
+                <Flex
+                  align="center"
+                  fontSize="1xl"
+                  fontWeight={["bold", "extrabold"]}
+                  lineHeight="tight"
+                >
+                   <LockIcon mx={2}/>
+
+                  {service.pledge}
+                  <chakra.span
+                    ml={2}
+                    fontSize="1xl"
+                    fontWeight="medium"
+                    color={"gray.500"}
+                  >
+                    {" "}
+                    DSET
+                  </chakra.span>
+                </Flex>
+
                 <Stack spacing={6}>
                   <Box mt={4}>
                     <Flex alignItems="center">
@@ -215,7 +249,7 @@ export default function Component({service}:{service:ServiceProps}) {
                     </Flex>
                   </Box>
                   <Button w="300px" colorScheme="blue" py={6}>
-                    Pucharse
+                    PURCHASE
                   </Button>
                  
                 </Stack>

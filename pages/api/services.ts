@@ -9,9 +9,11 @@ type Service= {
   "title": string;
   "description": string;
   "trust": number;
+  pledge:number;
   "price"?: number;
   "deadline"?: number;
   image?:string;
+  questions?:string[];
 }
 
 type Data = {
@@ -28,9 +30,15 @@ const services_data = {
             "title": "I will write a 200 pages book",
             "description": "I have 45 years of experience as I writer, having written 5 best-sellers...",
             "trust": 30000,
+            pledge:100,
             "price": 200000,
             "deadline": 1629124893,
-            image:"https://www.freecodecamp.org/news/content/images/2020/09/writing-cover.jpg"
+            image:"https://www.freecodecamp.org/news/content/images/2020/09/writing-cover.jpg",
+            questions:[
+                'Please provide content main target in terms of customers description and expectations',
+                'Please inform a deadline from deal date',
+                'Please inform number of languages you plan to translate the book into'
+            ]
            
         },
         {
@@ -39,9 +47,15 @@ const services_data = {
             "badge_color":"green",
             "publisher": "977efb35ab621d39dbeb7274ec7795a34708ff4d25a01a1df04c1f27",
             "title": "Company Policies",
-            "description": "This serves as a way of mediating conflicts between employees",
+            "description": "A smart contract employer-employees to regulate bonus compensation",
             "trust": 10000,
-            image:"https://www.pcg-services.com/wp-content/uploads/2016/08/policies-procedures-1.jpg"
+            pledge:100,
+            image:"https://www.pcg-services.com/wp-content/uploads/2016/08/policies-procedures-1.jpg",
+            questions:[
+                'Are you committing to achieve yearly turnover > 10 mio USD?',
+                'Are you available to assure availability over the week-ends?',
+                'Are you ready to travel weekly over regions at distances > 200 km?'
+            ]
         },
         {
             id:3,
@@ -52,6 +66,7 @@ const services_data = {
             "description": "It was used for only 2 months, in very good state",
             "trust": 45000,
             "price": 500000,
+            pledge:100,
             "deadline": 1629124893,
             image:"https://image.made-in-china.com/202f0j00zclUMRvBfCkm/MTB-Hot-Sale-21-Speed-Mountain-Bikes-Bicycle-High-Quality-Best-Price-MTB-Mountainbike-29-Inch-Adults-MTB-Bikes.jpg"
         },
@@ -64,8 +79,13 @@ const services_data = {
             "description": "50 years of experience software engineering.\n I will make you a beautiful front page website for an affordable price.",
             "trust": 73200,
             "price": 1000000,
+            pledge:100,
             "deadline": 1629124893,
-            image:"https://cdn.billomat.com/wp-content/uploads/2019/09/freelance-web-developer-danial1-ricaros-FCHlYvR5gJI-unsplash.jpg"
+            image:"https://cdn.billomat.com/wp-content/uploads/2019/09/freelance-web-developer-danial1-ricaros-FCHlYvR5gJI-unsplash.jpg",
+            questions:[
+                'Please confirm availability to pick-up the bike at the indicated address',
+
+            ]
         },
         {
             id:5,
@@ -75,8 +95,21 @@ const services_data = {
             "title": "If elected, I will be an excellent congressman",
             "description": "I defined a set of targets I must complete if elected",
             "trust": 100000000,
+            pledge:100,
+            image:"https://direitosbrasil.com/wp-content/uploads/2016/09/marketing-politico.jpg"
+        },
+        {
+            id:5,
+            "type": "constant",
+            "badge_color":"green",
+            "publisher": "3f96cfba6b1a10bf4dec08ea1459b87ecefa65c65a5f0899d030a214",
+            "title": "Holiday House",
+            "description": "I defined a set of targets I must complete if elected",
+            "trust": 100000000,
+            pledge:100,
             image:"https://direitosbrasil.com/wp-content/uploads/2016/09/marketing-politico.jpg"
         }
+
     ]
   }
 
