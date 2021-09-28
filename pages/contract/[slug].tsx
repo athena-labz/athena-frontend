@@ -60,7 +60,7 @@ function Rating({ rating, numReviews }: RatingProps) {
             return <BsStar key={i} style={{ marginLeft: '1' }} color={'#004aad'} />;
           })}
         <Box as="span" ml="2" color="gray.600" fontSize="sm">
-          {numReviews} DSET{numReviews > 1 && "'s"}
+          {numReviews} DSET
         </Box>
       </Box>
     );
@@ -118,7 +118,13 @@ export default function Component({service}:{service:ServiceProps}) {
           
           <Box bgGradient={`linear(to-b, ${topBg} 50%, ${bottomBg} 50%)`}>
             <Flex alignItens="left"> 
-            <Button leftIcon={<ArrowBackIcon />} marginTop={0} variant="outline" as={'a'}  href={'/discover'}>
+            <Button 
+                leftIcon={<ArrowBackIcon />}
+                _focus={{   boxShadow:"none"  }}           
+                marginTop={0} 
+                variant="outline" 
+                as={'a'}  
+                href={'/discover'}>
               Back
             </Button>
 
@@ -177,16 +183,14 @@ export default function Component({service}:{service:ServiceProps}) {
                 bg={"#edeff5"}
                 borderRightRadius="md"
               >
-                <Text fontSize="xl" fontWeight="semibold">
-                  {service.type.toUpperCase()}
-                </Text>
+               
                 {service.price && <Flex
                   align="center"
                   fontSize="5xl"
                   fontWeight={["bold", "extrabold"]}
                   lineHeight="tight"
                 >
-                  ${service.price}
+                  {service.price}
                   <chakra.span
                     ml={2}
                     fontSize="2xl"
@@ -194,7 +198,7 @@ export default function Component({service}:{service:ServiceProps}) {
                     color={"gray.500"}
                   >
                     {" "}
-                    ADA
+                    DSET
                   </chakra.span>
                 </Flex>}
 
