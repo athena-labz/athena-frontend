@@ -11,14 +11,22 @@ import {
   } from '@chakra-ui/react';
   import { CopyIcon } from '@chakra-ui/icons'
   import Image from 'next/image';
+import { judges } from '../../pages/api/judges';
   
-  export default function UserCard() {
-    const isJudge = false;
+  type Judge= {
+    name: string;
+    description: string;
+    trust: number;
+    price: number;
+    image?:string;
+    isJudge: boolean;
+  }
+
+  export default function UserCard({name, description, trust, price , isJudge}:Judge) {
     return (
         <Center py={6}>
         <Box
-          maxW={'280px'}
-          w={'full'}
+          w={'280px'}
           bg={useColorModeValue('white', 'gray.900')}
           boxShadow={'2xl'}
           rounded={'lg'}
@@ -35,16 +43,17 @@ import {
             
           />
           <Heading fontSize={'2xl'} fontFamily={'body'} mb={4}>
-            Lindsey James
+            {name}
           </Heading>
           <Text fontWeight={600} color={'gray.500'} mb={4}>
             0xc4c16a645...b21a <CopyIcon w={3} h={3} color="blue.500"/>
           </Text>
           <Text
-            textAlign={'center'}
+            textAlign={'justify'}
+            letterSpacing="tight"
             color={useColorModeValue('gray.700', 'gray.400')}
             px={3} mb={6}>
-              A wholesome farm owner in Montana. Upcoming gallery solo show in Germany
+              {description}
           </Text>
           
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
