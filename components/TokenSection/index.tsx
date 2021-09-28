@@ -147,7 +147,7 @@ export default function TokenSection() {
               color={useColorModeValue("gray.600", "gray.400")}
               fontSize={{ md: "lg" }}
             >
-              User's activiy is rewarded: inviting new members, acting as a judge, scoring a high CAS provide benefit for the member and for the platform as a whole.
+              User{"'"}s activiy is rewarded: inviting new members, acting as a judge, scoring a high CAS provide benefit for the member and for the platform as a whole.
             </chakra.p>
             
           </Box>

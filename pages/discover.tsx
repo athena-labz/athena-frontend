@@ -216,7 +216,7 @@ const Discover = ({services}:Discoverprops) => {
              <GridItem colSpan={4}>
               <Grid  gap={6}  templateColumns="repeat(6, 1fr)" >
                   {services.map((service, index) => (
-                    <GridItem colSpan={2}  >
+                    <GridItem colSpan={2}  key={service.id}>
                       <ServiceCard 
                         id={service.id}
                         type={service.type}
