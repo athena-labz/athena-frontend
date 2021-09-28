@@ -31,7 +31,7 @@ const services_data = {
             "description": "I have 45 years of experience as I writer, having written 5 best-sellers...",
             "trust": 30000,
             pledge:100,
-            "price": 200000,
+            "price": "200.000",
             "deadline": 1629124893,
             image:"https://www.freecodecamp.org/news/content/images/2020/09/writing-cover.jpg",
             questions:[
@@ -65,10 +65,14 @@ const services_data = {
             "title": "Mountain Bike For Sale",
             "description": "It was used for only 2 months, in very good state",
             "trust": 45000,
-            "price": 500000,
+            "price": "500.000",
             pledge:100,
             "deadline": 1629124893,
-            image:"https://image.made-in-china.com/202f0j00zclUMRvBfCkm/MTB-Hot-Sale-21-Speed-Mountain-Bikes-Bicycle-High-Quality-Best-Price-MTB-Mountainbike-29-Inch-Adults-MTB-Bikes.jpg"
+            image:"https://image.made-in-china.com/202f0j00zclUMRvBfCkm/MTB-Hot-Sale-21-Speed-Mountain-Bikes-Bicycle-High-Quality-Best-Price-MTB-Mountainbike-29-Inch-Adults-MTB-Bikes.jpg",
+            questions:[
+                'Please confirm availability to pick-up the bike at the indicated address',
+
+            ]
         },
         {
             id:4,
@@ -78,14 +82,11 @@ const services_data = {
             "title": "I will do your Web Site Front-End",
             "description": "50 years of experience software engineering.\n I will make you a beautiful front page website for an affordable price.",
             "trust": 73200,
-            "price": 1000000,
-            pledge:100,
+            "price": "1.000.000",
+            pledge:150,
             "deadline": 1629124893,
             image:"https://cdn.billomat.com/wp-content/uploads/2019/09/freelance-web-developer-danial1-ricaros-FCHlYvR5gJI-unsplash.jpg",
-            questions:[
-                'Please confirm availability to pick-up the bike at the indicated address',
-
-            ]
+            
         },
         {
             id:5,
@@ -94,19 +95,19 @@ const services_data = {
             "publisher": "3f96cfba6b1a10bf4dec08ea1459b87ecefa65c65a5f0899d030a214",
             "title": "If elected, I will be an excellent congressman",
             "description": "I defined a set of targets I must complete if elected",
-            "trust": 100000000,
-            pledge:100,
+            "trust": "1000000",
+            pledge:3000,
             image:"https://direitosbrasil.com/wp-content/uploads/2016/09/marketing-politico.jpg"
         },
         {
-            id:5,
+            id:6,
             "type": "constant",
             "badge_color":"green",
             "publisher": "3f96cfba6b1a10bf4dec08ea1459b87ecefa65c65a5f0899d030a214",
             "title": "Holiday House",
             "description": "I defined a set of targets I must complete if elected",
-            "trust": 100000000,
-            pledge:100,
+            "trust": "1000000",
+            pledge:500,
             image:"https://direitosbrasil.com/wp-content/uploads/2016/09/marketing-politico.jpg"
         }
 

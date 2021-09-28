@@ -20,7 +20,11 @@ import {
   SliderThumb,
   Badge,
   Grid,
-  GridItem ,
+  Flex,
+  GridItem,
+  Button,
+  Center,
+  CircularProgress,
  } from '@chakra-ui/react'
 
 
@@ -45,6 +49,7 @@ type Discoverprops ={
 
 const Discover = ({services}:Discoverprops) => {
   const [value, setValue] = useState(50);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Create state
   const [state,setState] = useState({
@@ -62,6 +67,13 @@ const Discover = ({services}:Discoverprops) => {
     setValue(new_value)
   }
 
+  const loadMore = async () => {
+    setIsLoading(true)
+    await setTimeout(function(){ 
+      setIsLoading(false)
+    }, 1000);
+  }
+
 
   return (
     <div >
@@ -75,7 +87,6 @@ const Discover = ({services}:Discoverprops) => {
         <SearchSection/>
 
          <Grid
-            templateRows="repeat(2, 1fr)"
             templateColumns="repeat(5, 1fr)"
             gap={2}
             px={"3rem"}
@@ -201,10 +212,10 @@ const Discover = ({services}:Discoverprops) => {
 
               </GridItem  >
 
-             <GridItem colSpan={4}  >
-                <Wrap>
+             <GridItem colSpan={4}>
+              <Grid  gap={6}  templateColumns="repeat(6, 1fr)" >
                   {services.map((service, index) => (
-                    <WrapItem key={index.toString()+service.title}>
+                    <GridItem colSpan={2}  >
                       <ServiceCard 
                         id={service.id}
                         type={service.type}
@@ -216,12 +227,27 @@ const Discover = ({services}:Discoverprops) => {
                         price={service.price}
                         deadline={service.deadline}
                         image={service.image}
+                        pledge={service.pledge}
                       /> 
-                     </WrapItem>
+                       </GridItem>
                   ))}
 
-                </Wrap>
-
+                </Grid>
+                <Center my={5}>
+                   {
+                    !isLoading ?
+                    <Button           
+                      onClick={loadMore}   
+                      fontSize={'md'}
+                      fontWeight={400}
+                      variant={'link'}
+                     >
+                      Load More
+                    </Button>
+                    :
+                    <CircularProgress isIndeterminate color="blue.400" />
+                  }
+                </Center>
               </GridItem  >
 
            
@@ -244,7 +270,7 @@ export const getStaticProps:GetStaticProps = async () => {
       services:data.services
       
     },
-   
+    revalidate:60*60*24// 24 hours
   }
 }
 
