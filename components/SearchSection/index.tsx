@@ -29,7 +29,7 @@ type Service= {
 type Discoverprops ={
   services: Service[];
   filterServ: Service[];
-  setfilter: (services:Service[]) => void;
+  setfilter: (services:any) => any;
 }
 
 const SearchSection = ({services, setfilter}:Discoverprops) => {
