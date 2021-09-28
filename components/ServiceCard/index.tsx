@@ -80,7 +80,7 @@ export default function ServiceCard(props:ServiceCardProps)  {
           <chakra.p
             mt={1}
             fontSize="sm"
-            style={{display:"block",overflow: "hidden",wordWrap:" break-word",lineHeight:"1.8em",maxHeight: "3.6em"}}
+            style={{display:"block",overflow: "hidden",wordWrap:"break-word",lineHeight:"1.8em",maxHeight: "3.6em"}}
 
             color={"gray.600"}
           >
