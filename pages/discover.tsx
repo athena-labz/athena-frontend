@@ -36,6 +36,7 @@ type Service= {
   description: string;
   trust: number;
   price?: number;
+   pledge:number;
   deadline?: number;
   badge_color:string;
   image?:string;

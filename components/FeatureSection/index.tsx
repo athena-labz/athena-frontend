@@ -45,7 +45,7 @@ const Feature = ({ title, text, icon }: FeatureProps) => {
 
 export default function FeaturesSection() {
   return (
-    <Box p={2} id="solution" style={{scrollMarginTop:120}}>
+    <Box p={2} id="solution" style={{scrollMarginTop:150}} >
       <Stack spacing={3} as={Container} maxW={'8xl'} textAlign={'center'} >
        
         <Stack flex={1} spacing={{ base: 5, md: 10 }}>

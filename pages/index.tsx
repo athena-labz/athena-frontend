@@ -8,6 +8,7 @@ import ProblemSection from '../components/ProblemSection'
 import RoadmapSection from '../components/RoadmapSection'
 import GoToMarketSection from '../components/GoToMarketSection'
 import FaqSection from '../components/FaqSection'
+import TokenSection from '../components/TokenSection'
 
 type Judge= {
   name: string;
@@ -42,6 +43,8 @@ const Home = ({judges}:Homeprops) => {
         <RoadmapSection />
 
         <GoToMarketSection />
+        
+        <TokenSection />
 
         <FaqSection />
         
