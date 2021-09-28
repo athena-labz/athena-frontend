@@ -50,7 +50,9 @@ type Discoverprops ={
 
 const Discover = ({services}:Discoverprops) => {
   const [value, setValue] = useState(50);
+  const [filtered, setFiltered] = useState(services);
   const [isLoading, setIsLoading] = useState(false);
+
 
   // Create state
   const [state,setState] = useState({
@@ -85,7 +87,7 @@ const Discover = ({services}:Discoverprops) => {
      
       <section>
 
-        <SearchSection/>
+        <SearchSection services={services} filterServ={filtered} setfilter={setFiltered}/>
 
          <Grid
             templateColumns="repeat(5, 1fr)"
@@ -217,6 +219,7 @@ const Discover = ({services}:Discoverprops) => {
               <Grid  gap={6}  templateColumns="repeat(6, 1fr)" >
                   {services.map((service, index) => (
                     <GridItem colSpan={2}  key={service.id}>
+
                       <ServiceCard 
                         id={service.id}
                         type={service.type}
