@@ -34,7 +34,7 @@ function StatsCard(props: StatsCardProps) {
           <Text fontWeight={'medium'} >
             {title}
           </Text>
-         <StatHelpText>Feb 12 - Feb 28</StatHelpText>
+         
         </Box>
         
       </Flex>
