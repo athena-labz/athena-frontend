@@ -151,7 +151,7 @@ export const getStaticProps:GetStaticProps = async () => {
   const data = services();
   const data_accusations = accusations();
   const data_judges = {
-      "name": "Gaea Micheil",
+      "name": "Mateus Torres",
       "description": "This is the face of Alluin Moonwalker, a true adventurer among blood elves. He stands tiny among others, despite his bulky frame.",
       "trust": 15000,
       "price": 15,
