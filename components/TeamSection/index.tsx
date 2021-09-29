@@ -105,16 +105,16 @@ export default function TeamSection() {
         <StatsCard
             title={'Gabriele Castaldi'}
             helpText={"Mechatronics engineer, IoT devices and Python developer. Entrepreneur with marketing experience of over 10 years. Plutus Pioneers Program second cohort"}
-            image="/gabri.png"
+            image="/gabri2.png"
           />
           <StatsCard
             title={'Samuel Santos'}
-            image="/samuel.png"
-            helpText={"JS developer and computer science student, develop web applications as a hobby and for freelance works. Candidate to Plutus Pioneers Program third cohort"}
+            image="/samuel2.png"
+            helpText={"JS developer and computer Science student, develop web applications as a hobby and for freelance works. Candidate to Plutus Pioneers Program third cohort"}
           />
           <StatsCard
             title={'Frank DelPidio'}
-            image="/frank.png"
+            image="/frank2.png"
             helpText={"Backend Software Engineer, Ruby on Rails developer, SQL database engineer, Certifited AWS Solutions Associate, Plutus Pioneers Program second cohort."}
           />
         
