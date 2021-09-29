@@ -250,6 +250,12 @@ const Header: NextPage = () => {
                 <PopoverBody color={'gray.600'} fontWeight="bold"  _hover = { { color: "#1E88E5" } }as="a" href="profile">
                  Profile
                 </PopoverBody>
+                 <PopoverBody color={'gray.600'} fontWeight="bold"  _hover = { { color: "#1E88E5" } }as="a" href="#">
+                 CAS History
+                </PopoverBody>
+                 <PopoverBody color={'gray.600'} fontWeight="bold"  _hover = { { color: "#1E88E5" } }as="a" href="#">
+                 Rewards History
+                </PopoverBody>
                 <Divider orientation="horizontal" /> 
                 <PopoverBody textAlign="left" color={'gray.600'} fontWeight="bold" _hover = { { color: "#1E88E5" } } as="button" onClick={(e) => setstate(!state)}>
                   Logout
