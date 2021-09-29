@@ -87,7 +87,7 @@ const ProfilePage = ({services, judge, accusations}:Discoverprops) => {
 
               <Tbody>
                 {services.map((service, index) => (
-                  <Tr>
+                  <Tr key={service.title}>
                     <Td>{service.publisher.slice(0,10)}...</Td>
                     <Td isTruncated>{service.title}</Td>
                     <Td isNumeric>{service.pledge}</Td>
