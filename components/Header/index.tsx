@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import {
     Box,
+    Center,
     Flex,
     Text,
     IconButton,
@@ -10,7 +11,9 @@ import {
     Icon,
     Link,
     Popover,
+    ButtonGroup ,
     PopoverTrigger,
+    PopoverFooter ,
     PopoverContent,
     useColorModeValue,
     useBreakpointValue,
@@ -26,7 +29,7 @@ import {
     PopoverHeader,
     PopoverBody,
 } from '@chakra-ui/react';
-
+import { BiKey,BiLogOut } from "react-icons/bi";
 import {
     HamburgerIcon,
     CloseIcon,
@@ -36,12 +39,16 @@ import {
 } from '@chakra-ui/icons';
 import { useState,useEffect } from 'react';
 import Image from 'next/image';
-
+import { useRouter } from 'next/router'
 const Header: NextPage = () => {
     const { isOpen, onToggle } = useDisclosure();
-
-    const [state, setstate] = useState(true)
+    const router = useRouter()
+    const pathnames_not_scroll_header = ['/create-contract','/profile']
+    const scroll_ = pathnames_not_scroll_header.indexOf(router.pathname) === -1;
+    const [state, setstate] = useState( scroll_ ? true:false)
     const [yPos, setYPos] = useState(0)
+
+  
 
     useEffect(function mount() {
 
@@ -61,11 +68,11 @@ const Header: NextPage = () => {
         <Box w="100%" >
           <Flex
             as={'header'}
-            pos={yPos > 70?"fixed" :"static"}
+            pos={yPos > 70 && scroll_?"fixed" :"relative"}
             top="0"
             w={'full'}
             boxShadow={'sm'}
-            zIndex="999"
+            zIndex="9999"
             justify={'center'}
             css={{
               backdropFilter: 'saturate(180%) blur(5px)',
@@ -150,6 +157,18 @@ const Header: NextPage = () => {
             direction={'row'}
             marginRight="6rem"
             spacing={6}>
+
+            <Button
+               as={'a'}                
+                bg={'blue.400'}
+                color={'white'}
+                href="/create-contract"
+                marginTop={1}
+                _hover={{
+                  bg: 'blue.500',
+                }}>
+              <Text marginRight="0.3rem"  marginLeft="0.5rem">Create a contract</Text>
+            </Button>
            
            <Popover >
               <PopoverTrigger >                
@@ -160,7 +179,7 @@ const Header: NextPage = () => {
                     fontWeight={400}  
                     borderRadius="35px"         
                     paddingLeft="0.5rem"  
-                    href={'#'}
+                    
                     _hover={{
                       bg: 'black.300',
                     }}>
@@ -176,12 +195,73 @@ const Header: NextPage = () => {
                   </Button>
               </PopoverTrigger>
 
-              <PopoverContent >
-                <PopoverArrow />
-                <PopoverCloseButton />
-                <PopoverHeader>Confirmation!</PopoverHeader>
-                <PopoverBody>Are you sure you want to have that milkshake?</PopoverBody>
-              </PopoverContent>
+              <PopoverContent  w={"16rem"} _focus={{   boxShadow:"none"  }} >
+               <PopoverArrow />
+                <PopoverHeader pt={4} fontWeight="bold" border="0" fontSize={'lg'} color={'gray.800'}>
+                 Mateus Torres
+                </PopoverHeader>
+                <PopoverBody  display="flex" flexDirection="row">
+                  <Text fontWeight={600} color={'gray.500'}>
+                    0xc4c16a645...b21a 
+                  </Text>
+                  <BiKey  style={{ color: "#1E88E5", fontSize: "1.5em" }} />
+                </PopoverBody>
+                <Divider orientation="horizontal" /> 
+                <PopoverBody>
+                  <Box
+                  w={'full'}
+                  bg={'white'}
+                  
+                  rounded={'lg'}
+
+                  >
+        
+                    <Stack pt={0} align={'center'}>
+                      <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
+                        Balance
+                      </Text>
+                      
+                      <Stack direction={'row'} align={'center'}>
+                        <Text fontWeight={800} fontSize={'xl'}>
+                          4.689 DST
+                        </Text>
+                      </Stack>
+
+                       <Button
+                          variant="outline"
+                          size="sm"
+                          fontSize={'md'}
+                          fontWeight={400}  
+                          borderRadius="35px"         
+                          _hover={{
+                            bg: 'blue.400',
+                            color: "#fff"
+                          }}>
+
+                          <Text  >Manage your wallet</Text>
+
+                        </Button>
+                    </Stack>
+
+              </Box>
+                 
+                </PopoverBody>
+                <Divider orientation="horizontal" /> 
+                <PopoverBody color={'gray.600'} fontWeight="bold"  _hover = { { color: "#1E88E5" } }as="a" href="profile">
+                 Profile
+                </PopoverBody>
+                 <PopoverBody color={'gray.600'} fontWeight="bold"  _hover = { { color: "#1E88E5" } }as="a" href="#">
+                 CAS History
+                </PopoverBody>
+                 <PopoverBody color={'gray.600'} fontWeight="bold"  _hover = { { color: "#1E88E5" } }as="a" href="#">
+                 Rewards History
+                </PopoverBody>
+                <Divider orientation="horizontal" /> 
+                <PopoverBody textAlign="left" color={'gray.600'} fontWeight="bold" _hover = { { color: "#1E88E5" } } as="button" onClick={(e) => setstate(!state)}>
+                  Logout
+                </PopoverBody>
+
+                </PopoverContent>
             </Popover>
           </Stack>
            }     
@@ -351,26 +431,27 @@ const Header: NextPage = () => {
     const NAV_ITEMS: Array<NavItem> = [
     {
         label: 'The Problem',
-        href:"#"
+        href:"/#problem"
 
       },
       {
         label: 'Solution',
-        href:"#"
+        href:"/#solution"
 
       },
       {
         label: 'Roadmap',
-        href:"#"
+        href:"/#roadmap"
 
       },
       {
         label: 'Token',
-        href:"/token"
+        href:"/#token"
 
       },
       {
         label: 'FAQ',
+        href:'/#faq'
 
       },
       {

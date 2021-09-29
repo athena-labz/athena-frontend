@@ -17,7 +17,7 @@ const Login: NextPage = () => {
 
      
       <Flex
-        minH={'100vh'}
+        minH={'80vh'}
         align={'center'}
         justify={'center'}>
         

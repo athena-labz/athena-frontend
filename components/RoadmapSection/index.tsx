@@ -12,7 +12,7 @@ import 'react-vertical-timeline-component/style.min.css';
 export default function RoadmapSection() {
 
   return (
-    <Container maxW={'7xl'} marginBottom={0} paddingBottom={0}>
+    <Container maxW={'7xl'} marginBottom={0} paddingBottom={0} id="roadmap" style={{scrollMarginTop:120}}>
           <Heading
             lineHeight={1.1}
             fontWeight={600}
