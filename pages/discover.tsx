@@ -23,6 +23,7 @@ import {
   Flex,
   GridItem,
   Button,
+  Divider,
   Center,
   CircularProgress,
  } from '@chakra-ui/react'
@@ -56,12 +57,13 @@ const Discover = ({services}:Discoverprops) => {
 
   // Create state
   const [state,setState] = useState({
-    xoffset: 91,
+    xoffset: 102,
     yoffset: 25,
   })
 
   const onChange = (new_value:number) => {
-    const new_coordenada = state.xoffset-(value-new_value)*2
+    let new_coordenada = state.xoffset-(value-new_value)*2 
+
       setState({
         ...state,
          ['xoffset']:new_coordenada});
@@ -88,7 +90,7 @@ const Discover = ({services}:Discoverprops) => {
       <section>
 
         <SearchSection services={services} filterServ={filtered} setfilter={setFiltered}/>
-
+       
          <Grid
             templateColumns="repeat(5, 1fr)"
             gap={2}
@@ -217,7 +219,7 @@ const Discover = ({services}:Discoverprops) => {
 
              <GridItem colSpan={4}>
               <Grid  gap={6}  templateColumns="repeat(6, 1fr)" >
-                  {services.map((service, index) => (
+                  {filtered.map((service, index) => (
                     <GridItem colSpan={2}  key={service.id}>
 
                       <ServiceCard 

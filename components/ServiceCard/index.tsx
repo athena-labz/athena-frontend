@@ -94,7 +94,7 @@ export default function ServiceCard(props:ServiceCardProps)  {
           fontWeight={["bold", "extrabold"]}
           lineHeight="tight"
         >
-           <LockIcon mx={2} color="blue.400"/>
+           <LockIcon mx={2} color="#42A5F5"/>
 
           {props.pledge}
           <chakra.span

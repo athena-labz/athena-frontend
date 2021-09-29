@@ -32,15 +32,20 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon } from '@chakra-ui/icons';
 import { FaUser } from "react-icons/fa";
-
-
-
+import { useState } from 'react';
 
 export default function Component() {
-  
+  const [questions, setQuestions] = useState([""])
+
+  const createNewQuestion = (e:any) => {
+    setQuestions([...questions, "new"])
+  }
+
   return (
     <Box bg={useColorModeValue("gray.50", "inherit")} p={10}>
-      
+      <Heading fontSize="lg" fontWeight="medium" lineHeight="6">
+       Create a Contract
+      </Heading>
       <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true">
         <Box py={5}>
           <Box
@@ -56,20 +61,6 @@ export default function Component() {
           columns={{ md: 3 }}
           spacing={{ md: 6 }}
         >
-          <GridItem colSpan={{ md: 1 }}>
-            <Box px={[4, 0]}>
-              <Heading fontSize="lg" fontWeight="medium" lineHeight="6">
-               Create a Contract
-              </Heading>
-              <Text
-                mt={1}
-                fontSize="sm"
-                color={useColorModeValue("gray.600", "gray.400")}
-              >
-                Add a description
-              </Text>
-            </Box>
-          </GridItem>
           <GridItem mt={[5, null, 0]} colSpan={{ md: 2 }}>
             <chakra.form
 
@@ -120,7 +111,7 @@ export default function Component() {
                       Service Description
                     </FormLabel>
                     <Textarea
-                      placeholder="you@example.com"
+                      placeholder="Brief description for your service"
                       mt={1}
                       rows={3}
                       w="full"
@@ -128,9 +119,7 @@ export default function Component() {
                       focusBorderColor="brand.400"
                       fontSize={{ sm: "sm" }}
                     />
-                    <FormHelperText>
-                      Brief description for your profile. URLs are hyperlinked.
-                    </FormHelperText>
+                    
                   </FormControl>
                 </div>
                 </SimpleGrid>
@@ -159,7 +148,7 @@ export default function Component() {
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
                     >
-                      TrustToken  
+                      Trust Token 
                     </FormLabel>
                     <NumberInput  step={0.1}>
                       <NumberInputField />
@@ -168,6 +157,9 @@ export default function Component() {
                         <NumberDecrementStepper />
                       </NumberInputStepper>
                     </NumberInput>
+                    <FormHelperText>
+                     It will be used to reward an individual who has been wronged
+                    </FormHelperText>
                   </FormControl>
                   <FormControl as={GridItem} colSpan={[6, 0]}>
                     <FormLabel
@@ -176,23 +168,12 @@ export default function Component() {
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
                     >
-                      Judge Selection
+                      Type of Service
                     </FormLabel>
-                    <Select
-                      id="country"
-                      name="country"
-                      autoComplete="country"
-                      placeholder="Select option"
-                      mt={1}
-                      focusBorderColor="brand.400"
-                      shadow="sm"
-                      size="sm"
-                      w="full"
-                      rounded="md"
-                    >
-                      <option>Armando</option>
-                      <option>Robert</option>
-                      <option>Josh</option>
+                   <Select variant="outline" placeholder="Outline" >
+                      <option>ONE-TIME</option>
+                      <option>CONSTANT</option>
+                      
                     </Select>
                   </FormControl>
                 </SimpleGrid>
@@ -207,7 +188,9 @@ export default function Component() {
                     >
                       Questions
                     </FormLabel>
-                    <Input
+                    {questions.map( (index,question) => (
+                      <div key={index+question}>
+                        <Input
                       type="text"
                       name="service_title"
                       id="service_title"
@@ -221,15 +204,23 @@ export default function Component() {
                     />
                     <Button
                       ml="1rem"
+                      mb="0.5rem"
                       bg="blue.500"
                       colorScheme="brand"
-                      fontWeight="md"
+                      fontWeight="sm"
+                      size="sm"
                       _hover={{
                         bg: 'blue.400',
                       }}
+                      onClick={createNewQuestion}
                     >
                       <AddIcon/>
                     </Button>
+
+
+                      </div>
+
+                    ))}
                   </FormControl> 
                   </SimpleGrid>
               </Stack>

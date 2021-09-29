@@ -5,6 +5,7 @@ import {
     InputRightElement,
     InputGroup,
     Input,
+    Flex,
     Divider,
     Center,
 
@@ -35,22 +36,22 @@ type Discoverprops ={
 const SearchSection = ({services, setfilter}:Discoverprops) => {
     function handleChange(e: any){
       if (e.target.value.length > 0) {
-      let filteredResults = services.filter(p => {
-      return ( 
-      p.title.toLowerCase().match(e.target.value.toLowerCase())
-      )
-      });
-      setfilter(filteredResults);
+          let filteredResults = services.filter(p => {
+          return ( 
+          p.title.toLowerCase().match(e.target.value.toLowerCase())
+          )
+          });
+        setfilter(filteredResults);
       }
       else{
         setfilter(services)
       }
+
     }
     var handleClick = () => {}
 
     return (
-      <Container maxW={'6xl'} p="2rem">
-
+      <Flex maxW={'3xl'} p="2rem" ml="1.5rem" alignItems="start" >
         <InputGroup size="lg">
             <Input
                 onChange={handleChange}
@@ -65,12 +66,10 @@ const SearchSection = ({services, setfilter}:Discoverprops) => {
             </InputRightElement>
               
         </InputGroup>
-        
 
-        <Divider orientation="horizontal" marginTop="2rem" />
        
 
-     </Container>
+     </Flex>
     );
   }
   
