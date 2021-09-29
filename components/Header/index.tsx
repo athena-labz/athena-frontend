@@ -43,7 +43,7 @@ import { useRouter } from 'next/router'
 const Header: NextPage = () => {
     const { isOpen, onToggle } = useDisclosure();
     const router = useRouter()
-    const pathnames_not_scroll_header = ['/create-contract']
+    const pathnames_not_scroll_header = ['/create-contract','/profile']
     const scroll_ = pathnames_not_scroll_header.indexOf(router.pathname) === -1;
     const [state, setstate] = useState( scroll_ ? true:false)
     const [yPos, setYPos] = useState(0)
@@ -72,7 +72,7 @@ const Header: NextPage = () => {
             top="0"
             w={'full'}
             boxShadow={'sm'}
-            
+            zIndex="9999"
             justify={'center'}
             css={{
               backdropFilter: 'saturate(180%) blur(5px)',

@@ -26,17 +26,15 @@ import { judges } from '../../pages/api/judges';
     return (
         <Center py={6}>
         <Box
-          w={'280px'}
+          w={'15rem'}
           bg={'white'}
           boxShadow={'2xl'}
           rounded={'lg'}
           p={6}
           textAlign={'center'}>
           <Avatar
-            size={'2xl'}
-            src={
-              'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-            }
+            size={'lg'}
+            name="Mateus Torres"
             alt={'Avatar Alt'}
             mb={4}
             pos={'relative'}
@@ -48,13 +46,7 @@ import { judges } from '../../pages/api/judges';
           <Text fontWeight={600} color={'gray.500'} mb={4}>
             0xc4c16a645...b21a <CopyIcon w={3} h={3} color="blue.500"/>
           </Text>
-          <Text
-            textAlign={'justify'}
-            letterSpacing="tight"
-            color={'gray.700'}
-            px={3} mb={6}>
-              {description}
-          </Text>
+          
           
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             {isJudge && <Badge

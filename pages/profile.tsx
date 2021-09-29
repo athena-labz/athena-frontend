@@ -57,11 +57,11 @@ type Discoverprops ={
 const ProfilePage = ({services, judge, accusations}:Discoverprops) => {
   
   return (
-    <Flex maxW={'90%'} px="20" py="8" alignItems='row'>
+    <Flex px="8" py="1" alignItems='row'>
 
         <UserCard name={judge.name} description={judge.description} trust={judge.trust} price={judge.price} isJudge={judge.isJudge}/>
 
-        <Tabs variant="enclosed" colorScheme="blue" size="md" mt={6} ml={12}>
+        <Tabs variant="enclosed" colorScheme="blue" size="md" mt={6} ml={6}>
 
           <TabList>
             <Tab>Contracts</Tab>
@@ -72,7 +72,7 @@ const ProfilePage = ({services, judge, accusations}:Discoverprops) => {
           <TabPanels>
             <TabPanel>
 
-            <Table variant="simple" bg={'white'} size='sm'>
+            <Table variant="striped" colorScheme="gray"  size='md' border="1px" borderColor="gray.200">
               <Thead>
                 <Tr>
                   <Th>Publisher</Th>
@@ -104,13 +104,12 @@ const ProfilePage = ({services, judge, accusations}:Discoverprops) => {
 
             <TabPanel>
 
-              <Table variant="simple" bg={'white'} size='sm'>
+              <Table variant="striped" colorScheme="gray"  size='md' border="1px" borderColor="gray.200">
                 <Thead>
                   <Tr>
                     <Th>Publisher</Th>
                     <Th>Service</Th>
                     <Th>Judge</Th>
-                    <Th>Pledge</Th>
                     <Th>Price</Th>
                     <Th>Deadline</Th>
                     <Th></Th>
@@ -123,7 +122,6 @@ const ProfilePage = ({services, judge, accusations}:Discoverprops) => {
                       <Td>{accusation.publisher.slice(0,10)}...</Td>
                       <Td isTruncated>{accusation.title}</Td>
                       <Td isTruncated>{accusation.judge}</Td>
-                      <Td isNumeric>{accusation.pledge}</Td>
                       <Td>{accusation.price}</Td>
                       <Td>{accusation.deadline}</Td>
                       <Td><InfoOutlineIcon/></Td>
