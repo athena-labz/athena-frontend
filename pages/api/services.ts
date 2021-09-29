@@ -122,6 +122,10 @@ const services_data = {
             "deadline": '22/09/2021',
             image:"https://direitosbrasil.com/wp-content/uploads/2016/09/marketing-politico.jpg",
             "status": "Running",
+            questions:[
+                'Are you committing to leave the house in the same way you find as you enter it, proving it with pictures of the indicated locations in the attach?',
+                'Are you available to assure that not more than 4 people will be leaving in the house ?'
+            ]
         }
 
     ]
