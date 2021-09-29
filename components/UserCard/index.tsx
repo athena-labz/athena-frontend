@@ -27,7 +27,7 @@ import { judges } from '../../pages/api/judges';
         <Center py={6}>
         <Box
           w={'280px'}
-          bg={useColorModeValue('white', 'gray.900')}
+          bg={'white'}
           boxShadow={'2xl'}
           rounded={'lg'}
           p={6}
@@ -51,7 +51,7 @@ import { judges } from '../../pages/api/judges';
           <Text
             textAlign={'justify'}
             letterSpacing="tight"
-            color={useColorModeValue('gray.700', 'gray.400')}
+            color={'gray.700'}
             px={3} mb={6}>
               {description}
           </Text>
@@ -60,7 +60,7 @@ import { judges } from '../../pages/api/judges';
             {isJudge && <Badge
               px={2}
               py={1}
-              bg={useColorModeValue('gray.400', 'blue.400')}
+              bg={'gray.400'}
               fontWeight={'400'} color='white'>
                 Judge
             </Badge>} 
