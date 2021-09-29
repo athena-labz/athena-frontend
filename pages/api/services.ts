@@ -115,7 +115,7 @@ const services_data = {
             "badge_color":"green",
             "publisher": "3f96cfba6b1a10bf4dec08ea1459b87ecefa65c65a5f0899d030a214",
             "title": "Holiday House",
-            "description": "I defined a set of targets I must complete if elected",
+            "description": "It's a beautiful 180 sqm apartment on the ground floor in an exclusive residential village located on the beautiful white beach in the heart of the Marine Park and Watamu Nature Reserve, right in front of the Island of Love, destination of all tourists.",
             "trust": "1000000",
             "price": '250.000',
             pledge:500,
