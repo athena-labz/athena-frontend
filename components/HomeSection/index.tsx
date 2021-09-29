@@ -95,6 +95,8 @@ export default function HomeSection() {
                     rounded="lg"
                     color="white"
                     bg={'blue.400'}
+                    as="a"
+                    href="https://github.com/GabriIT/HackTh_Digiservices/raw/main/WP%20Digiservices%2017%20Aug%202021%20v1.pdf"
                    _hover={{ bg: 'blue.500' }}
                     px={{ base: 8, md: 10 }}
                     py={{ base: 3, md: 4 }}
@@ -115,6 +117,8 @@ export default function HomeSection() {
                     fontSize={{ base: "md", md: "lg" }}
                     rounded="lg"
                     color="black.200"
+                    as="a"
+                    href="/#problem"
                     bg="gray.300"
                     _hover={{ bg: "gray.200" }}
                     cursor="pointer"
