@@ -105,7 +105,7 @@ export default function TeamSection() {
         <StatsCard
             title={'Gabriele Castaldi'}
             helpText={"Mechatronics engineer, IoT devices and Python developer. Entrepreneur with marketing experience of over 10 years. Plutus Pioneers Program second cohort"}
-            image="/gabri2.png"
+            image="/gabri3.png"
           />
           <StatsCard
             title={'Samuel Santos'}
