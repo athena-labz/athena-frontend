@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const pathnames_not_show_footer = ['/login','/forgot-password','/reset-password',"/signup"]
+  const pathnames_not_show_footer = ['/login','/forgot-password','/profile','/reset-password',"/signup","/create-contract"]
   
   return (
     <ChakraProvider theme={customtheme}> 
@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           
        </main>
     </ChakraProvider>
-  )
+  )     
   
   
 }
