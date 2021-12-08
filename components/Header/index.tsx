@@ -185,7 +185,7 @@ const Header: NextPage = () => {
                     }}>
 
                     <WrapItem>
-                      <Avatar name="Molaaa Tioluwani"  size="sm" />
+                      <Avatar name="John Smith"  bgColor="blue.400" size="sm" />
                     </WrapItem>
 
                     <Text marginRight="0.3rem"  marginLeft="0.5rem">7.0000</Text>
@@ -198,7 +198,7 @@ const Header: NextPage = () => {
               <PopoverContent  w={"16rem"} _focus={{   boxShadow:"none"  }} >
                <PopoverArrow />
                 <PopoverHeader pt={4} fontWeight="bold" border="0" fontSize={'lg'} color={'gray.800'}>
-                 Mateus Torres
+                John Smith
                 </PopoverHeader>
                 <PopoverBody  display="flex" flexDirection="row">
                   <Text fontWeight={600} color={'gray.500'}>
