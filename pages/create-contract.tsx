@@ -22,6 +22,7 @@ import {
   Avatar,
   Text
 } from "@chakra-ui/react";
+import Head from 'next/head'
 import { SearchIcon, AddIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import {
@@ -72,6 +73,9 @@ export default function Component() {
 
   return (
     <Box bg={useColorModeValue("gray.50", "inherit")} p={12}>
+      <Head>
+        <title>Create a Contract</title>
+      </Head>
       <Heading fontSize="lg" fontWeight="medium" lineHeight="6" color="blue.600">
         Create a Contract
       </Heading>

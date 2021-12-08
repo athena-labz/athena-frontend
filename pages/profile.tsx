@@ -15,7 +15,7 @@ import {
   Tab,
   TabPanel
 } from '@chakra-ui/react';
-
+import Head from 'next/head'
 import UserCard from '../components/UserCard';
 import { services } from './api/services';
 import { accusations } from './api/accusations';
@@ -57,13 +57,16 @@ type Discoverprops = {
 const ProfilePage = ({ services, judge, accusations }: Discoverprops) => {
 
   return (
-    <Flex px="12" py="1" alignItems='row' justifyContent="flex-end">
-      <div style={{ marginRight:"3rem",marginTop:"5rem"}}>
+    <Flex px="1.5rem" py="1" alignItems='row' justifyContent="space-between">
+       <Head>
+        <title>Profile</title>
+      </Head>
+      <div style={{marginTop:"5rem"}}>
         <UserCard name={judge.name} description={judge.description} trust={judge.trust} price={judge.price} isJudge={judge.isJudge} />
       </div>
 
-      <div style={{width:"100rem"}}>
-        <Tabs variant="enclosed" colorScheme="blue" size="md" mt={6} ml={6}>
+      <div style={{width:"68rem"}}>
+        <Tabs variant="enclosed" colorScheme="blue" size="sm" mt={6} ml={6}>
 
           <TabList>
             <Tab>Contracts</Tab>
