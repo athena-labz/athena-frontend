@@ -64,7 +64,7 @@ export default function Component() {
   }
 
   const handleChangeSelect = (name: string) => {
-    const element = document.getElementById(name);
+    const element =  (document.getElementById(name) as HTMLInputElement);
     const value = element == null? "":element.value;
     setForm({ ...form, [name]: value })
   }
