@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const pathnames_not_show_footer = ['/login','/forgot-password','/profile','/reset-password',"/signup","/create-contract"]
+  const pathnames_not_show_footer = ['/login','/forgot-password','/profile','/reset-password',"/signup","/create-contract","/contract"]
   
   return (
     <ChakraProvider theme={customtheme}> 
@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
           <Component {...pageProps} />
           
-          {pathnames_not_show_footer.indexOf(router.pathname) === -1 &&  <Footer /> }
+          {pathnames_not_show_footer.includes(router.pathname) &&  <Footer /> }
          
           
        </main>

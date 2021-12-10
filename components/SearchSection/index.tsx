@@ -14,37 +14,72 @@ import {
 import { Search2Icon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
-type Service= {
-  type: string;
-  publisher: string;
-  title: string;
-  description: string;
-  trust: number;
-  price?: number;
-  deadline?: number;
-  badge_color:string;
-  image?:string;
+
+type Contract = {
+  nft: {
+      currency_symbol: string,
+      token_name: string
+  },
+  relation_type: string,
+  privacy_type: string,
+  publisher: string,
+  collateral: [
+      {
+          currency_symbol: string, // This is ADA's currency_symbol
+          value: number // 5 ADA
+      }
+  ],
+  terms_hash: string,
+  judges?: [
+      {
+          name_judge: string,
+          judge: string,
+      }
+  ],
+  accusations?: [
+      {
+          name_accuser: string,
+          accuser: string,
+          name_accused: string,
+          accused: string,
+          time: number,
+          deadline: number
+      }
+  ],
+  resolutions?: [],
+  roles: number,
+  role_map?: [
+      {
+          name: string,
+          address: string,
+          role: 0
+      },
+      {
+          address: string,
+          role: 0
+      }
+  ]
 }
 
 
 type Discoverprops ={
-  services: Service[];
-  filterServ: Service[];
-  setfilter: (services:any) => any;
+  contracts: Contract[];
+  filterServ: Contract[];
+  setfilter: (contracts:any) => any;
 }
 
-const SearchSection = ({services, setfilter}:Discoverprops) => {
+const SearchSection = ({contracts, setfilter}:Discoverprops) => {
     function handleChange(e: any){
       if (e.target.value.length > 0) {
-          let filteredResults = services.filter(p => {
+          let filteredResults = contracts.filter(p => {
           return ( 
-          p.title.toLowerCase().match(e.target.value.toLowerCase())
+          p.terms_hash.toLowerCase().match(e.target.value.toLowerCase())
           )
           });
         setfilter(filteredResults);
       }
       else{
-        setfilter(services)
+        setfilter(contracts)
       }
 
     }

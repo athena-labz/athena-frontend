@@ -1,17 +1,17 @@
 import type { GetStaticProps, NextPage } from 'next'
-import {useState, useCallback} from 'react';
+import { useState, useCallback } from 'react';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ServiceCard from '../components/ServiceCard'
-import { services } from './api/services'
+import { contracts } from './api/contract'
 import SearchSection from '../components/SearchSection'
-import { 
-  Box, 
+import {
+  Box,
   Text,
   WrapItem,
   Wrap,
   Container,
-  Select ,
+  Select,
   FormControl,
   FormLabel,
   Slider,
@@ -26,55 +26,87 @@ import {
   Divider,
   Center,
   CircularProgress,
- } from '@chakra-ui/react'
+} from '@chakra-ui/react'
 
 
-type Service= {
-  id:number;
-  type: string;
-  publisher: string;
-  title: string;
-  description: string;
-  trust: number;
-  price?: number;
-   pledge:number;
-  deadline?: number;
-  badge_color:string;
-  image?:string;
+type Contract = {
+  nft: {
+    currency_symbol: string,
+    token_name: string
+  },
+  relation_type: string,
+  privacy_type: string,
+  publisher: string,
+  collateral: [
+    {
+      currency_symbol: string, // This is ADA's currency_symbol
+      value: number // 5 ADA
+    }
+  ],
+  terms_hash: string,
+  judges?: [
+    {
+      name_judge: string,
+      judge: string,
+    }
+  ],
+  accusations?: [
+    {
+      name_accuser: string,
+      accuser: string,
+      name_accused: string,
+      accused: string,
+      time: number,
+      deadline: number
+    }
+  ],
+  resolutions?: [],
+  roles: number,
+  role_map?: [
+    {
+      name: string,
+      address: string,
+      role: 0
+    },
+    {
+      address: string,
+      role: 0
+    }
+  ]
+}
+
+type Discoverprops = {
+  contracts: Contract[]
 }
 
 
-type Discoverprops ={
-  services: Service[]
-}
-
-
-const Discover = ({services}:Discoverprops) => {
+const Discover = ({ contracts }: Discoverprops) => {
   const [value, setValue] = useState(50);
-  const [filtered, setFiltered] = useState(services);
+  const [filtered, setFiltered] = useState(contracts);
   const [isLoading, setIsLoading] = useState(false);
 
 
   // Create state
-  const [state,setState] = useState({
+  const [state, setState] = useState({
     xoffset: 102,
     yoffset: 25,
   })
 
-  const onChange = (new_value:number) => {
-    let new_coordenada = state.xoffset-(value-new_value)*2 
+  const onChange = (new_value: number) => {
+    let new_coordenada = state.xoffset - (value - new_value) * 2
 
-      setState({
-        ...state,
-         ['xoffset']:new_coordenada});
-   
+    setState({
+      ...state,
+      ['xoffset']: new_coordenada
+    });
+
 
     setValue(new_value)
   }
 
   const loadMore = async () => {
     setIsLoading(true)
-    await setTimeout(function(){ 
+    await setTimeout(function () {
       setIsLoading(false)
     }, 1000);
   }
@@ -83,200 +115,170 @@ const Discover = ({services}:Discoverprops) => {
   return (
     <div >
       <Head>
-        <title>DigiServices</title>
+        <title>DigiServices - Discover</title>
       </Head>
 
-     
+
       <section>
 
-        <SearchSection services={services} filterServ={filtered} setfilter={setFiltered}/>
-       
-         <Grid
-            templateColumns="repeat(5, 1fr)"
-            gap={2}
-            px={"3rem"}
-          >       
+        <SearchSection contracts={contracts} filterServ={filtered} setfilter={setFiltered} />
 
-          <GridItem rowSpan={2} colSpan={1} > 
-             
-              <Box w="100%" h="100%" >
+        <Grid
+          templateColumns="repeat(5, 1fr)"
+          gap={2}
+          px={"3rem"}
+        >
 
-                <Box w="100%" p={2} marginTop={'0.5rem'}>
+          <GridItem rowSpan={2} colSpan={1} >
 
-                   <FormControl >
-                      <FormLabel 
-                            color="gray.600" 
-                            fontWeight='bold'
-                            style={{textTransform:'uppercase'}}>
-                        trust token range
-                      </FormLabel>
-                      
-                      <Badge 
-                            variant="solid" 
-                            p={1}
-                            borderRadius={"0.8rem"}                           
-                            style={{
-                                    position: "absolute",
-                                    left: `${state.xoffset}px`,
-                                     top: `${state.yoffset}px`
-                            }}
-                          
-                        >
-                          {value}
-                        </Badge>
-                      <Slider 
-                          aria-label="slider-ex-2" 
-                          colorScheme="blue" 
-                          defaultValue={50} 
-                          marginTop={6}
-                          value={value}
-                          onChange={onChange}
-                      >
-                        
-                          
-                          <SliderTrack >
-                            <SliderFilledTrack />  
-                          </SliderTrack>
+            <Box w="100%" h="100%" >
 
-                          <SliderThumb  />
+              <Box w="100%" p={2} marginTop={'0.5rem'}>
 
-                      </Slider>
-                      
+                <FormControl >
+                  <FormLabel
+                    color="gray.600"
+                    fontWeight='bold'
+                    style={{ textTransform: 'uppercase' }}>
+                    Collateral Range
+                  </FormLabel>
 
-                     
-                                          
-                    </FormControl>
+                  <Badge
+                    variant="solid"
+                    p={1}
+                    borderRadius={"0.8rem"}
+                    style={{
+                      position: "absolute",
+                      left: `${state.xoffset}px`,
+                      top: `${state.yoffset}px`
+                    }}
 
-                 </Box>
+                  >
+                    {value}
+                  </Badge>
+                  <Slider
+                    aria-label="slider-ex-2"
+                    colorScheme="blue"
+                    defaultValue={50}
+                    marginTop={6}
+                    value={value}
+                    onChange={onChange}
+                  >
 
 
-                 <Box w="100%" p={2} marginTop={'0.5rem'}>
+                    <SliderTrack >
+                      <SliderFilledTrack />
+                    </SliderTrack>
 
-                   <FormControl >
-                      <FormLabel color="gray.600" fontWeight='bold' style={{textTransform:'uppercase'}}>
-                        Filter 1
-                      </FormLabel>
+                    <SliderThumb />
 
-                      <Select
-                        name="options"
-                        placeholder="Select some colors..."
-                        size="md"
-                      >
-                        <option value="option1" >option 1</option>
-                        <option value="option2">option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                    </FormControl>
-
-                 </Box>
-
-                 <Box w="100%" p={2} marginTop={'0.5rem'}>
-
-                   <FormControl >
-                      <FormLabel color="gray.600" fontWeight='bold' style={{textTransform:'uppercase'}}>
-                        Filter 3
-                      </FormLabel>
-                      <Select
-                        isMulti
-                        name="colors"
-                        placeholder="Select some options..."
-                        size="md"
-                      >
-                        <option value="option1">option 1</option>
-                        <option value="option2">option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                    </FormControl>
-
-                 </Box>
-
-                <Box w="100%" p={2} marginTop={'0.5rem'}>
-
-                   <FormControl >
-                      <FormLabel color="gray.600" fontWeight='bold' style={{textTransform:'uppercase'}}>
-                        Filter 3
-                      </FormLabel>
-                      <Select
-                        isMulti
-                        name="options"
-                        placeholder="Select some options..."
-                        size="md"
-                      >
-                        <option value="option1">option 1</option>
-                        <option value="option2">option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                    </FormControl>
-
-                 </Box>
+                  </Slider>
 
 
-                 
+
+
+                </FormControl>
 
               </Box>
 
-              </GridItem  >
 
-             <GridItem colSpan={4}>
-              <Grid  gap={6}  templateColumns="repeat(6, 1fr)" >
-                  {filtered.map((service, index) => (
-                    <GridItem colSpan={2}  key={service.id}>
+              <Box w="100%" p={2} marginTop={'0.5rem'}>
 
-                      <ServiceCard 
-                        id={service.id}
-                        type={service.type}
-                        badge_color={service.badge_color}
-                        publisher={service.publisher}
-                        title={service.title}
-                        description={service.description}
-                        trust={service.trust}
-                        price={service.price}
-                        deadline={service.deadline}
-                        image={service.image}
-                        pledge={service.pledge}
-                      /> 
-                       </GridItem>
-                  ))}
+                <FormControl >
+                  <FormLabel color="gray.600" fontWeight='bold' style={{ textTransform: 'uppercase' }}>
+                    Privacy Type
+                  </FormLabel>
 
-                </Grid>
-                <Center my={5}>
-                   {
-                    !isLoading ?
-                    <Button           
-                      onClick={loadMore}   
-                      fontSize={'md'}
-                      fontWeight={400}
-                      variant={'link'}
-                     >
-                      Load More
-                    </Button>
-                    :
-                    <CircularProgress isIndeterminate color="blue.400" />
-                  }
-                </Center>
-              </GridItem  >
+                  <Select
+                    name="options"
 
-           
-          </Grid>
+                    size="md"
+                  >
+                    <option value="option1" >PUBLIC</option>
+                    <option value="option2">PRIVATE</option>
+                  </Select>
+                </FormControl>
 
-        
-       </section >
- 
+              </Box>
+
+              <Box w="100%" p={2} marginTop={'0.5rem'}>
+
+                <FormControl >
+                  <FormLabel color="gray.600" fontWeight='bold' style={{ textTransform: 'uppercase' }}>
+                    Relation Type
+                  </FormLabel>
+                  <Select
+                    isMulti
+                    name="colors"
+                    size="md"
+                  >
+                    <option value="option1">DISTRIBUTED</option>
+                    <option value="option2">CONVERGENT</option>
+                  </Select>
+                </FormControl>
+
+              </Box>
+
+
+            </Box>
+
+          </GridItem  >
+
+          <GridItem colSpan={4}>
+            <Grid gap={6} templateColumns="repeat(6, 1fr)" >
+              {filtered.map((contract, index) => (
+                <GridItem colSpan={2} key={contract.terms_hash}>
+
+                  <ServiceCard
+                    nft={contract.nft}
+                    relation_type={contract.relation_type }
+                    privacy_type={ contract.privacy_type}
+                    publisher={contract.publisher }
+                    collateral={contract.collateral[0] }
+                    terms_hash={contract.terms_hash}
+                  />
+                </GridItem>
+              ))}
+
+            </Grid>
+            <Center my={5}>
+              {
+                !isLoading ?
+                  <Button
+                    onClick={loadMore}
+                    fontSize={'md'}
+                    fontWeight={400}
+                    variant={'link'}
+                  >
+                    Load More
+                  </Button>
+                  :
+                  <CircularProgress isIndeterminate color="blue.400" />
+              }
+            </Center>
+          </GridItem  >
+
+
+        </Grid>
+
+
+      </section >
+
     </div>
   )
 }
 
-export const getStaticProps:GetStaticProps = async () => {
-  
+export const getStaticProps: GetStaticProps = async () => {
+
   //const {data} =  await api("services",{});
-  const data = services();
+  const data = contracts();
 
   return {
-    props:{
-      services:data.services
-      
+    props: {
+      contracts: data.contracts
+
     },
-    revalidate:60*60*24// 24 hours
+    revalidate: 60 * 60 * 24// 24 hours
   }
 }
 
