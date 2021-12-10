@@ -107,7 +107,7 @@ const Header: NextPage = () => {
             
             <Box ml={10}>            
               <a href={'/'} >
-                <Image src="/logo.png" width="200rem" height="80rem" /> 
+                <Image src="/logo.png" width="200rem" height="50rem" /> 
               </a>             
             </Box>
                 

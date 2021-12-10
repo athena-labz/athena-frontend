@@ -29,7 +29,7 @@ const Home = ({judges}:Homeprops) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>DigiServices</title>
+        <title>ATHENA</title>
       </Head>
 
      

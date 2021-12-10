@@ -18,7 +18,7 @@ import {
   
   const Logo = (props: any) => {
     return (
-        <Image src="/logo.png" width="200rem" height="80rem" /> 
+        <Image src="/logo.png" width="200rem" height="50rem" /> 
     );
   };
   
@@ -75,9 +75,7 @@ import {
               <Box>
                 <Logo color={useColorModeValue('gray.700', 'white')} />
               </Box>
-              <Text fontSize={'sm'}>
-                © 2021 Digi Services. 
-              </Text>
+             
               <Stack direction={'row'} spacing={6}>
                 <SocialButton label={'Twitter'} href={'#'}>
                   <FaTwitter />
