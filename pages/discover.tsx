@@ -115,7 +115,7 @@ const Discover = ({ contracts }: Discoverprops) => {
   return (
     <div >
       <Head>
-        <title>DigiServices - Discover</title>
+        <title>ATHENA - Discover</title>
       </Head>
 
 
