@@ -13,13 +13,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   const show_footer = (pathname:string)=>{
 
     const filterd = pathnames_not_show_footer.filter((pathname_list:string)=>{ 
-      if(pathname_list.includes(pathname))
+      var aux = pathname.replace("/","");
+      if(aux != "" && pathname_list.includes(aux))
         return true
     
       return false
     })
-
-    if(filterd) return false
+    console.log(pathname.replace("/",""),filterd)
+    if(filterd.length > 0) return false
     else return true
   }
 

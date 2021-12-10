@@ -63,7 +63,7 @@ export default function FeaturesSection() {
                 position: 'absolute',
                 bottom: 1,
                 left: 0,
-                bg: 'blue.400',
+                bg: '#38b6ff',
                 zIndex: -1,
               }}>
               Solution 
@@ -104,7 +104,7 @@ export default function FeaturesSection() {
           }
         />
         <Feature
-          icon={<Icon as={FiLock} w={10} h={10} color="blue.500"/>}
+          icon={<Icon as={FiLock} w={10} h={10} color="#38b6ff"/>}
           title={'Reliability'}
           text={
             'You can select good service providers by analyzing the trust tokens they have and the contract they proposed.'

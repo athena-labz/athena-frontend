@@ -109,7 +109,7 @@ export default function FaqSection() {
             position: 'absolute',
             bottom: 1,
             left: 0,
-            bg: 'blue.400',
+            bg: '#38b6ff',
             zIndex: -1,
           }}>
           Frequently Asked Questions (FAQ)

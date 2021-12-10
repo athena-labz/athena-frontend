@@ -37,13 +37,13 @@ export default function ProblemSection() {
                 position: 'absolute',
                 bottom: 1,
                 left: 0,
-                bg: 'blue.400',
+                bg: '#38b6ff',
                 zIndex: -1,
               }}>
               The
             </Text>
             <br />
-            <Text as={'span'} color={'blue.400'}>
+            <Text as={'span'} color={'#38b6ff'}>
               Problem Statement!
             </Text>
           </Heading>
@@ -66,7 +66,7 @@ export default function ProblemSection() {
             top={'-20%'}
             left={0}
             zIndex={-1}
-            color={useColorModeValue('blue.50', 'blue.400')}
+            color={useColorModeValue('blue.50', '#38b6ff')}
           />
           <Box
             position={'relative'}

@@ -94,7 +94,7 @@ export default function TeamSection() {
                 position: 'absolute',
                 bottom: 1,
                 left: 0,
-                bg: 'blue.400',
+                bg: '#38b6ff',
                 zIndex: -1,
               }}>
               Know the team 

@@ -344,7 +344,7 @@ export default function Component() {
           >
             <Button
               type="submit"
-              bg="blue.500"
+              bg="#38b6ff"
               colorScheme="blue"
               _focus={{ shadow: "" }}
               fontWeight="md"

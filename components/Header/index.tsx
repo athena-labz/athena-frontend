@@ -140,7 +140,7 @@ const Header: NextPage = () => {
                 fontSize={'md'}
                 fontWeight={600}
                 color={'white'}
-                bg={'blue.500'}
+                bg={'#38b6ff'}
                 onClick={(e) => setstate(!state)}
                 href={'#'}
                 _hover={{
@@ -160,12 +160,12 @@ const Header: NextPage = () => {
 
             <Button
                as={'a'}                
-                bg={'blue.400'}
+                bg={'#38b6ff'}
                 color={'white'}
                 href="/create-contract"
                 marginTop={1}
                 _hover={{
-                  bg: 'blue.500',
+                  bg: 'blue.400',
                 }}>
               <Text marginRight="0.3rem"  marginLeft="0.5rem">Create a contract</Text>
             </Button>
@@ -185,12 +185,12 @@ const Header: NextPage = () => {
                     }}>
 
                     <WrapItem>
-                      <Avatar name="John Smith"  bgColor="blue.400" size="sm" />
+                      <Avatar name="John Smith"  bgColor="#38b6ff" size="sm" />
                     </WrapItem>
 
                     <Text marginRight="0.3rem"  marginLeft="0.5rem">7.0000</Text>
 
-                    <Text color="blue.500" fontWeight="700" > DSET </Text>
+                    <Text color="#38b6ff" fontWeight="700" > DSET </Text>
 
                   </Button>
               </PopoverTrigger>
