@@ -45,7 +45,7 @@ const Feature = ({ title, text, icon }: FeatureProps) => {
 
 export default function FeaturesSection() {
   return (
-    <Box p={2} id="solution" style={{scrollMarginTop:150}} >
+    <Box p={10} id="solution" style={{scrollMarginTop:150}} >
       <Stack spacing={3} as={Container} maxW={'8xl'} textAlign={'center'} >
        
         <Stack flex={1} spacing={{ base: 5, md: 10 }}>
@@ -91,7 +91,7 @@ export default function FeaturesSection() {
         />
         <Feature
           icon={<Icon as={FiTrendingUp} w={10} h={10} color="green.500" />}
-          title={'Reawards'}
+          title={'Rewards'}
           text={
             'They are calculated through an algorithm that collects statistics related to the service or good provided and returns the amount of tokens per hour that will be rewarded.'
           }

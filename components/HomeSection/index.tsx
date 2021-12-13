@@ -12,7 +12,7 @@ import {
 export default function HomeSection() {
   const bg = useColorModeValue("white", "gray.800");
   return (
-    <Box pos="relative" overflow="hidden" bg={bg} mt={0}>
+    <Box pos="relative" overflow="hidden" bg={bg} mt={10}>
       <Box maxW="8xl" mx="auto">
         <Box
           pos="relative"

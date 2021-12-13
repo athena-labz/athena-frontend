@@ -47,7 +47,7 @@ export default function ProblemSection() {
               Problem Statement!
             </Text>
           </Heading>
-          <Text color={'gray.500'}>
+          <Text color={'gray.500'}  fontSize={"lg"}>
             The increased occurrence of internet fraud puts consumers in a precarious position. 
             Non-payment/Non-delivery is the fourth most prevalent cyber-crime in the United States in which victims lost a total of 265 million USD.
           </Text>
