@@ -19,7 +19,7 @@ export default function ProblemSection() {
     <Container maxW={'7xl'} id="problem" style={{scrollMarginTop:120}}>
       <Stack
         align={'center'}
-        spacing={{ base: 8, md: 10 }}
+        spacing={{ base: 7, md: 8 }}
         py={{ base: 20, md: 28 }}
         direction={{ base: 'column', md: 'row' }}>
         <Stack flex={1} spacing={{ base: 5, md: 10 }}>
