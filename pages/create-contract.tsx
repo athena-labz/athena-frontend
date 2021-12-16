@@ -24,6 +24,7 @@ import {
   Text
 } from "@chakra-ui/react";
 import Head from 'next/head'
+import MultiSelectMenu from "../components/MutipleSelect";
 import { AddIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import {
@@ -41,6 +42,7 @@ export interface Item {
 
 export default function Component() {
   const [usersRoles, setUserRoles] = useState([{ user: "", role: 0 }])
+  const [usersRoleValues, setUserRole] = useState([""])
   const [usersInputs, setUserInputs] = useState([{
     input: "",
     question: "",
@@ -136,6 +138,11 @@ export default function Component() {
 
   const handleChangeNumber = (name: string, value: any) => {
     setForm({ ...form, [name]: value })
+
+    if (name == "roles") {
+      const value_ = parseInt(value);
+      setUserRole(Array.from(Array(value_+1).keys()).map(e => String(e)))
+    }
   }
 
   const handleChangeSelect = (name: string) => {
@@ -485,23 +492,17 @@ export default function Component() {
                 </Select>
               </FormControl>
 
-              <FormControl as={GridItem} colSpan={[4, 1]}>
+              {usersRoleValues.length > 0 && <FormControl as={GridItem} colSpan={[4, 1]}>
                 <FormLabel
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
                   color={"blue.700"}
                 >
-                  Role
+                  {"-"}
                 </FormLabel>
-                <NumberInput step={1} min={0} max={form.roles} onChange={(e) => handleChangeNumber("collateral", e)} name="collateral">
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-              </FormControl>
+                <MultiSelectMenu label="Roles" options={usersRoleValues} />
+              </FormControl>}
 
               <FormControl as={GridItem} colSpan={[2, 1]} display="flex" alignItems="flex-end">
                 <Button
