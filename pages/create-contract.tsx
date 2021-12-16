@@ -7,7 +7,6 @@ import {
   NumberInputField,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  useColorModeValue,
   SimpleGrid,
   GridItem,
   Heading,
@@ -153,7 +152,7 @@ export default function Component() {
 
 
   return (
-    <Box bg={useColorModeValue("gray.50", "inherit")} p={12}>
+    <Box bg={"gray.50"} p={12}>
       <Head>
         <title>Create a Contract</title>
       </Head>
@@ -164,7 +163,7 @@ export default function Component() {
         <Box py={5}>
           <Box
             borderTop="solid 1px"
-            borderTopColor={useColorModeValue("blue.200", "whiteAlpha.200")}
+            borderTopColor={"blue.200"}
           ></Box>
         </Box>
       </Box>
@@ -179,7 +178,7 @@ export default function Component() {
             px={4}
             py={5}
             p={[null, 6]}
-            bg={useColorModeValue("white", "gray.700")}
+            bg={"white"}
             spacing={6}
           >
             <SimpleGrid columns={2} spacing={6}>
@@ -188,7 +187,7 @@ export default function Component() {
                   htmlFor="service_title"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Contract Title
                 </FormLabel>
@@ -213,7 +212,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Collateral
                 </FormLabel>
@@ -234,7 +233,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Relation Type
                 </FormLabel>
@@ -250,7 +249,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Privacy Type
                 </FormLabel>
@@ -265,7 +264,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Judge
                 </FormLabel>
@@ -298,7 +297,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Roles
                 </FormLabel>
@@ -412,7 +411,7 @@ export default function Component() {
             <Box py={3}>
               <Box
                 borderTop="solid 1px"
-                borderTopColor={useColorModeValue("blue.200", "whiteAlpha.200")}
+                borderTopColor={"blue.200"}
               ></Box>
             </Box>
           </Box>
@@ -430,7 +429,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Input Name
                 </FormLabel>
@@ -455,7 +454,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Question
                 </FormLabel>
@@ -480,7 +479,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Type
                 </FormLabel>
@@ -537,7 +536,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Input Name
                 </FormLabel>
@@ -553,7 +552,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Operator
                 </FormLabel>
@@ -577,7 +576,7 @@ export default function Component() {
                   htmlFor="price"
                   fontSize="sm"
                   fontWeight="md"
-                  color={useColorModeValue("blue.700", "blue.50")}
+                  color={"blue.700"}
                 >
                   Value
                 </FormLabel>
