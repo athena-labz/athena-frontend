@@ -84,9 +84,9 @@ export default function Component() {
           <InputRightElement
             pointerEvents='none'
             color='gray.400'
-            fontSize='1.2em'
-            children='%'
-          />
+            fontSize='1.2em'>
+              %
+            </InputRightElement>
           <Input placeholder='Enter amount' />
 
         </InputGroup>
