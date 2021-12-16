@@ -331,7 +331,7 @@ export default function Component() {
               </Box>
 
               {usersRoles.map((userRole, index) => (
-                <SimpleGrid columns={3} spacing={6} px={5} key={index + "AAA"} mt={index > 0 ? 3 : 0}>
+                <SimpleGrid columns={3} spacing={6} px={5} key={index + "AAA"} mt={index > 0 ? 3 : 0} key={`role-${index}`}>
                   <FormControl as={GridItem} colSpan={[1, 1]}>
                     <FormLabel
                       htmlFor="service_title"
@@ -424,7 +424,7 @@ export default function Component() {
           </Box>
 
           {usersRoles.map((userRole, index) => (
-            <SimpleGrid columns={6} spacing={6} p={5} >
+            <SimpleGrid columns={6} spacing={6} p={5}  key={`triggers-${index}`}>
               <FormControl as={GridItem} colSpan={[2, 1]}>
                 <FormLabel
                   htmlFor="price"
@@ -531,7 +531,7 @@ export default function Component() {
           </Box>
 
           {usersInputs.map((userInput, index) => (
-            <SimpleGrid columns={6} spacing={6} p={5} >
+            <SimpleGrid columns={6} spacing={6} p={5}  key={`input-${index}`}>
               <FormControl as={GridItem} colSpan={[2, 1]}>
                 <FormLabel
                   htmlFor="price"
@@ -543,7 +543,7 @@ export default function Component() {
                 </FormLabel>
                 <Select variant="outline" onChange={e => handleChangeSelect("privacyType")} id="privacyType">
                   {
-                    usersInputs.map((userInput, index) => (<option value={userInput.input}>{userInput.input}</option>))
+                    usersInputs.map((userInput, index) => (<option key={`option-inpt-${index}`} value={userInput.input}>{userInput.input}</option>))
                   }
                 </Select>
               </FormControl>
