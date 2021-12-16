@@ -331,7 +331,7 @@ export default function Component() {
               </Box>
 
               {usersRoles.map((userRole, index) => (
-                <SimpleGrid columns={3} spacing={6} px={5} key={index + "AAA"} mt={index > 0 ? 3 : 0} key={`role-${index}`}>
+                <SimpleGrid columns={3} spacing={6} px={5} key={index + "*role"} mt={index > 0 ? 3 : 0}>
                   <FormControl as={GridItem} colSpan={[1, 1]}>
                     <FormLabel
                       htmlFor="service_title"
