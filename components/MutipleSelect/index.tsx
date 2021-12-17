@@ -29,14 +29,14 @@ const MultiSelectMenu = (props: MultiSelectMenuProps): JSX.Element => {
                         borderWidth={1}
                         p={2}
                         px={4}
-                        width={"9rem"}
+                        width={"12rem"}
                         borderRadius="10px"
                         _focus={{
                             outline: "none"
                         }}
                         {...buttonProps}
                     >
-                        {`${label}${selectedOptions.length > 0 ? ` (${selectedOptions.length})` : ""
+                        {`${label}${selectedOptions.length > 0 ? ` (${selectedOptions.join()})` : ""
                             }`}
                     </MenuButton>
                     <MenuList>

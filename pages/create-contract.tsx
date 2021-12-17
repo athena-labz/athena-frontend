@@ -46,9 +46,14 @@ export default function Component() {
     input: "",
     question: "",
     type: "INT",
-    roles: 0,
-    trigger: { operator: "", value: "" },
-    action: ""
+  }])
+
+  const [triggers, setTriggers] = useState([{
+    input: "",
+    operator: "",
+    value: "",
+    action: "",
+    actionSelector:""
   }])
 
   const [form, setForm] = useState({
@@ -66,15 +71,21 @@ export default function Component() {
     setUserInputs([...usersInputs, {
       input: "",
       question: "",
-      type: "INT",
-      roles: 0,
-      trigger: { operator: "", value: "" },
-      action: ""
+      type: "INT"
     }])
   }
 
-  const createNewUserIput = (e: any) => {
+  const createNewUserRoles = (e: any) => {
     setUserRoles([...usersRoles, { user: "", role: 0 }])
+    console.log(triggers)
+  }
+
+  const createNewUserInput = (e: any) => {
+    setUserInputs([...usersInputs, {
+      input: "",
+      question: "",
+      type: "INT",
+    }])
   }
 
   const chooseInputAction = (type_: string, name: string) => {
@@ -85,8 +96,8 @@ export default function Component() {
             pointerEvents='none'
             color='gray.400'
             fontSize='1.2em'>
-              %
-            </InputRightElement>
+            %
+          </InputRightElement>
           <Input placeholder='Enter amount' />
 
         </InputGroup>
@@ -135,12 +146,25 @@ export default function Component() {
     //setForm({...form,[e.target.name]:e.target.value})
   }
 
+  const handleChangeInput = (e: any, index: number) => {
+    //console.log(e.target.name, index)
+    let clone = usersInputs[index]
+    clone[e.target.name] = e.target.value;
+
+    setUserInputs([
+      ...usersInputs.slice(0, index),
+      clone,
+      ...usersInputs.slice(index + 1)
+    ]
+    )
+  }
+
   const handleChangeNumber = (name: string, value: any) => {
     setForm({ ...form, [name]: value })
 
     if (name == "roles") {
       const value_ = parseInt(value);
-      setUserRole(Array.from(Array(value_+1).keys()).map(e => String(e)))
+      setUserRole(Array.from(Array(value_ + 1).keys()).map(e => String(e)))
     }
   }
 
@@ -148,6 +172,21 @@ export default function Component() {
     const element = (document.getElementById(name) as HTMLInputElement);
     const value = element == null ? "" : element.value;
     setForm({ ...form, [name]: value })
+  }
+
+  const handleChangeSelectTrigger = (name: string,index:number) => {
+    const element = (document.getElementById(name) as HTMLInputElement);
+    const value = element == null ? "" : element.value;
+
+    let clone = usersInputs[index]
+    clone[name] = value;
+
+    setTriggers([
+      ...usersInputs.slice(0, index),
+      clone,
+      ...usersInputs.slice(index + 1)
+    ]
+    )
   }
 
 
@@ -392,7 +431,7 @@ export default function Component() {
                       _hover={{
                         bg: 'blue.400',
                       }}
-                      onClick={createNewUserRole}
+                      onClick={createNewUserRoles}
                     >
                       <AddIcon />
                     </Button>
@@ -422,8 +461,8 @@ export default function Component() {
             </Heading>
           </Box>
 
-          {usersRoles.map((userRole, index) => (
-            <SimpleGrid columns={6} spacing={6} p={5}  key={`triggers-${index}`}>
+          {usersInputs.map((userInput, index) => (
+            <SimpleGrid columns={6} spacing={6} p={5} key={`triggers-${index}`}>
               <FormControl as={GridItem} colSpan={[2, 1]}>
                 <FormLabel
                   htmlFor="price"
@@ -436,9 +475,10 @@ export default function Component() {
                 <Input
                   type="text"
                   placeholder="Question identifier"
-                  name="title"
-                  onChange={handleChange}
-                  id="service_title"
+                  name="input"
+                  onChange={e => handleChangeInput(e, index)}
+                  value={userInput.input}
+                  id="service_input"
                   autoComplete="family-name"
                   mt={1}
                   focusBorderColor="blue.400"
@@ -514,7 +554,7 @@ export default function Component() {
                   _hover={{
                     bg: 'blue.400',
                   }}
-                  onClick={createNewUserIput}
+                  onClick={createNewUserInput}
                 >
                   <AddIcon />
                 </Button>
@@ -529,8 +569,8 @@ export default function Component() {
             </Heading>
           </Box>
 
-          {usersInputs.map((userInput, index) => (
-            <SimpleGrid columns={6} spacing={6} p={5}  key={`input-${index}`}>
+          {triggers.map((triggger, index) => (
+            <SimpleGrid columns={6} spacing={6} p={5} key={`input-${index}`}>
               <FormControl as={GridItem} colSpan={[2, 1]}>
                 <FormLabel
                   htmlFor="price"
@@ -556,18 +596,10 @@ export default function Component() {
                 >
                   Operator
                 </FormLabel>
-                <Select variant="outline" onChange={e => handleChangeSelect("privacyType")} id="privacyType">
-                  {
-                    userInput.type == "INT" ?
-                      <>
-                        <option value="INT">EQUALS</option>
-                        <option value="INT">GREATER THAN</option>
-                        <option value="BOOL">LESS THAN</option>
-                      </> :
-                      <option value="INT">EQUALS</option>
-                  }
-
-
+                <Select variant="outline" onChange={e => handleChangeSelectTrigger("operator",index)} id="operator">
+                  <option value="INT">EQUALS</option>
+                  <option value="INT">GREATER THAN</option>
+                  <option value="BOOL">LESS THAN</option>
                 </Select>
 
               </FormControl>
@@ -605,7 +637,7 @@ export default function Component() {
                 >
                   Action Selector
                 </FormLabel>
-                <Select variant="outline" onChange={e => handleChangeSelect("privacyType")} id="privacyType">
+                <Select variant="outline" onChange={e => handleChangeSelectTrigger("actionSelector",index)} id="actionSelector">
                   <option value="1">Decrease CAS</option>
                   <option value="2">Suspend from contract</option>
                   <option value="3">Pay from collateral</option>
@@ -622,7 +654,7 @@ export default function Component() {
                 >
                   Action
                 </FormLabel>
-                {chooseInputAction("1", "action")}
+                {chooseInputAction(String(triggger.actionSelector), "action")}
               </FormControl>
 
               <FormControl as={GridItem} colSpan={[2, 1]} display="flex" alignItems="flex-end">
@@ -636,7 +668,7 @@ export default function Component() {
                   _hover={{
                     bg: 'blue.400',
                   }}
-                  onClick={createNewUserIput}
+                  onClick={createNewUserRoles}
                 >
                   <AddIcon />
                 </Button>
