@@ -39,21 +39,25 @@ export interface Item {
   value: string;
 }
 
+interface GenericObject {
+  [key: string]: any
+}
+
 export default function Component() {
   const [usersRoles, setUserRoles] = useState([{ user: "", role: 0 }])
   const [usersRoleValues, setUserRole] = useState([""])
-  const [usersInputs, setUserInputs] = useState([{
+  const [usersInputs, setUserInputs] = useState<GenericObject[]>([{
     input: "",
     question: "",
     type: "INT",
   }])
 
-  const [triggers, setTriggers] = useState([{
-    input: "",
-    operator: "",
-    value: "",
-    action: "",
-    actionSelector:""
+  const [triggers, setTriggers] = useState<GenericObject[]>([{
+    "input": "",
+    "operator": "",
+    "value": "",
+    "action": "",
+    "actionSelector":""
   }])
 
   const [form, setForm] = useState({
@@ -62,8 +66,7 @@ export default function Component() {
     relationType: "DISTRIBUTED",
     judge: "asdasd",
     privacyType: "",
-    roles: 0,
-
+    roles: 0
   })
   const options = ["Noa Rahman", "Julie Molina", "Leonidas Browning", "Qiang He", "Dong Liu", "Zack Jacobs"];
 
@@ -174,17 +177,17 @@ export default function Component() {
     setForm({ ...form, [name]: value })
   }
 
-  const handleChangeSelectTrigger = (name: string,index:number) => {
+  const handleChangeSelectTrigger = (name:string,index:number) => {
     const element = (document.getElementById(name) as HTMLInputElement);
     const value = element == null ? "" : element.value;
 
-    let clone = usersInputs[index]
+    let clone = triggers[index]
     clone[name] = value;
 
     setTriggers([
-      ...usersInputs.slice(0, index),
+      ...triggers.slice(0, index),
       clone,
-      ...usersInputs.slice(index + 1)
+      ...triggers.slice(index + 1)
     ]
     )
   }
