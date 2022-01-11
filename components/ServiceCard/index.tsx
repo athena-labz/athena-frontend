@@ -10,12 +10,13 @@ type ServiceCardProps ={
     },
     relation_type: string,
     privacy_type: string,
-    publisher: string,
+    publisher_name?: string,
     collateral: {
             currency_symbol: string, // This is ADA's currency_symbol
             value: number // 5 ADA
     }
     ,
+    title:string,
     terms_hash: string,
 }
 
@@ -34,9 +35,10 @@ export default function ServiceCard(props:ServiceCardProps)  {
       w="full"
       alignItems="center"
       justifyContent="center"
+      width={"23rem"}
     >
       <Box
-        maxW="xs"
+        width={"100%"}
         mx="auto"
         py={3}
         bg={useColorModeValue("white", "gray.800")}
@@ -51,7 +53,7 @@ export default function ServiceCard(props:ServiceCardProps)  {
             textTransform="uppercase"
             isTruncated
           >
-            Contract: {props.terms_hash}
+            {props.title}
           </chakra.h1>
           <chakra.p
             mt={1}
@@ -60,10 +62,11 @@ export default function ServiceCard(props:ServiceCardProps)  {
 
             color={"gray.600"}
           >
-            Publisher: Jonh asdas  
+            Publisher: {props.publisher_name} 
             <br />
             
           </chakra.p>
+
         </Box>
 
          <Center
@@ -82,7 +85,7 @@ export default function ServiceCard(props:ServiceCardProps)  {
             color={"gray.500"}
           >
             {" "}
-            DSET
+            {props.collateral.currency_symbol}
           </chakra.span>
         </Center>
  

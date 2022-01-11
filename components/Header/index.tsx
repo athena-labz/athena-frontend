@@ -460,8 +460,8 @@ const Header: NextPage = () => {
 
       },
       {
-        label: 'Discover',
-        href:"/discover"
+        label: 'Contracts',
+        href:"/contracts"
       },
      
     ];

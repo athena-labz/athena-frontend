@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const pathnames_not_show_footer = ['/login','/forgot-password','/profile','/reset-password',"/signup","/create-contract","/contract"]
+  const pathnames_not_show_footer = ['/login','/contracts','/forgot-password','/profile','/reset-password',"/signup","/create-contract","/contract"]
   
   const show_footer = (pathname:string)=>{
 

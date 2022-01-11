@@ -1,5 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ServiceCard from '../components/ServiceCard'
@@ -27,53 +27,7 @@ import {
   Center,
   CircularProgress,
 } from '@chakra-ui/react'
-
-
-type Contract = {
-  nft: {
-    currency_symbol: string,
-    token_name: string
-  },
-  relation_type: string,
-  privacy_type: string,
-  publisher: string,
-  collateral: [
-    {
-      currency_symbol: string, // This is ADA's currency_symbol
-      value: number // 5 ADA
-    }
-  ],
-  terms_hash: string,
-  judges?: [
-    {
-      name_judge: string,
-      judge: string,
-    }
-  ],
-  accusations?: [
-    {
-      name_accuser: string,
-      accuser: string,
-      name_accused: string,
-      accused: string,
-      time: number,
-      deadline: number
-    }
-  ],
-  resolutions?: [],
-  roles: number,
-  role_map?: [
-    {
-      name: string,
-      address: string,
-      role: 0
-    },
-    {
-      address: string,
-      role: 0
-    }
-  ]
-}
+import type Contract from '../types/contract'
 
 type Discoverprops = {
   contracts: Contract[]
@@ -84,22 +38,30 @@ const Discover = ({ contracts }: Discoverprops) => {
   const [value, setValue] = useState(50);
   const [filtered, setFiltered] = useState(contracts);
   const [isLoading, setIsLoading] = useState(false);
-
+  const ball_ref = useRef(null)
 
   // Create state
   const [state, setState] = useState({
-    xoffset: 102,
-    yoffset: 25,
+    xoffset: 115,
+    yoffset: 1.5,
   })
+
+
 
   const onChange = (new_value: number) => {
     let new_coordenada = state.xoffset - (value - new_value) * 2
-
-    setState({
-      ...state,
-      ['xoffset']: new_coordenada
-    });
-
+    let test = document.querySelector('#slider-thumb-testy');
+    let test_data = null;
+    if (test) {
+      test_data = test.getBoundingClientRect()
+    }
+    if (test_data) {
+      let x = new_value.toString().length == 1? test_data.x -60 : test_data.x -55;
+      setState({
+        xoffset: x,
+        yoffset: 1.5,
+      });
+    }
 
     setValue(new_value)
   }
@@ -146,20 +108,23 @@ const Discover = ({ contracts }: Discoverprops) => {
                   <Badge
                     variant="solid"
                     p={1}
+                    id={"bolinha"}
                     borderRadius={"0.8rem"}
                     style={{
                       position: "absolute",
                       left: `${state.xoffset}px`,
-                      top: `${state.yoffset}px`
+                      top: `${state.yoffset}rem`
                     }}
 
                   >
                     {value}
                   </Badge>
                   <Slider
+                    ref={ball_ref}
                     aria-label="slider-ex-2"
                     colorScheme="blue"
                     defaultValue={50}
+                    id={"testy"}
                     marginTop={6}
                     value={value}
                     onChange={onChange}
@@ -225,22 +190,20 @@ const Discover = ({ contracts }: Discoverprops) => {
           </GridItem  >
 
           <GridItem colSpan={4}>
-            <Grid gap={6} templateColumns="repeat(6, 1fr)" >
+            <Flex width={"100%"} style={{ flexFlow: "row wrap", alignContent: "space-between", justifyContent: "space-between" }}>
               {filtered.map((contract, index) => (
-                <GridItem colSpan={2} key={contract.terms_hash}>
-
-                  <ServiceCard
-                    nft={contract.nft}
-                    relation_type={contract.relation_type }
-                    privacy_type={ contract.privacy_type}
-                    publisher={contract.publisher }
-                    collateral={contract.collateral[0] }
-                    terms_hash={contract.terms_hash}
-                  />
-                </GridItem>
+                <ServiceCard
+                  key={contract.terms_hash}
+                  title={contract.title}
+                  nft={contract.nft}
+                  relation_type={contract.relation_type}
+                  privacy_type={contract.privacy_type}
+                  publisher_name={contract.publisher_name}
+                  collateral={contract.collateral[0]}
+                  terms_hash={contract.terms_hash}
+                />
               ))}
-
-            </Grid>
+            </Flex>
             <Center my={5}>
               {
                 !isLoading ?
