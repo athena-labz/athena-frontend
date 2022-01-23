@@ -4,8 +4,12 @@ import {
   Image,
   Flex,
   useColorModeValue,
-  Link,
+  Link,Icon
 } from "@chakra-ui/react";
+
+
+import { MdPriorityHigh } from "react-icons/md";
+
 
 type TermCardProps ={
   input_name:string,
@@ -16,7 +20,7 @@ type TermCardProps ={
 }
   
   export default function TermCard({input_name,type,roles,question,triggers}:TermCardProps) {
-    const myTrigger =  triggers.filter(trigger => trigger.input_name === input_name)[0]
+    const myTrigger =  triggers.filter(trigger => trigger.input_name === input_name)
 
     return (
       <Flex
@@ -66,12 +70,29 @@ type TermCardProps ={
             <chakra.p mt={2} color={useColorModeValue("gray.600", "gray.300")}>
              {question}
             </chakra.p>
-
-            <chakra.p mt={2} color={useColorModeValue("gray.600", "gray.300")}>
-             Trigger:
-            </chakra.p>
           </Box>
+
+          <Box py={4}>
+        
+
+         {myTrigger && myTrigger.map( q => <Flex
+            alignItems="center"
+            mt={4}
+            color={useColorModeValue("gray.700", "gray.200")}
+          >
+            <Icon
+              as={MdPriorityHigh}
+              h={6}
+              w={6}
+              mr={2}
+            />
+
+            <chakra.h3 px={2} fontSize="0.85rem" textTransform="uppercase">
+              IF {q.operator} {q.value} THEN {q.action_selector}  {q.action}
+            </chakra.h3>
+          </Flex>)}
         </Box>
+        </Box>       
       </Flex>
     );
   }

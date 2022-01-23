@@ -14,6 +14,7 @@ const contracts_data = {
                 "token_name": "ADA"
             },
             title:"Bipede robot crowd-funding",
+            publisherCAS:20000,
             publisher_name:"Carlos Augusto",
             "relation_type": "distributed",
             "privacy_type": "public",
@@ -24,7 +25,7 @@ const contracts_data = {
                     "value": 5 // 5 ADA
                 }
             ],
-            "terms_hash": "81dc9bdb52d04dc20036dbd8313ed055",
+            "terms_hash": "81dc9bdb52d04dc20036dbd8313ed05fc",
             terms:[
                 {
                     input_name:"vision tracking",
@@ -48,42 +49,42 @@ const contracts_data = {
             triggers:[
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:" -10% points of CAS"
                 },
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"50% of collateral to be severed (to be paid)"
                 },
                 {
                     input_name:"vision tracking",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"20% of collateral to be severed (to be paid)"
                 },
             ],
@@ -117,6 +118,7 @@ const contracts_data = {
                 }
             ],
             title:"test of",
+            publisherCAS:20000,
             "terms_hash": "a9ac6733cce5c65e4ff26e6bf312c27f",
             "judges": [
                 "827ccb0eea8a706c4c34a16891f84e7b",
@@ -149,6 +151,7 @@ const contracts_data = {
                 "token_name": "ADA"
             },
             title:"Bipede robot crowd-funding",
+            publisherCAS:20000,
             publisher_name:"Mark Lavosier",
             "relation_type": "distributed",
             "privacy_type": "public",
@@ -159,7 +162,7 @@ const contracts_data = {
                     "value": 5 // 5 ADA
                 }
             ],
-            "terms_hash": "81dc9bdb52d04dc20036dbd8313ed055",
+            "terms_hash": "81dc9bdaa2d04dc20036dbd8313ed055",
             terms:[
                 {
                     input_name:"vision tracking",
@@ -183,42 +186,42 @@ const contracts_data = {
             triggers:[
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:" -10% points of CAS"
                 },
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"50% of collateral to be severed (to be paid)"
                 },
                 {
                     input_name:"vision tracking",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"20% of collateral to be severed (to be paid)"
                 },
             ],
@@ -242,6 +245,7 @@ const contracts_data = {
                 "token_name": "ADA"
             },
             title:"Bipede robot crowd-funding",
+            publisherCAS:20000,
             publisher_name:"Yelena Kamado",
             "relation_type": "distributed",
             "privacy_type": "public",
@@ -252,7 +256,7 @@ const contracts_data = {
                     "value": 5 // 5 ADA
                 }
             ],
-            "terms_hash": "81dc9bdb52d04dc20036dbd8313ed055",
+            "terms_hash": "81dc9bdb52d04dc20036dbd8r3ed055",
             terms:[
                 {
                     input_name:"vision tracking",
@@ -276,42 +280,42 @@ const contracts_data = {
             triggers:[
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:" -10% points of CAS"
                 },
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"50% of collateral to be severed (to be paid)"
                 },
                 {
                     input_name:"vision tracking",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"20% of collateral to be severed (to be paid)"
                 },
             ],
@@ -335,6 +339,7 @@ const contracts_data = {
                 "token_name": "ADA"
             },
             title:"Bipede robot crowd-funding",
+            publisherCAS:20000,
             publisher_name:"Edward Elric",
             "relation_type": "distributed",
             "privacy_type": "public",
@@ -369,42 +374,42 @@ const contracts_data = {
             triggers:[
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:" -10% points of CAS"
                 },
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"50% of collateral to be severed (to be paid)"
                 },
                 {
                     input_name:"vision tracking",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"20% of collateral to be severed (to be paid)"
                 },
             ],
@@ -428,6 +433,7 @@ const contracts_data = {
                 "token_name": "ADA"
             },
             title:"Bipede robot crowd-funding",
+            publisherCAS:20000,
             publisher_name:"Aphonse Elric",
             "relation_type": "distributed",
             "privacy_type": "public",
@@ -438,7 +444,7 @@ const contracts_data = {
                     "value": 5 // 5 ADA
                 }
             ],
-            "terms_hash": "81dc9bdb52d04dc20036dbd8313ed055",
+            "terms_hash": "81dc9bdb52d04dc40036dbd8313ed055",
             terms:[
                 {
                     input_name:"vision tracking",
@@ -462,42 +468,42 @@ const contracts_data = {
             triggers:[
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:" -10% points of CAS"
                 },
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"50% of collateral to be severed (to be paid)"
                 },
                 {
                     input_name:"vision tracking",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"20% of collateral to be severed (to be paid)"
                 },
             ],
@@ -521,6 +527,7 @@ const contracts_data = {
                 "token_name": "ADA"
             },
             title:"Bipede robot crowd-funding",
+            publisherCAS:20000,
             publisher_name:"Eren Yeagar",
             "relation_type": "distributed",
             "privacy_type": "public",
@@ -531,7 +538,7 @@ const contracts_data = {
                     "value": 5 // 5 ADA
                 }
             ],
-            "terms_hash": "81dc9bdb52d04dc20036dbd8313ed055",
+            "terms_hash": "81dc9bdb52d04dc20036dbd83177d055",
             terms:[
                 {
                     input_name:"vision tracking",
@@ -555,42 +562,42 @@ const contracts_data = {
             triggers:[
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:" -10% points of CAS"
                 },
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"50% of collateral to be severed (to be paid)"
                 },
                 {
                     input_name:"vision tracking",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"20% of collateral to be severed (to be paid)"
                 },
             ],
@@ -614,6 +621,7 @@ const contracts_data = {
                 "token_name": "ADA"
             },
             title:"Bipede robot crowd-funding",
+            publisherCAS:20000,
             publisher_name:"Mikasa Ackerman",
             "relation_type": "distributed",
             "privacy_type": "public",
@@ -624,7 +632,7 @@ const contracts_data = {
                     "value": 5 // 5 ADA
                 }
             ],
-            "terms_hash": "81dc9bdb52d04dc20036dbd8313ed055",
+            "terms_hash": "81dc9bdb52d04dc20036dbd8313hu055",
             terms:[
                 {
                     input_name:"vision tracking",
@@ -648,42 +656,42 @@ const contracts_data = {
             triggers:[
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:" -10% points of CAS"
                 },
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"50% of collateral to be severed (to be paid)"
                 },
                 {
                     input_name:"vision tracking",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"20% of collateral to be severed (to be paid)"
                 },
             ],
@@ -707,6 +715,7 @@ const contracts_data = {
                 "token_name": "ADA"
             },
             title:"Bipede robot crowd-funding",
+            publisherCAS:20000,
             publisher_name:"Levi Ackerman",
             "relation_type": "distributed",
             "privacy_type": "public",
@@ -717,7 +726,7 @@ const contracts_data = {
                     "value": 5 // 5 ADA
                 }
             ],
-            "terms_hash": "81dc9bdb52d04dc20036dbd8313ed055",
+            "terms_hash": "81dc9bdb52d04dc20036dbd8313edyu5",
             terms:[
                 {
                     input_name:"vision tracking",
@@ -741,42 +750,42 @@ const contracts_data = {
             triggers:[
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:" -10% points of CAS"
                 },
                 {
                     input_name:"battery cycle",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"50% of collateral to be severed (to be paid)"
                 },
                 {
                     input_name:"vision tracking",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[0] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Decrease CAS",
+                    action_selector: "Decrease",
                     action:"-10% points of CAS"
                 },
                 {
                     input_name:"Advanced payment",
-                    value:"N/A",
-                    operator:"Boolean",
+                    value:"TRUE",
+                    operator:"EQUALS",
                     roles:[1] ,
-                    action_selector: "Collateral",
+                    action_selector: "Pay",
                     action:"20% of collateral to be severed (to be paid)"
                 },
             ],
@@ -802,8 +811,20 @@ export function contracts() {
 }
 
 
-export function contract(hash: string) {
-    return contracts_data.contracts.filter(contract => contract.terms_hash === hash)
+export function contract(hash: any) {
+    try {
+        let filtered = contracts_data.contracts.filter(contract => contract.terms_hash === hash)
+
+        if(filtered.length > 0 )
+            return filtered[0]
+        else
+            return null
+    } catch (error) {
+        console.log(error)
+    }
+    
+    
+
 }
 
 

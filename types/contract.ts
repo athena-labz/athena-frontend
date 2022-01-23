@@ -8,6 +8,7 @@ type Contract = {
     relation_type: string,
     privacy_type: string,
     publisher: string,
+    publisherCAS?: number,
     collateral: [
         {
             currency_symbol: string, // This is ADA's currency_symbol
