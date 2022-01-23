@@ -117,7 +117,7 @@ const contracts_data = {
                     "value": 10000000 // 5 ADA
                 }
             ],
-            title:"test of integration ith slack",
+            title:"test of integration with discord",
             publisherCAS:20000,
             "terms_hash": "a9ac6733cce5c65e4ff26e6bf312c27f",
             "judges": [
