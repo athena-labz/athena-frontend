@@ -12,12 +12,12 @@ export default function FaqSection() {
         {
             key:"A",
             question:"How shall I offer a service?",
-            answer:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod"
+            answer:"You set a new contract and add the features of the service you intend to offer. You can add description and if possible make the service performance measurable to assure transparency and understanding"
         },
         {
             key:"B",
             question:"How shall I sign a services?",
-            answer:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod"
+            answer:"Sumbitting the acceptance of a smart contract you are signing and agreeing the terms of the provided service. During the contract setting you are allowed to add inputs related to the performance you expect and it is your interest to make it in a undertandable and measurable way"
         },
         {
             key:"C",
