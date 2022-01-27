@@ -152,7 +152,7 @@ export default function Component({ service }: { service: Contract }) {
                 {service.terms && <SimpleGrid columns={[1, 2, 1, 2]} spacingY={4}>
                   {service.terms.map(q => (
                     <TermCard
-                      key={q.input_name}
+                      key={q.input_name+Math.random()}
                       input_name={q.input_name}
                       type={q.type}
                       roles={q.roles}

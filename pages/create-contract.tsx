@@ -473,7 +473,7 @@ export default function Component() {
                   fontWeight="md"
                   color={"blue.700"}
                 >
-                  Input Name
+                  Question identifier
                 </FormLabel>
                 <Input
                   type="text"
@@ -528,8 +528,8 @@ export default function Component() {
                 </FormLabel>
 
                 <Select variant="outline" onChange={e => handleChangeSelect("privacyType")} id="privacyType">
-                  <option value="INT">INTEGER</option>
-                  <option value="BOOL">BOOLEAN</option>
+                  <option value="INT">QUANTITY</option>
+                  <option value="BOOL">TRUE/FALSE</option>
 
                 </Select>
               </FormControl>
@@ -581,7 +581,7 @@ export default function Component() {
                   fontWeight="md"
                   color={"blue.700"}
                 >
-                  Input Name
+                 Question identifier
                 </FormLabel>
                 <Select variant="outline" onChange={e => handleChangeSelect("privacyType")} id="privacyType">
                   {

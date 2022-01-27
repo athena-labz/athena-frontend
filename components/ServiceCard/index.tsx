@@ -35,7 +35,7 @@ export default function ServiceCard(props:ServiceCardProps)  {
       w="full"
       alignItems="center"
       justifyContent="center"
-      width={"23rem"}
+      width={"20.5rem"}
     >
       <Box
         width={"100%"}

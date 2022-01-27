@@ -98,7 +98,7 @@ const SearchSection = ({ contracts, setfilter }: Discoverprops) => {
     var handleClick = () => { }
 
     return (
-        <Flex maxW={'3xl'} p="2rem" ml="1.5rem" alignItems="start" >
+        <Flex maxW={'3xl'} p="2rem" ml="1.1rem" alignItems="start" >
             <InputGroup size="lg">
                 <Input
                     onChange={handleChange}

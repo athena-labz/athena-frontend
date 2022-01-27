@@ -1,5 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ServiceCard from '../components/ServiceCard'
@@ -42,21 +42,23 @@ const Discover = ({ contracts }: Discoverprops) => {
 
   // Create state
   const [state, setState] = useState({
-    xoffset: 115,
+    xoffset: 5.4,
     yoffset: 1.5,
   })
 
+  useEffect(() => {
+    onChange(50)
+}, [state])
 
 
   const onChange = (new_value: number) => {
-    let new_coordenada = state.xoffset - (value - new_value) * 2
     let test = document.querySelector('#slider-thumb-testy');
     let test_data = null;
     if (test) {
       test_data = test.getBoundingClientRect()
     }
     if (test_data) {
-      let x = new_value.toString().length == 1? test_data.x -60 : test_data.x -55;
+      let x = new_value.toString().length == 1? test_data.x*0.063 -2.2 : test_data.x*0.063 -2.3;
       setState({
         xoffset: x,
         yoffset: 1.5,
@@ -88,7 +90,7 @@ const Discover = ({ contracts }: Discoverprops) => {
         <Grid
           templateColumns="repeat(5, 1fr)"
           gap={2}
-          px={"3rem"}
+          px={"1.56rem"}
         >
 
           <GridItem rowSpan={2} colSpan={1} >
@@ -112,7 +114,7 @@ const Discover = ({ contracts }: Discoverprops) => {
                     borderRadius={"0.8rem"}
                     style={{
                       position: "absolute",
-                      left: `${state.xoffset}px`,
+                      left: `${state.xoffset}rem`,
                       top: `${state.yoffset}rem`
                     }}
 

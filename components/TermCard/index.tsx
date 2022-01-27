@@ -43,7 +43,7 @@ type TermCardProps ={
               fontSize="sm"
               color={useColorModeValue("gray.600", "gray.400")}
             >
-            Roles: {" "} {roles}
+            Roles: {" "} {roles.join()}
             </chakra.span>
             <Link
               px={3}
