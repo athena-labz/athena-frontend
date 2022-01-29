@@ -74,8 +74,8 @@ export default function FeaturesSection() {
           
         </Stack>
         <Text color={'gray.600'} fontSize={'xl'} textAlign={'justify'}>
-        Write smart contrats what in order to ensure that dishonest behavior is penalized, we makes it possible for service providers to lock an arbitrary amount of tokens inside their proposal in the marketplace and require the same by their client. 
-        These act as commitment as well as pledge in case there is a conflict.
+        Smart contracts assure that dishonest behavior is penalized and virtuos dealing rewarded. The platform works also as escrow: both parties deposit Trust Tokens (TT) as collateral. All service provider can arbitrarly set an amount: the higher it is, the higher the confidence and reliability they show. 
+        Both parties' collaterals act as commitment as well as pledge in case of a mediation event.
        
         </Text>
       </Stack>
@@ -86,28 +86,28 @@ export default function FeaturesSection() {
           icon={<Icon as={FiBriefcase} w={10} h={10} color="gray.500"/>}
           title={'Services'}
           text={
-            'It is a NFT with a reference to the contract that can be used to prove contract agreement'
+            'Services are offered and signed through a unique contract: a NFT is issued for identifying contract terms agreement'
           }
         />
         <Feature
           icon={<Icon as={FiTrendingUp} w={10} h={10} color="green.500" />}
           title={'Rewards'}
           text={
-            'They are calculated through an algorithm that collects statistics related to the service or good provided and returns the amount of tokens per hour that will be rewarded.'
+            'A deep-learning based  algorythm calculates periodically rewards: services, performances and reviews all contributes to the the outcome'
           }
         />
         <Feature
           icon={<Icon as={FiTrendingDown} w={10} h={10} color="red.500" />}
           title={'Penalties'}
           text={
-            'Parties that refuse to follow the rules pre-defined in the contract will be penalized by losing tokens proportionally to the severity of their misbehavior.'
+            'Parties breaking the rules pre-defined in the contract will be penalized by losing tokens proportionally to the severity of their misbehavior'
           }
         />
         <Feature
           icon={<Icon as={FiLock} w={10} h={10} color="#38b6ff"/>}
           title={'Reliability'}
           text={
-            'You can select good service providers by analyzing the trust tokens they have and the contract they proposed.'
+            'Credit Assessment Score (CAS) describes the reliability of a service provider. A CAS above 50 shows a reliable member. A CAS above 95 assure trustwothiness through excellent performances'
           }
         />
         </SimpleGrid>
