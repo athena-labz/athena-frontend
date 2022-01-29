@@ -17,7 +17,7 @@ const contracts_data = {
             publisherCAS:20000,
             publisher_name:"Carlos Augusto",
             "relation_type": "distributed",
-            "privacy_type": "public",
+            "privacy_type": "PUBLIC",
             "publisher": "202cb962ac59075b964b07152d234b70",
             "collateral": [
                 {
@@ -200,8 +200,8 @@ const contracts_data = {
             title:"Mountain Bike For Sale",
             publisherCAS:200000,
             publisher_name:"Mark Lavosier",
-            "relation_type": "distributed",
-            "privacy_type": "public",
+            "relation_type": "one-time",
+            "privacy_type": "PUBLIC",
             "publisher": "202cb962ac59075b964b07152d234b70",
             "collateral": [
                 {
@@ -353,7 +353,7 @@ const contracts_data = {
             publisherCAS:3456522,
             publisher_name:"Edward Elric",
             "relation_type": "distributed",
-            "privacy_type": "public",
+            "privacy_type": "PUBLIC",
             "publisher": "202cb962ac59075b964b07152d234b70",
             "collateral": [
                 {
@@ -503,7 +503,7 @@ const contracts_data = {
             publisherCAS:20000,
             publisher_name:"Eren Yeagar",
             "relation_type": "distributed",
-            "privacy_type": "public",
+            "privacy_type": "PUBLIC",
             "publisher": "202cb962ac59075b964b07152d234b70",
             "collateral": [
                 {
@@ -597,7 +597,7 @@ const contracts_data = {
             publisherCAS:20000,
             publisher_name:"Mikasa Ackerman",
             "relation_type": "distributed",
-            "privacy_type": "public",
+            "privacy_type": "PUBLIC",
             "publisher": "202cb962ac59075b964b07152d234b70",
             "collateral": [
                 {
@@ -691,7 +691,7 @@ const contracts_data = {
             publisherCAS:20000,
             publisher_name:"Levi Ackerman",
             "relation_type": "distributed",
-            "privacy_type": "public",
+            "privacy_type": "PUBLIC",
             "publisher": "202cb962ac59075b964b07152d234b70",
             "collateral": [
                 {

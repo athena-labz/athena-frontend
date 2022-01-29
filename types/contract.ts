@@ -47,7 +47,7 @@ type Contract = {
         }
     ],
     title:string,
-    publisher_name?:string;
+    publisher_name:string;
     resolutions?: string[ ],
     roles: number,
     role_map?: [

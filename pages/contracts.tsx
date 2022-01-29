@@ -48,8 +48,20 @@ const Discover = ({ contracts }: Discoverprops) => {
 
   useEffect(() => {
     onChange(50)
-}, [state])
+  }, [])
 
+  const handleChangeSelect = (name: string) => {
+    const element = (document.getElementById(name) as HTMLInputElement);
+    const value = element == null ? "" : element.value;
+
+    if(value != "ALL" && name == "privacy_type")
+     setFiltered(contracts.filter((e) => e.privacy_type === value))
+    else if(value != "ALL" && name == "relation_type")
+      setFiltered(contracts.filter((e) => e.relation_type === value))
+    else
+      setFiltered(contracts)
+
+  }
 
   const onChange = (new_value: number) => {
     let test = document.querySelector('#slider-thumb-testy');
@@ -58,7 +70,7 @@ const Discover = ({ contracts }: Discoverprops) => {
       test_data = test.getBoundingClientRect()
     }
     if (test_data) {
-      let x = new_value.toString().length == 1? test_data.x*0.063 -2.2 : test_data.x*0.063 -2.3;
+      let x = new_value.toString().length == 1 ? test_data.x * 0.063 - 2.2 : test_data.x * 0.063 - 2.3;
       setState({
         xoffset: x,
         yoffset: 1.5,
@@ -100,69 +112,20 @@ const Discover = ({ contracts }: Discoverprops) => {
               <Box w="100%" p={2} marginTop={'0.5rem'}>
 
                 <FormControl >
-                  <FormLabel
-                    color="gray.600"
-                    fontWeight='bold'
-                    style={{ textTransform: 'uppercase' }}>
-                    Collateral Range
-                  </FormLabel>
-
-                  <Badge
-                    variant="solid"
-                    p={1}
-                    id={"bolinha"}
-                    borderRadius={"0.8rem"}
-                    style={{
-                      position: "absolute",
-                      left: `${state.xoffset}rem`,
-                      top: `${state.yoffset}rem`
-                    }}
-
-                  >
-                    {value}
-                  </Badge>
-                  <Slider
-                    ref={ball_ref}
-                    aria-label="slider-ex-2"
-                    colorScheme="blue"
-                    defaultValue={50}
-                    id={"testy"}
-                    marginTop={6}
-                    value={value}
-                    onChange={onChange}
-                  >
-
-
-                    <SliderTrack >
-                      <SliderFilledTrack />
-                    </SliderTrack>
-
-                    <SliderThumb />
-
-                  </Slider>
-
-
-
-
-                </FormControl>
-
-              </Box>
-
-
-              <Box w="100%" p={2} marginTop={'0.5rem'}>
-
-                <FormControl >
                   <FormLabel color="gray.600" fontWeight='bold' style={{ textTransform: 'uppercase' }}>
                     Privacy Type
                   </FormLabel>
 
                   <Select
-                    name="options"
-
+                  id="privacyType"
+                    name="privacyType"
+                    onChange={e => handleChangeSelect("privacyType")}
                     size="md"
                   >
-                    <option value="option1" >PUBLIC</option>
-                    <option value="option2">PRIVATE</option>
+                    <option value="ALL">ALL</option>
+                    <option value="PUBLIC" >PUBLIC</option>
+                    <option value="PRIVATE">PRIVATE</option>
+                   
                   </Select>
                 </FormControl>
 
@@ -176,11 +139,14 @@ const Discover = ({ contracts }: Discoverprops) => {
                   </FormLabel>
                   <Select
                     isMulti
-                    name="colors"
                     size="md"
+                    id="relation_type"
+                    name="relation_type"
+                    onChange={e => handleChangeSelect("relation_type")}
                   >
-                    <option value="option1">DISTRIBUTED</option>
-                    <option value="option2">CONVERGENT</option>
+                     <option value="ALL">ALL</option>
+                    <option value="distributed"> REPEATED SERVICE </option>
+                    <option value="one-time">ONE-TIME SERVICE</option>
                   </Select>
                 </FormControl>
 

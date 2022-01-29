@@ -12,67 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { extendTheme } from "@chakra-ui/react";
 import { Search2Icon } from '@chakra-ui/icons';
-import { useState } from 'react';
-
-
-type Contract = {
-    contract_name: string,
-    nft: {
-        currency_symbol: string,
-        token_name: string
-    },
-    relation_type: string,
-    privacy_type: string,
-    publisher: string,
-    collateral: [
-        {
-            currency_symbol: string, // This is ADA's currency_symbol
-            value: number // 5 ADA
-        }
-    ],
-    terms_hash: string,
-    terms: {
-        input_name: string,
-        question: string,
-        type: string,
-        roles: number[]
-    }[],
-    triggers: {
-        input_name: string,
-        operator: string,
-        action_selector: string,
-        action: string,
-        roles: string,
-        value: string
-    }[],
-    judges?: [
-        {
-            name_judge: string,
-            judge: string,
-        }
-    ],
-    accusations?: [
-        {
-            name_accuser: string,
-            accuser: string,
-            name_accused: string,
-            accused: string,
-            time: number,
-            deadline: number
-        }
-    ],
-    title: string,
-    resolutions?: string[],
-    roles: number,
-    role_map?: [
-        {
-            name: string,
-            address: string,
-            role: number
-        }
-    ]
-}
-
+import type Contract from '../../types/contract'
 
 type Discoverprops = {
     contracts: Contract[];
@@ -85,7 +25,9 @@ const SearchSection = ({ contracts, setfilter }: Discoverprops) => {
         if (e.target.value.length > 0) {
             let filteredResults = contracts.filter(p => {
                 return (
-                    p.terms_hash.toLowerCase().match(e.target.value.toLowerCase())
+                    p.title.toLowerCase().match(e.target.value.toLowerCase()) ||
+                    p.terms_hash.toLowerCase().match(e.target.value.toLowerCase()) ||
+                    p.publisher_name.toLowerCase().match(e.target.value.toLowerCase()) 
                 )
             });
             setfilter(filteredResults);

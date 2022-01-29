@@ -233,7 +233,7 @@ export default function Component({ service }: { service: Contract }) {
                     </Flex>
                   </Box>
                   <Button w="300px" colorScheme="blue" py={6}>
-                    PURCHASE
+                  AGREE AND SIGN
                   </Button>
 
                 </Stack>
