@@ -17,7 +17,7 @@ export default function FaqSection() {
         {
             key:"B",
             question:"How shall I sign a services?",
-            answer:"Sumbitting the acceptance of a smart contract you are signing and agreeing the terms of the provided service. During the contract setting you are allowed to add inputs related to the performance you expect and it is your interest to make it in a undertandable and measurable way"
+            answer:"Submitting the acceptance of a smart contract you are signing and agreeing the terms of the provided service. During the contract setting you are allowed to add inputs related to the performance you expect and it is your interest to make it in a undertandable and measurable way"
         },
         {
             key:"C",
@@ -26,13 +26,13 @@ export default function FaqSection() {
         },
         {
             key:"D",
-            question:"How does I assess reliability of service publisher or client through CAS?",
+            question:"How does I assess reliability of service publisher or client through CAS (Credit Assessment Score) ?",
             answer:" CAS (Credit Assessment Score) is a dynamic score which upates periodically and wrap up the whole social and business reliability of each platform member by reviewing the past history of transactions, service success rates as customer or service provider. Additionally it measures,rewards and penalizes members who achieve or not set year targets. CAS measurement rules, rewards and penalty are set under CAS window "
         },
         {
             key:"E",
             question:"What are TrustToken (TT), as collateral?",
-            answer:" TrustToken (TT) are tokens set as guarantee by both sides the service provider and customer during the contract negotiation. It is an escrow which is opened at contract execution and distributed to both parties according to a logic accounting for the transaction performance. In case of arbitration a juror is involved and he will be rewarded through TT as well for his performance. At present ADA will be used as TT."
+            answer:" TrustToken (TT) are tokens set as guarantee by both sides, the service provider and customer during the contract negotiation. It is an escrow which is opened at contract execution and distributed to both parties according to a logic accounting for the transaction performance. In case of arbitration a juror is involved and he will be rewarded through TT as well for his performance. At present ADA will be used as TT."
         },
         {
             key:"F",
@@ -86,8 +86,8 @@ export default function FaqSection() {
         },
         {
             key:"P",
-            question:"What are penalties?",
-            answer:"A loss in tokens holding can be triggered by misbehavious, insufficient perfromance, missing set targets."
+            question:"What are rewards and penalties?",
+            answer:"A gain or loss in tokens holding can be triggered by virtuous behaviours or misbehavious, excellent feed-back or insufficient performance, matching or missing set targets. Dateils are set into CAS, Rewards, Penalties tag"
         },
         
     ]
