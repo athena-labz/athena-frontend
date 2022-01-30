@@ -8,7 +8,7 @@ import ProblemSection from '../components/ProblemSection'
 import RoadmapSection from '../components/RoadmapSection'
 import GoToMarketSection from '../components/GoToMarketSection'
 import FaqSection from '../components/FaqSection'
-import TokenSection from '../components/TokenSection'
+import CrowdfundingSection from '../components/CrowdfundingSection'
 import TeamSection from '../components/TeamSection'
 
 type Judge = {
@@ -41,11 +41,11 @@ const Home = ({ judges }: Homeprops) => {
 
         <FeaturesSection />
 
+        <CrowdfundingSection />
+
         <RoadmapSection />
 
         <GoToMarketSection />
-
-        {/* Add Crowfunding  section */}
 
         <TeamSection />
 
