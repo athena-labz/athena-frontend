@@ -1,8 +1,7 @@
 <div align="center">
   <img src="https://github.com/SamuelSSan28/athena-frontend/blob/dev/public/logo.png" alt="Podcastr logo">
-  
   <br/>
-   <br/>
+  <br/>
 
 [![Languages](https://img.shields.io/github/languages/count/samuelssan28/athena-frontend?color=%23004AAD&style=flat-square)](#)
 [![Stars](https://img.shields.io/github/stars/samuelssan28/athena-frontend?color=004AAD&style=flat-square)](https://github.com/samuelssan28/athena-frontend/stargazers)
