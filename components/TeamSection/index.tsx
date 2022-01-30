@@ -68,11 +68,13 @@ function StatsCard(props: StatsCardProps) {
 
 export default function TeamSection() {
   return (
-    <Box 
+    <Flex 
       id="team"
       style={{scrollMarginTop:100}}
-      maxW="6xl" 
+      maxW="100%" 
+      flexDirection={"column"}
       textAlign="center" 
+      alignItems={"center"}
       pt={0} 
       px={{ base: 2, sm: 2, md: 3 }} 
       marginTop={0} 
@@ -94,7 +96,7 @@ export default function TeamSection() {
                 position: 'absolute',
                 bottom: 1,
                 left: 0,
-                bg: 'blue.400',
+                bg: '#38b6ff',
                 zIndex: -1,
               }}>
               Know the team 
@@ -119,6 +121,6 @@ export default function TeamSection() {
           />
         
     </Center>
-    </Box>
+    </Flex>
   );
 }

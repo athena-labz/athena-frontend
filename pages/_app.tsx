@@ -8,8 +8,22 @@ import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const pathnames_not_show_footer = ['/login','/forgot-password','/reset-password',"/signup"]
+  const pathnames_not_show_footer = ['/login','/contracts','/forgot-password','/profile','/reset-password',"/signup","/create-contract","/contract"]
   
+  const show_footer = (pathname:string)=>{
+
+    const filterd = pathnames_not_show_footer.filter((pathname_list:string)=>{ 
+      var aux = pathname.replace("/","");
+      if(aux != "" && pathname_list.includes(aux))
+        return true
+    
+      return false
+    })
+    console.log(pathname.replace("/",""),filterd)
+    if(filterd.length > 0) return false
+    else return true
+  }
+
   return (
     <ChakraProvider theme={customtheme}> 
       <main style={{flex:1}}>
@@ -17,12 +31,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
           <Component {...pageProps} />
           
-          {pathnames_not_show_footer.indexOf(router.pathname) === -1 &&  <Footer /> }
+          {show_footer(router.pathname) &&  <Footer /> }
          
           
        </main>
     </ChakraProvider>
-  )
+  )     
   
   
 }

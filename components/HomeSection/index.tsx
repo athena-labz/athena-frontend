@@ -12,7 +12,7 @@ import {
 export default function HomeSection() {
   const bg = useColorModeValue("white", "gray.800");
   return (
-    <Box pos="relative" overflow="hidden" bg={bg} mt={0}>
+    <Box pos="relative" overflow="hidden" bg={bg} mt={10}>
       <Box maxW="8xl" mx="auto">
         <Box
           pos="relative"
@@ -64,8 +64,8 @@ export default function HomeSection() {
                 </chakra.span>
                 <chakra.span
                   display={{ base: "block", xl: "inline" }}
-                  color={useColorModeValue("blue.600", "blue.400")}
-                >
+                  color={useColorModeValue("#38b6ff", "blue.400")}
+                > 
                  made easy
                 </chakra.span>
               </chakra.h1>
@@ -94,7 +94,7 @@ export default function HomeSection() {
                     fontSize={{ base: "md", md: "lg" }}
                     rounded="lg"
                     color="white"
-                    bg={'blue.400'}
+                    bg={'#38b6ff'}
                     as="a"
                     href="https://github.com/GabriIT/HackTh_Digiservices/raw/main/WP%20Digiservices%2017%20Aug%202021%20v1.pdf"
                    _hover={{ bg: 'blue.500' }}

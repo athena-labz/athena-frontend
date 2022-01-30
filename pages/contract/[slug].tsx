@@ -1,5 +1,5 @@
-import { services } from '../api/services'
-import {GetStaticPaths, GetStaticProps} from 'next'
+import { contract } from '../api/contract'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import React from "react";
 import {
   chakra,
@@ -10,67 +10,52 @@ import {
   Stack,
   SimpleGrid,
   Icon,
-  Link,Image,
+  Link, Image,
   Button,
 } from "@chakra-ui/react";
-import { ArrowBackIcon,LockIcon } from '@chakra-ui/icons'
-
-type ServiceProps= {
-  id:number;
-  type: string;
-  publisher: string;
-  title: string;
-  description: string;
-  trust: number;
-  pledge:number;
-  price?: number;
-  deadline?: number;
-  badge_color:string;
-  image?:string;
-  questions?:string[];
-}
+import { ArrowBackIcon, LockIcon, UnlockIcon } from '@chakra-ui/icons'
+import type Contract from '../../types/contract'
+import TermCard from '../../components/TermCard';
 
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 
 interface RatingProps {
-    rating: number;
-    numReviews: number;
+  rating: number;
+  numReviews: number;
 }
 
 
 function Rating({ rating, numReviews }: RatingProps) {
-    return (
-      <Box d="flex" alignItems="center"  >
-        {Array(5)
-          .fill('')
-          .map((_, i) => {
-            const roundedRating = Math.round(rating * 2) / 2;
-            if (roundedRating - i >= 1) {
-              return (
-                <BsStarFill
-                  key={i}
-                  style={{ marginLeft: '1' }}
-                  color={i < rating ? '#004aad' : 'gray.300'}
-                />
-              );
-            }
-            if (roundedRating - i === 0.5) {
-              return <BsStarHalf key={i} style={{ marginLeft: '1' }} color={'#004aad'} />;
-            }
-            return <BsStar key={i} style={{ marginLeft: '1' }} color={'#004aad'} />;
-          })}
-        <Box as="span" ml="2" color="gray.600" fontSize="sm">
-          {numReviews} DSET
-        </Box>
-      </Box>
-    );
-  }
+  return (
+    <Box d="flex" alignItems="center"  >
+      {Array(5)
+        .fill('')
+        .map((_, i) => {
+          const roundedRating = Math.round(rating * 2) / 2;
+          if (roundedRating - i >= 1) {
+            return (
+              <BsStarFill
+                key={i}
+                style={{ marginLeft: '1' }}
+                color={i < rating ? '#004aad' : 'gray.300'}
+              />
+            );
+          }
+          if (roundedRating - i === 0.5) {
+            return <BsStarHalf key={i} style={{ marginLeft: '1' }} color={'#004aad'} />;
+          }
+          return <BsStar key={i} style={{ marginLeft: '1' }} color={'#004aad'} />;
+        })}
 
-export default function Component({service}:{service:ServiceProps}) {
+    </Box>
+  );
+}
+
+export default function Component({ service }: { service: Contract }) {
   const topBg = useColorModeValue("gray.200", "gray.700");
   const bottomBg = useColorModeValue("white", "gray.800");
 
-  const Feature = (props:any) => {
+  const Feature = (props: any) => {
     return (
       <Flex align="center">
         <Flex shrink={0}>
@@ -78,7 +63,7 @@ export default function Component({service}:{service:ServiceProps}) {
             boxSize={5}
             mt={1}
             mr={2}
-            
+
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -113,20 +98,20 @@ export default function Component({service}:{service:ServiceProps}) {
         w="full"
         bg={bottomBg}
       >
-  
+
         <Box pt={15} rounded="md" bg={topBg}>
-          
+
           <Box bgGradient={`linear(to-b, ${topBg} 50%, ${bottomBg} 50%)`}>
-            <Flex alignItens="left"> 
-            <Button 
+            <Flex alignItens="left">
+              <Button
                 leftIcon={<ArrowBackIcon />}
-                _focus={{   boxShadow:"none"  }}           
-                marginTop={0} 
-                variant="outline" 
-                as={'a'}  
-                href={'/discover'}>
-              Back
-            </Button>
+                _focus={{ boxShadow: "none" }}
+                marginTop={0}
+                variant="outline"
+                as={'a'}
+                href={'/contracts'}>
+                Back
+              </Button>
 
             </Flex>
             <Flex
@@ -143,12 +128,7 @@ export default function Component({service}:{service:ServiceProps}) {
                 <Text fontSize="3xl" fontWeight="bold" lineHeight="tight">
                   {service.title}
                 </Text>
-                <chakra.p
-                  fontSize={["sm", "md"]}
-                  
-                >
-                  {service.description}
-                </chakra.p>
+
                 <Flex align="center">
 
                   <Text
@@ -158,7 +138,7 @@ export default function Component({service}:{service:ServiceProps}) {
                     textTransform="uppercase"
                     color="brand.400"
                   >
-                    Publisher Questions
+                    Terms
                   </Text>
                   <Flex
                     ml="15px"
@@ -168,12 +148,20 @@ export default function Component({service}:{service:ServiceProps}) {
                     borderTopColor={topBg}
                   />
                 </Flex>
-                {service.questions && <SimpleGrid columns={[1,  2, 1, 2]} spacingY={4}>
-                  {service.questions.map(q => (
-                     <Feature key={q}>{q}</Feature>
-                    )
+
+                {service.terms && <SimpleGrid columns={[1, 2, 1, 2]} spacingY={4}>
+                  {service.terms.map(q => (
+                    <TermCard
+                      key={q.input_name+Math.random()}
+                      input_name={q.input_name}
+                      type={q.type}
+                      roles={q.roles}
+                      question={q.question}
+                      triggers={service.triggers} />
+                  )
                   )}
                 </SimpleGrid>}
+
               </Stack>
               <Stack
                 p="45px"
@@ -183,14 +171,14 @@ export default function Component({service}:{service:ServiceProps}) {
                 bg={"#edeff5"}
                 borderRightRadius="md"
               >
-               
-                {service.price && <Flex
+
+                {service.collateral[0].value && <Flex
                   align="center"
                   fontSize="5xl"
                   fontWeight={["bold", "extrabold"]}
                   lineHeight="tight"
                 >
-                  {service.price}
+                  {service.collateral[0].value}
                   <chakra.span
                     ml={2}
                     fontSize="2xl"
@@ -198,7 +186,7 @@ export default function Component({service}:{service:ServiceProps}) {
                     color={"gray.500"}
                   >
                     {" "}
-                    DSET
+                    {service.collateral[0].currency_symbol}
                   </chakra.span>
                 </Flex>}
 
@@ -209,21 +197,13 @@ export default function Component({service}:{service:ServiceProps}) {
                   fontWeight={["bold", "extrabold"]}
                   lineHeight="tight"
                 >
-                   <LockIcon mx={2}/>
+                  {service.privacy_type == "PRIVATE" ? <LockIcon mx={2} color="#42A5F5" /> : <UnlockIcon mx={2} color="#42A5F5" />}
 
-                  {service.pledge}
-                  <chakra.span
-                    ml={2}
-                    fontSize="1xl"
-                    fontWeight="medium"
-                    color={"gray.500"}
-                  >
-                    {" "}
-                    DSET
-                  </chakra.span>
+
+                  {service.privacy_type.toUpperCase()}
                 </Flex>
 
-                <Stack spacing={6}>
+                <Stack spacing={6} alignItems="center">
                   <Box mt={4}>
                     <Flex alignItems="center">
                       <Flex alignItems="center">
@@ -238,9 +218,9 @@ export default function Component({service}:{service:ServiceProps}) {
                           mx={2}
                           fontWeight="bold"
                           color={"gray.700"}
-                          
+
                         >
-                          Jone Doe
+                          {service.publisher_name}
                         </Link>
                       </Flex>
                       <chakra.span
@@ -248,14 +228,14 @@ export default function Component({service}:{service:ServiceProps}) {
                         fontSize="sm"
                         color={"gray.600"}
                       >
-                        <Rating rating={service.trust/1000/12} numReviews={service.trust} />
+                        <Rating rating={(service.publisherCAS ? service.publisherCAS : 1) / 1000 / 12} numReviews={service.publisherCAS || 1} />
                       </chakra.span>
                     </Flex>
                   </Box>
                   <Button w="300px" colorScheme="blue" py={6}>
-                    PURCHASE
+                  AGREE AND SIGN
                   </Button>
-                 
+
                 </Stack>
               </Stack>
             </Flex>
@@ -267,30 +247,30 @@ export default function Component({service}:{service:ServiceProps}) {
 }
 
 
-export const getStaticPaths:GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
 
-    return {
-        paths:[],
-        fallback:'blocking'
-    }
+  return {
+    paths: [],
+    fallback: 'blocking'
+  }
 }
 
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const { slug } = params!;
+  const { slug } = params!;
 
-    if (!slug ) return { notFound: true };
-    const data = services();
+  if (!slug) return { notFound: true };
 
-    const service = data.services.filter(service => service.id.toString() === slug.toString())[0] 
-    
-    console.log(service)
-    return {
-      props:{
-        service
-        
-      },
-      revalidate:60*60*24// 24 hours
-    }
+  const data = contract(slug);
+
+  if (data == null)
+    return { notFound: true }
+
+  return {
+    props: {
+      service: data
+
+    },
+    revalidate: 60 * 60 * 24// 24 hours
   }
-  
+}

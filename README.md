@@ -1,11 +1,11 @@
 <div align="center">
-  <img src="https://digiservices-frontend.vercel.app/_next/image?url=%2Flogo.png&w=640&q=75" alt="Podcastr logo">
+  <img src="https://github.com/SamuelSSan28/athena-frontend/blob/dev/public/logo.png" alt="Podcastr logo">
   
   <br/>
    <br/>
 
-[![Languages](https://img.shields.io/github/languages/count/samuelssan28/digiservices-frontend?color=%23004AAD&style=flat-square)](#)
-[![Stars](https://img.shields.io/github/stars/samuelssan28/digiservices-frontend?color=004AAD&style=flat-square)](https://github.com/samuelssan28/digiservices-frontend/stargazers)
+[![Languages](https://img.shields.io/github/languages/count/samuelssan28/athena-frontend?color=%23004AAD&style=flat-square)](#)
+[![Stars](https://img.shields.io/github/stars/samuelssan28/athena-frontend?color=004AAD&style=flat-square)](https://github.com/samuelssan28/athena-frontend/stargazers)
 
 </div>
 
@@ -15,7 +15,7 @@
 
 
 <p align="center"> 
-DigiServices is a Cardano-based project that aims to be a trustworthy, reward-driven, platform for goods and service exchanges
+Athena is a Cardano-based project that aims to be a trustworthy, reward-driven, platform for goods and service exchanges
 </p>
 
 <p align="justify">
@@ -66,7 +66,7 @@ $ yarn dev
 
 The app will be available for access on your browser at `http://localhost:3000`
 
-## 🤝 Colaboradores
+## 🤝 Contributors
 
 We thank the following people who contributed to this project:
 
@@ -74,17 +74,9 @@ We thank the following people who contributed to this project:
   <tr>
     <td align="center">
       <a href="#">
-        <img src="https://avatars.githubusercontent.com/u/8145759?v=4" width="100px;" alt="Frank DelPidio"/><br>
-        <sub>
-          <b>Frank DelPidio</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="#">
         <img src="https://avatars.githubusercontent.com/u/54087364?v=4" width="100px;" alt="Castaldi Gabriele"/><br>
         <sub>
-          <b>Castaldi Gabriele</b>
+          <b>Gabriele Castaldi</b>
         </sub>
       </a>
     </td>
@@ -101,6 +93,30 @@ We thank the following people who contributed to this project:
         <img src="https://avatars.githubusercontent.com/u/42661697?v=4" width="100px;" alt="Foto do Samuel"/><br>
         <sub>
           <b>Samuel Santos</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/48389824?v=4" width="100px;" alt="Pedro Lucca"/><br>
+        <sub>
+          <b>Pedro Lucca</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/57373773?v=4" width="100px;" alt="Naum Celestino"/><br>
+        <sub>
+          <b>Naum Celestino</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/43761534?v=4" width="100px;" alt="Manassés Silva"/><br>
+        <sub>
+          <b>Manassés Silva</b>
         </sub>
       </a>
     </td>

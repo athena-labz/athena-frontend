@@ -19,7 +19,7 @@ export default function ProblemSection() {
     <Container maxW={'7xl'} id="problem" style={{scrollMarginTop:120}}>
       <Stack
         align={'center'}
-        spacing={{ base: 8, md: 10 }}
+        spacing={{ base: 7, md: 8 }}
         py={{ base: 20, md: 28 }}
         direction={{ base: 'column', md: 'row' }}>
         <Stack flex={1} spacing={{ base: 5, md: 10 }}>
@@ -37,17 +37,17 @@ export default function ProblemSection() {
                 position: 'absolute',
                 bottom: 1,
                 left: 0,
-                bg: 'blue.400',
+                bg: '#38b6ff',
                 zIndex: -1,
               }}>
               The
             </Text>
             <br />
-            <Text as={'span'} color={'blue.400'}>
+            <Text as={'span'} color={'#38b6ff'}>
               Problem Statement!
             </Text>
           </Heading>
-          <Text color={'gray.500'}>
+          <Text color={'gray.500'}  fontSize={"lg"}>
             The increased occurrence of internet fraud puts consumers in a precarious position. 
             Non-payment/Non-delivery is the fourth most prevalent cyber-crime in the United States in which victims lost a total of 265 million USD.
           </Text>
@@ -66,7 +66,7 @@ export default function ProblemSection() {
             top={'-20%'}
             left={0}
             zIndex={-1}
-            color={useColorModeValue('blue.50', 'blue.400')}
+            color={useColorModeValue('blue.50', '#38b6ff')}
           />
           <Box
             position={'relative'}

@@ -11,28 +11,28 @@ import FaqSection from '../components/FaqSection'
 import TokenSection from '../components/TokenSection'
 import TeamSection from '../components/TeamSection'
 
-type Judge= {
+type Judge = {
   name: string;
   description: string;
   trust: number;
   price: number;
-  image?:string;
+  image?: string;
 }
 
-type Homeprops ={
+type Homeprops = {
   judges: Judge[]
 }
 
 
-const Home = ({judges}:Homeprops) => {
+const Home = ({ judges }: Homeprops) => {
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>DigiServices</title>
+        <title>ATHENA</title>
       </Head>
 
-     
+
       <section >
 
         <HomeSection />
@@ -44,30 +44,30 @@ const Home = ({judges}:Homeprops) => {
         <RoadmapSection />
 
         <GoToMarketSection />
-        
-        <TokenSection />
+
+        {/* Add Crowfunding  section */}
 
         <TeamSection />
 
         <FaqSection />
-        
-       </section >
- 
+
+      </section >
+
     </div>
   )
 }
 
-export const getStaticProps:GetStaticProps = async () => {
-  
+export const getStaticProps: GetStaticProps = async () => {
+
   //const {data} =  await api("services",{});
   const data = judges();
 
   return {
-    props:{
-      judges:data.judges
-      
+    props: {
+      judges: data.judges
+
     },
-   
+
   }
 }
 
