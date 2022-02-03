@@ -26,10 +26,6 @@ Athena is a Cardano-based project that aims to be a trustworthy, reward-driven, 
  We propose a platform that enables parties to create contracts stored in the Cardano blochain to build trust based on token rewards calculated through an algorithm that collects statistics related to the service or good provded and returns the amount of tokens per hour that will be rewarded. Parties that violate the contract will be penalized by losing tokens proportional to the severity of violation.
 </p>
 
-### White-Paper
-[![card](https://github-readme-stats.vercel.app/api/pin/?username=mateusap1&repo=DigiServices)](https://github.com/mateusap1/)
-
-
 ## Tecnologies
 This project was developed using cutting edge front-end technologies.
 
