@@ -64,7 +64,7 @@ export default function RoadmapSection() {
             icon={<GiSpanner />}
           >
             <h2>
-              Techinical model and solution details
+              Technical model and solution details
             </h2>
             <p>
                 The purpose is to design, develop, and implement solutions to evaluating and selecting solutions that potentially satisfy an appropriate set of allocated requirements. 

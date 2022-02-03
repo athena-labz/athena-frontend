@@ -433,7 +433,7 @@ const NAV_ITEMS: Array<NavItem> = [
 
   },
   {
-    label: 'Crowfunding ',
+    label: 'Crowdfunding ',
     href: "/#crowdfunding"
   },
   {
