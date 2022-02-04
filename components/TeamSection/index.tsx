@@ -42,12 +42,12 @@ function StatsCard(props: StatsCardProps) {
         p={3}
         textAlign={'center'}>
         <Avatar
-          size={'3xl'}
+          size={'2xl'}
           src={image}
           alt={'Avatar Alt'}
           mb={0}
           pos={'relative'}
-          
+          style={{marginBottom: ".5rem"}}
         />
         <Heading fontSize={'2xl'} fontFamily={'body'}>
           {title}
@@ -115,9 +115,9 @@ export default function TeamSection() {
             helpText={"JS developer and computer Science student, develop web applications as a hobby and for freelance works. Candidate to Plutus Pioneers Program third cohort"}
           />
           <StatsCard
-            title={'Frank DelPidio'}
-            image="/frank2.png"
-            helpText={"Backend Software Engineer, Ruby on Rails developer, SQL database engineer, Certifited AWS Solutions Associate, Plutus Pioneers Program second cohort."}
+            title={'Mateus Santos'}
+            image="/mateus2.png"
+            helpText={"Full-stack developer, passionate about blockchain and smart contracts. Plutus Pioneers Program second cohort graduate"}
           />
         
     </Center>
