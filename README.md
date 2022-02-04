@@ -1,8 +1,7 @@
 <div align="center">
   <img src="https://github.com/SamuelSSan28/athena-frontend/blob/dev/public/logo.png" alt="Podcastr logo">
-  
   <br/>
-   <br/>
+  <br/>
 
 [![Languages](https://img.shields.io/github/languages/count/samuelssan28/athena-frontend?color=%23004AAD&style=flat-square)](#)
 [![Stars](https://img.shields.io/github/stars/samuelssan28/athena-frontend?color=004AAD&style=flat-square)](https://github.com/samuelssan28/athena-frontend/stargazers)
@@ -26,10 +25,6 @@ Athena is a Cardano-based project that aims to be a trustworthy, reward-driven, 
 <p align="justify">
  We propose a platform that enables parties to create contracts stored in the Cardano blochain to build trust based on token rewards calculated through an algorithm that collects statistics related to the service or good provded and returns the amount of tokens per hour that will be rewarded. Parties that violate the contract will be penalized by losing tokens proportional to the severity of violation.
 </p>
-
-### White-Paper
-[![card](https://github-readme-stats.vercel.app/api/pin/?username=mateusap1&repo=DigiServices)](https://github.com/mateusap1/)
-
 
 ## Tecnologies
 This project was developed using cutting edge front-end technologies.

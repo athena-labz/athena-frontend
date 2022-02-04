@@ -46,6 +46,7 @@ function StatsCard(props: StatsCardProps) {
           src={image}
           alt={'Avatar Alt'}
           mb={0}
+          border={"solid"}
           pos={'relative'}
           style={{marginBottom: ".5rem"}}
         />
@@ -111,7 +112,7 @@ export default function TeamSection() {
           />
           <StatsCard
             title={'Samuel Santos'}
-            image="/samuel2.png"
+            image="/samuel2.jpg"
             helpText={"JS developer and computer Science student, develop web applications as a hobby and for freelance works. Candidate to Plutus Pioneers Program third cohort"}
           />
           <StatsCard
