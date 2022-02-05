@@ -89,7 +89,7 @@ return (
               title="Competitive fees"
               icon={<Icon as={FiUsers} w={8} h={8} color="gray.500"/>}
             >
-               2% of total pledged amount. For reference Kickstarter fees are 5% + #5-5% of payment transaction fees.
+               2% of total pledged amount. For reference Kickstarter fees are 5% + 5-5% of payment transaction fees.
             </Feature>
 
             <Feature
@@ -111,9 +111,7 @@ return (
               title="Mobile notifications"
               icon={<Icon as={FiUsers} w={8} h={8} color="gray.500"/>}
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Maiores impedit perferendis suscipit eaque, iste dolor
-              cupiditate blanditiis ratione.
+              Campaign updates will be notified over mobile app
             </Feature>
           </Stack>
         </Box>
