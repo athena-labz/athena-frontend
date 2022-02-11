@@ -248,7 +248,7 @@ const Discover = ({ contracts }: Discoverprops) => {
                     </chakra.span>
                   </Box>
                 </Flex>
-                <Progress colorScheme='blue' size='md' value={20} />
+                <Progress colorScheme='blue' size='md' value={45} />
 
                 <chakra.span
                   fontSize="13px"
