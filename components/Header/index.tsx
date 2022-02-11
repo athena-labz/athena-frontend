@@ -450,6 +450,10 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Contracts',
     href: "/contracts"
   },
+  {
+    label: 'Campaigns',
+    href: "/campaigns"
+  },
    {
     label: 'Token',
     href: "/token"
