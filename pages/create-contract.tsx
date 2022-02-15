@@ -13,6 +13,7 @@ import {
   Stack,
   FormControl,
   FormLabel,
+  Tooltip,
   Input,
   InputGroup,
   InputLeftElement,
@@ -20,11 +21,14 @@ import {
   Button,
   Select,
   Avatar,
-  Text
+  Text,
+  Icon,
+  Tag,
+  Link
 } from "@chakra-ui/react";
 import Head from 'next/head'
 import MultiSelectMenu from "../components/MutipleSelect";
-import { AddIcon } from '@chakra-ui/icons';
+import { AddIcon, InfoOutlineIcon, QuestionOutlineIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import {
   AutoComplete,
@@ -33,6 +37,7 @@ import {
   AutoCompleteItem,
   AutoCompleteList
 } from "@choc-ui/chakra-autocomplete";
+
 
 export interface Item {
   label: string;
@@ -57,7 +62,7 @@ export default function Component() {
     "operator": "",
     "value": "",
     "action": "",
-    "actionSelector":""
+    "actionSelector": ""
   }])
 
   const [form, setForm] = useState({
@@ -177,7 +182,7 @@ export default function Component() {
     setForm({ ...form, [name]: value })
   }
 
-  const handleChangeSelectTrigger = (name:string,index:number) => {
+  const handleChangeSelectTrigger = (name: string, index: number) => {
     const element = (document.getElementById(name) as HTMLInputElement);
     const value = element == null ? "" : element.value;
 
@@ -192,15 +197,19 @@ export default function Component() {
     )
   }
 
-
   return (
     <Box bg={"gray.50"} p={12}>
       <Head>
         <title>Create a Contract</title>
       </Head>
       <Heading fontSize="lg" fontWeight="medium" lineHeight="6" color="blue.600">
-        Create a Contract
+        Create a Contract {"  "}
+        <Tooltip label="Article about contracts" aria-label='A tooltip'>
+          <Link isExternal href="https://github.com/athena-labz/athena-frontend"  ><InfoOutlineIcon as={"a"} /></Link>
+        </Tooltip>
+
       </Heading>
+
       <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true">
         <Box py={5}>
           <Box
@@ -460,7 +469,12 @@ export default function Component() {
 
           <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true" px={15} pt={0}>
             <Heading fontSize="sm" fontWeight="medium" lineHeight="6" color="blue.600">
-              Inputs
+              Inputs {"   "}
+              <Tooltip 
+                   placement='right'
+                  label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero velit, rhoncus n" aria-label='A tooltip'>
+                <InfoOutlineIcon as={"a"} />
+              </Tooltip>
             </Heading>
           </Box>
 
@@ -568,7 +582,12 @@ export default function Component() {
 
           <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true" p={15}>
             <Heading fontSize="sm" fontWeight="medium" lineHeight="6" color="blue.600">
-              Triggers
+              Triggers{"   "}
+              <Tooltip 
+                   placement='right'
+                  label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero velit, rhoncus n" aria-label='A tooltip'>
+                <InfoOutlineIcon as={"a"} />
+              </Tooltip>
             </Heading>
           </Box>
 
@@ -581,7 +600,7 @@ export default function Component() {
                   fontWeight="md"
                   color={"blue.700"}
                 >
-                 Question identifier
+                  Question identifier
                 </FormLabel>
                 <Select variant="outline" onChange={e => handleChangeSelect("privacyType")} id="privacyType">
                   {
@@ -599,7 +618,7 @@ export default function Component() {
                 >
                   Operator
                 </FormLabel>
-                <Select variant="outline" onChange={e => handleChangeSelectTrigger("operator",index)} id="operator">
+                <Select variant="outline" onChange={e => handleChangeSelectTrigger("operator", index)} id="operator">
                   <option value="INT">EQUALS</option>
                   <option value="INT">GREATER THAN</option>
                   <option value="BOOL">LESS THAN</option>
@@ -640,7 +659,7 @@ export default function Component() {
                 >
                   Action Selector
                 </FormLabel>
-                <Select variant="outline" onChange={e => handleChangeSelectTrigger("actionSelector",index)} id="actionSelector">
+                <Select variant="outline" onChange={e => handleChangeSelectTrigger("actionSelector", index)} id="actionSelector">
                   <option value="1">Decrease CAS</option>
                   <option value="2">Suspend from contract</option>
                   <option value="3">Pay from collateral</option>
