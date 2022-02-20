@@ -409,7 +409,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           align={'start'}>
           {children &&
             children.map((child) => (
-              <NextLink href={child.href}>
+              <NextLink href={child?.href ??  "#"}>
                 <Link key={child.label} py={2} >
                   {child.label}
                 </Link>
