@@ -28,14 +28,13 @@ interface RatingProps {
 
 export default function ServiceCard(props:ServiceCardProps)  {
 
-
   return (
      <Flex
-      p={3}
+      p={2}
       w="full"
       alignItems="center"
       justifyContent="center"
-      width={"20.5rem"}
+      width={"23rem"}
     >
       <Box
         width={"100%"}
