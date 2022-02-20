@@ -7,23 +7,14 @@ import { contracts } from './api/contract'
 import SearchSection from '../components/SearchSection'
 import {
   Box,
-  Text,
-  WrapItem,
-  Wrap,
-  Container,
   Select,
   FormControl,
   FormLabel,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  Badge,
+  SimpleGrid,
   Grid,
   Flex,
   GridItem,
   Button,
-  Divider,
   Center,
   CircularProgress,
 } from '@chakra-ui/react'
@@ -54,9 +45,9 @@ const Discover = ({ contracts }: Discoverprops) => {
     const element = (document.getElementById(name) as HTMLInputElement);
     const value = element == null ? "" : element.value;
 
-    if(value != "ALL" && name == "privacy_type")
-     setFiltered(contracts.filter((e) => e.privacy_type === value))
-    else if(value != "ALL" && name == "relation_type")
+    if (value != "ALL" && name == "privacy_type")
+      setFiltered(contracts.filter((e) => e.privacy_type === value))
+    else if (value != "ALL" && name == "relation_type")
       setFiltered(contracts.filter((e) => e.relation_type === value))
     else
       setFiltered(contracts)
@@ -97,7 +88,7 @@ const Discover = ({ contracts }: Discoverprops) => {
 
       <section>
 
-        <SearchSection contracts={contracts} filterServ={filtered} setfilter={setFiltered} />
+        <SearchSection contracts={contracts} filterServ={filtered} setfilter={setFiltered} isCampaign={false}/>
 
         <Grid
           templateColumns="repeat(5, 1fr)"
@@ -117,7 +108,7 @@ const Discover = ({ contracts }: Discoverprops) => {
                   </FormLabel>
 
                   <Select
-                  id="privacyType"
+                    id="privacyType"
                     name="privacyType"
                     onChange={e => handleChangeSelect("privacyType")}
                     size="md"
@@ -125,7 +116,7 @@ const Discover = ({ contracts }: Discoverprops) => {
                     <option value="ALL">ALL</option>
                     <option value="PUBLIC" >PUBLIC</option>
                     <option value="PRIVATE">PRIVATE</option>
-                   
+
                   </Select>
                 </FormControl>
 
@@ -144,7 +135,7 @@ const Discover = ({ contracts }: Discoverprops) => {
                     name="relation_type"
                     onChange={e => handleChangeSelect("relation_type")}
                   >
-                     <option value="ALL">ALL</option>
+                    <option value="ALL">ALL</option>
                     <option value="distributed"> REPEATED SERVICE </option>
                     <option value="one-time">ONE-TIME SERVICE</option>
                   </Select>
@@ -157,20 +148,33 @@ const Discover = ({ contracts }: Discoverprops) => {
 
           </GridItem  >
 
-          <GridItem colSpan={4}>
-            <Flex width={"100%"} style={{ flexFlow: "row wrap", alignContent: "space-between", justifyContent: "space-between" }}>
-              {filtered.map((contract, index) => (
-                <ServiceCard
-                  key={contract.terms_hash}
-                  title={contract.title}
-                  nft={contract.nft}
-                  relation_type={contract.relation_type}
-                  privacy_type={contract.privacy_type}
-                  publisher_name={contract.publisher_name}
-                  collateral={contract.collateral[0]}
-                  terms_hash={contract.terms_hash}
-                />
-              ))}
+          <GridItem colSpan={4} >
+            <Flex
+              w="full"
+              p={2}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <SimpleGrid
+                columns={[1, 3]}
+                gap="4rem"
+                mx="auto"
+                marginBottom={0}
+                textAlign={["left", "center"]}
+              >
+                {filtered.map((contract, index) => (
+                  <ServiceCard
+                    key={contract.terms_hash}
+                    title={contract.title}
+                    nft={contract.nft}
+                    relation_type={contract.relation_type}
+                    privacy_type={contract.privacy_type}
+                    publisher_name={contract.publisher_name}
+                    collateral={contract.collateral[0]}
+                    terms_hash={contract.terms_hash}
+                  />
+                ))}
+                </SimpleGrid>
             </Flex>
             <Center my={5}>
               {

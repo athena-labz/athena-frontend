@@ -16,9 +16,12 @@ import {
     Text,
     useColorModeValue,
   } from '@chakra-ui/react';
+import { useUser } from '../../contexts/UserContext';
   
   export default function LoginCard() {
     const [value, setValue] = useState("1")
+    const [loginData, setLogin] = useState({user:"",password:"",name:""})
+    const {login} = useUser(); 
 
     return (
         <Stack spacing={1} mx={'auto'} maxW={'md'} py={4} px={3}>
@@ -43,13 +46,17 @@ import {
             p={8}>
             
             <Stack spacing={4}>
+            <FormControl id="email">
+                <FormLabel>Name</FormLabel>
+                <Input value={loginData.name} onChange={evt => setLogin({user:loginData.user,password:loginData.password,name:evt.target.value})} />
+              </FormControl>
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
-                <Input type="email" />
+                <Input type="email" value={loginData.user} onChange={evt => setLogin({user:evt.target.value,password:loginData.password,name:loginData.name})} />
               </FormControl>
               <FormControl id="password">
                 <FormLabel>Password</FormLabel>
-                <Input type="password" />
+                <Input type="password" value={loginData.password} onChange={evt => setLogin({user:loginData.user,password:evt.target.value,name:loginData.name})} />
               </FormControl>
               <Stack spacing={10}>
                 <Stack
@@ -60,6 +67,7 @@ import {
                   <Link href="/forgot-password" color={'blue.400'}>Forgot password?</Link>
                 </Stack>
                 <Button
+                  onClick={e => login(loginData.name,loginData.password)}
                   bg={'blue.400'}
                   color={'white'}
                   _hover={{

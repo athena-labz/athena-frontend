@@ -28,7 +28,9 @@ import {
   PopoverCloseButton,
   PopoverHeader,
   PopoverBody,
+  chakra,
 } from '@chakra-ui/react';
+import NextLink from 'next/link'
 import { BiKey, BiLogOut } from "react-icons/bi";
 import {
   HamburgerIcon,
@@ -40,6 +42,8 @@ import {
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router'
+import { useUser } from '../../contexts/UserContext'
+
 const Header: NextPage = () => {
   const { isOpen, onToggle } = useDisclosure();
   const router = useRouter()
@@ -47,7 +51,7 @@ const Header: NextPage = () => {
   const scroll_ = pathnames_not_scroll_header.indexOf(router.pathname) === -1;
   const [state, setstate] = useState(scroll_ ? true : false)
   const [yPos, setYPos] = useState(0)
-
+  const { isLogged, name, logout } = useUser();
 
 
   useEffect(function mount() {
@@ -118,7 +122,7 @@ const Header: NextPage = () => {
         </Flex>
 
 
-        {state ?
+        {!isLogged ?
           <Stack
             flex={{ base: 1, md: 0 }}
             justify={'flex-end'}
@@ -173,7 +177,7 @@ const Header: NextPage = () => {
                   }}>
 
                   <WrapItem>
-                    <Avatar name="John Smith" bgColor="#38b6ff" size="sm" />
+                    <Avatar name={name} bgColor="#38b6ff" size="sm" />
                   </WrapItem>
 
                   <Text marginRight="0.3rem" marginLeft="0.5rem">7.0000</Text>
@@ -186,7 +190,7 @@ const Header: NextPage = () => {
               <PopoverContent w={"16rem"} _focus={{ boxShadow: "none" }} >
                 <PopoverArrow />
                 <PopoverHeader pt={4} fontWeight="bold" border="0" fontSize={'lg'} color={'gray.800'}>
-                  John Smith
+                  {name}
                 </PopoverHeader>
                 <PopoverBody display="flex" flexDirection="row">
                   <Text fontWeight={600} color={'gray.500'}>
@@ -235,22 +239,36 @@ const Header: NextPage = () => {
                 </PopoverBody>
 
                 <Divider orientation="horizontal" />
+                <NextLink href="/create-contract">
+                  <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} >
+                    Create a contract
+                  </PopoverBody>
+                </NextLink>
 
-                <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} as="a" href="/create-contract">
-                Create a contract
-                </PopoverBody>
+                <NextLink href="/create-contract">
+                  <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} >
+                    Create a campaign
+                  </PopoverBody>
+                </NextLink>
                 <Divider orientation="horizontal" />
-                <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} as="a" href="profile">
-                  Profile
-                </PopoverBody>
-                <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} as="a" href="#">
-                  CAS History
-                </PopoverBody>
-                <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} as="a" href="#">
-                  Rewards History
-                </PopoverBody>
+                <NextLink href="/profile">
+                  <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }}>
+                    Profile
+                  </PopoverBody>
+                </NextLink>
+                <NextLink href="#">
+                  <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} as="a" href="#">
+                    CAS History
+                  </PopoverBody>
+                </NextLink>
+                <NextLink href="#">
+                  <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }}>
+                    Rewards History
+                  </PopoverBody>
+                </NextLink>
                 <Divider orientation="horizontal" />
-                <PopoverBody textAlign="left" color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} as="button" onClick={(e) => setstate(!state)}>
+                <PopoverBody textAlign="left" color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }}
+                  as="button" onClick={(e) => logout()}>
                   Logout
                 </PopoverBody>
 
@@ -280,35 +298,20 @@ const DesktopNav = () => {
         <Box key={navItem.label} >
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'md'}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor,
-                }}>
-                {navItem.label}
-              </Link>
+              <NextLink href={navItem.href ?? '#'}>
+                <Link
+                  p={2}
+                  fontSize={'md'}
+                  fontWeight={500}
+                  color={linkColor}
+                  _hover={{
+                    textDecoration: 'none',
+                    color: "blue.400",
+                  }}>
+                  {navItem.label}
+                </Link>
+              </NextLink>
             </PopoverTrigger>
-
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}>
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
           </Popover>
         </Box>
       ))}
@@ -318,35 +321,37 @@ const DesktopNav = () => {
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
-    <Link
-      href={href}
-      role={'group'}
-      display={'block'}
-      p={2}
-      rounded={'md'}
-      _hover={{ bg: useColorModeValue('blue.50', 'gray.900') }}>
-      <Stack direction={'row'} align={'center'}>
-        <Box>
-          <Text
+    <NextLink href={href ?? '#'}>
+      <Link
+
+        role={'group'}
+        display={'block'}
+        p={2}
+        rounded={'md'}
+        _hover={{ bg: useColorModeValue('blue.50', 'gray.900') }}>
+        <Stack direction={'row'} align={'center'}>
+          <Box>
+            <Text
+              transition={'all .3s ease'}
+              _groupHover={{ color: 'blue.500' }}
+              fontWeight={500}>
+              {label}
+            </Text>
+            <Text fontSize={'md'}>{subLabel}</Text>
+          </Box>
+          <Flex
             transition={'all .3s ease'}
-            _groupHover={{ color: 'blue.500' }}
-            fontWeight={500}>
-            {label}
-          </Text>
-          <Text fontSize={'md'}>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
-          opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
-          flex={1}>
-          <Icon color={'blue.500'} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
-      </Stack>
-    </Link>
+            transform={'translateX(-10px)'}
+            opacity={0}
+            _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
+            justify={'flex-end'}
+            align={'center'}
+            flex={1}>
+            <Icon color={'blue.500'} w={5} h={5} as={ChevronRightIcon} />
+          </Flex>
+        </Stack>
+      </Link>
+    </NextLink>
   );
 };
 
@@ -404,9 +409,11 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           align={'start'}>
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
+              <NextLink href={child?.href ??  "#"}>
+                <Link key={child.label} py={2} >
+                  {child.label}
+                </Link>
+              </NextLink>
             ))}
         </Stack>
       </Collapse>
@@ -450,7 +457,11 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Contracts',
     href: "/contracts"
   },
-   {
+  {
+    label: 'Campaigns',
+    href: "/campaigns"
+  },
+  {
     label: 'Token',
     href: "/token"
 
@@ -460,7 +471,7 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '/#faq'
 
   },
-  
+
 
 ];
 export default Header

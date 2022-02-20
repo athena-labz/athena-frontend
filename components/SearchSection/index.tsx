@@ -17,12 +17,13 @@ import type Contract from '../../types/contract'
 type Discoverprops = {
     contracts: Contract[];
     filterServ: Contract[];
+    isCampaign:boolean;
     setfilter: (contracts: any) => any;
 }
 
-const SearchSection = ({ contracts, setfilter }: Discoverprops) => {
+const SearchSection = ({ contracts, setfilter,isCampaign }: Discoverprops) => {
     function handleChange(e: any) {
-        if (e.target.value.length > 0) {
+        if (e.target.value.length > 0 && !isCampaign) {
             let filteredResults = contracts.filter(p => {
                 return (
                     p.title.toLowerCase().match(e.target.value.toLowerCase()) ||
@@ -40,16 +41,16 @@ const SearchSection = ({ contracts, setfilter }: Discoverprops) => {
     var handleClick = () => { }
 
     return (
-        <Flex maxW={'3xl'} p="2rem" ml="1.1rem" alignItems="start" >
+        <Flex maxW={'6xl'} p="2rem" ml="1.1rem" alignItems="start" >
             <InputGroup size="lg">
                 <Input
                     onChange={handleChange}
-                    pr="4.5rem"
+                    pr="30.5rem"
                     placeholder="Search"
                     _placeholder={{ color: 'gray.600' }}
                 />
                 <InputRightElement width="5.75rem" >
-                    <Button h="2rem" size="lg" onClick={handleClick} bg="blue.500">
+                    <Button h="2.3rem" size="lg" onClick={handleClick} bg="#38b6ff">
                         <Search2Icon color="white" />
                     </Button>
                 </InputRightElement>
