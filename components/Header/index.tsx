@@ -245,7 +245,7 @@ const Header: NextPage = () => {
                   </PopoverBody>
                 </NextLink>
 
-                <NextLink href="/create-contract">
+                <NextLink href="/create-campaign">
                   <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} >
                     Create a campaign
                   </PopoverBody>

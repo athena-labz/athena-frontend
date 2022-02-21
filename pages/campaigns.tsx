@@ -38,7 +38,7 @@ const Discover = ({ campaigns }: Discoverprops) => {
 
           {isLogged && 
           <Flex maxW={'6xl'} p="2rem" ml="1.1rem" alignItems="start" >
-            <NextLink href={"#"}>
+            <NextLink href={"/create-campaign"}>
               <Button
                 bg={'#38b6ff'}
                 color={'white'}
