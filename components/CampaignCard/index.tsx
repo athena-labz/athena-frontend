@@ -73,7 +73,7 @@ const Discover = ({name, description,category,img,owner,place,expiration,total_v
                {description}
             </chakra.p>
 
-            <Stack px={2} pb={2}>
+            <Stack px={6} pb={2}>
                 <Flex justify={"space-between"}>
                     <Box>
                         <Icon as={FiUsers} w={4} h={4} color="gray.500" />

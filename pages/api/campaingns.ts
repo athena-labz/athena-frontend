@@ -29,8 +29,8 @@ export function campaigns_resume(){
             currency:"ADA"
           },
           {
-            name:"Thunder Road: Vendetta",
-            description:"The classic 1986 game about the world's most lethal car race is revved up and reloaded!",
+            name:"Bipede robot crowd-funding",
+            description:"Humanoid robots conceived with the final objective to have a human-like behavior abd composed of rigid bodies linked by simple kinematic connections. ",
             category:"TECH",
             img:"https://www.researchgate.net/profile/Klaus-Strobl/publication/4041244/figure/fig5/AS:668899829882890@1536489555349/Biped-robot-with-camera-reference-frame-S-C-and-foot-reference.png",
             owner:"Edward Elric",
