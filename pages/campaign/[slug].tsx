@@ -60,20 +60,6 @@ export default function Campaign_Page({ campaign }: { campaign: Campaign }) {
                         </VStack>
                     </Box>
 
-                    <Flex p={0} alignItems="center" justifyContent={"center"} style={{marginTop:5}}>
-                        <Icon as={GiInjustice} w={8} h={7} color="gray.600" />
-                        {"   "}
-                        <chakra.span
-                            fontSize="1.3rem"
-                            mt={0}
-                            ml={3}
-                            fontWeight="500"
-                            color={useColorModeValue("gray.600", "gray.400")}
-                        >
-                           Judge by Gaea Micheil 
-                        </chakra.span>
-                    </Flex>
-
                     <Stack px={2} pb={0} pt={0} style={{marginTop:25}}>
                         <chakra.span
                             fontSize="1.1rem"
@@ -115,7 +101,19 @@ export default function Campaign_Page({ campaign }: { campaign: Campaign }) {
                                 </chakra.span>
                             </Box>
                         </Flex>
-
+                        <Flex p={0} alignItems="center" justifyContent={"center"} style={{marginTop:5}}>
+                        <Icon as={GiInjustice} w={8} h={7} color="gray.600" />
+                        {"   "}
+                        <chakra.span
+                            fontSize="1.3rem"
+                            mt={0}
+                            ml={3}
+                            fontWeight="500"
+                            color={useColorModeValue("gray.600", "gray.400")}
+                        >
+                           Judge by Halina Evelyn
+                        </chakra.span>
+                    </Flex>
 
                     </Stack>
 
