@@ -556,29 +556,54 @@ export default function Component() {
                 </SimpleGrid>
               ))}
             </Box>
-            <FormControl as={GridItem} w="18%">
-              <FormLabel
-                htmlFor="price"
-                fontSize="sm"
-                fontWeight="md"
-                color={"blue.700"}
-              >
-                Action
-              </FormLabel>
-              <Input
-                type="text"
-                name="title"
-                onChange={handleChange}
-                id="service_title"
-                autoComplete="family-name"
-                mt={1}
-                focusBorderColor="blue.400"
-                shadow="sm"
-                size="md"
-                w={"full"}
-                rounded="md"
-              />
+            <FormControl as={GridItem} w="20%" ml={"-2rem"}>
+              <Flex alignItems={"center"} justifyContent={"space-between"}>
+                <Box >
+                  <FormLabel
+                    htmlFor="price"
+                    fontSize="sm"
+                    fontWeight="md"
+                    color={"blue.700"}
+                  >
+                    Action
+                  </FormLabel>
+                  <Input
+                    type="text"
+                    name="title"
+                    onChange={handleChange}
+                    id="service_title"
+                    autoComplete="family-name"
+                    mt={1}
+                    focusBorderColor="blue.400"
+                    shadow="sm"
+                    size="md"
+                    w={"full"}
+                    rounded="md"
+                  />
+                </Box>
+
+
+                <Button
+                  p={4}
+                  ml="0.5rem"
+                  mt={8}
+                  bg="blue.500"
+                  colorScheme="brand"
+                  fontWeight="sm"
+                  size="sm"
+                  _hover={{
+                    bg: 'blue.400',
+                  }}
+                  onClick={createNewUserRoles}
+                >
+                  <AddIcon  />
+                </Button>
+
+
+              </Flex>
+
             </FormControl>
+
           </Flex>
 
           <Box
