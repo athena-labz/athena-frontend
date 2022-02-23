@@ -37,15 +37,13 @@ const Home = ({ judges }: Homeprops) => {
 
         <HomeSection />
 
-        <ProblemSection />
-
         <FeaturesSection />
 
         <CrowdfundingSection />
 
-        <RoadmapSection />
+       {/* <RoadmapSection />*/}
 
-        <GoToMarketSection />
+       {/* <GoToMarketSection />*/}
 
         <TeamSection />
 

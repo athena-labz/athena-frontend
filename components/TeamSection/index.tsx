@@ -39,10 +39,11 @@ function StatsCard(props: StatsCardProps) {
         maxW={'320px'}
         w={'full'}
         rounded={'lg'}
-        p={3}
+        p={4}
+        mx={10}
         textAlign={'center'}>
         <Avatar
-          size={'2xl'}
+          size={'2.8rem'}
           src={image}
           alt={'Avatar Alt'}
           mb={0}
@@ -50,7 +51,7 @@ function StatsCard(props: StatsCardProps) {
           pos={'relative'}
           style={{marginBottom: ".5rem"}}
         />
-        <Heading fontSize={'2xl'} fontFamily={'body'}>
+        <Heading fontSize={'1.8rem'} fontFamily={'body'}>
           {title}
         </Heading>
         
