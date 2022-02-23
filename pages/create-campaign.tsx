@@ -16,14 +16,9 @@ import {
   Tooltip,
   Input,
   InputGroup,
-  InputLeftElement,
   InputRightElement,
   Button,
   Select,
-  Avatar,
-  Text,
-  Icon,
-  Tag,
   Link
 } from "@chakra-ui/react";
 import Head from 'next/head'
@@ -32,7 +27,6 @@ import { AddIcon, InfoOutlineIcon, QuestionOutlineIcon } from '@chakra-ui/icons'
 import { useState } from 'react';
 import {
   AutoComplete,
-  AutoCompleteGroup,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList

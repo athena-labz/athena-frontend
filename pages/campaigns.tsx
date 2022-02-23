@@ -68,6 +68,7 @@ const Discover = ({ campaigns }: Discoverprops) => {
           >
             {filtered.map((campaign, index) => (
               <CampaignCard
+                id={campaign.id}
                 key={campaign.name}
                 name={campaign.name}
                 description={campaign.description}

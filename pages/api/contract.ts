@@ -795,9 +795,6 @@ export function contract(hash: any) {
     } catch (error) {
         console.log(error)
     }
-    
-    
-
 }
 
 
