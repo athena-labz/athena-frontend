@@ -19,6 +19,7 @@ import {
   InputRightElement,
   Button,
   Select,
+  Flex,
   Link
 } from "@chakra-ui/react";
 import Head from 'next/head'
@@ -44,7 +45,7 @@ interface GenericObject {
 
 export default function Component() {
   const [usersRoles, setUserRoles] = useState([{ user: "", role: 0 }])
-  const [usersRoleValues, setUserRole] = useState([""])
+  const [usersRoleValues, setUserRole] = useState(["PUBLISHER", "ASSIGNEE"])
   const [usersInputs, setUserInputs] = useState<GenericObject[]>([{
     input: "",
     question: "",
@@ -280,7 +281,7 @@ export default function Component() {
             </SimpleGrid>
 
             <SimpleGrid columns={2} spacing={6}>
-            <FormControl as={GridItem} colSpan={[6, 1]}>
+              <FormControl as={GridItem} colSpan={[6, 1]}>
                 <FormLabel
                   htmlFor="price"
                   fontSize="sm"
@@ -330,117 +331,12 @@ export default function Component() {
                   </AutoComplete>
                 </Stack>
               </FormControl>
-
-              <FormControl as={GridItem} colSpan={[6, 1]}>
-                <FormLabel
-                  htmlFor="price"
-                  fontSize="sm"
-                  fontWeight="md"
-                  color={"blue.700"}
-                >
-                  Roles
-                </FormLabel>
-
-                <Select variant="outline" onChange={e => handleChangeSelect("privacyType")} id="privacyType">
-                  <option value="INT">PUBLISHER</option>
-                  <option value="BOOL">ASSIGNEE</option>
-
-                </Select>
-              </FormControl>
-
-
             </SimpleGrid>
 
 
           </Stack>
-          {form.privacyType === "PRIVATE" &&
-            <>
-              <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true" p={15}>
-                <Heading fontSize="md" fontWeight="medium" lineHeight="6" color="blue.600">
-                  Roles Map
-                </Heading>
-                <Box py={3}>
-                  <Box
-                    borderTop="solid 1px"
-                    borderTopColor={"blue.200"}
-                  ></Box>
-                </Box>
-              </Box>
-
-              {usersRoles.map((userRole, index) => (
-                <SimpleGrid columns={3} spacing={6} px={5} key={index + "*role"} mt={index > 0 ? 3 : 0}>
-                  <FormControl as={GridItem} colSpan={[1, 1]}>
-                    <FormLabel
-                      htmlFor="service_title"
-                      fontSize="sm"
-                      fontWeight="md"
-                      color={"blue.700"}
-                    >
-                      User
-                    </FormLabel>
-                    <Stack direction="column">
-                      <AutoComplete rollNavigation>
-                        <AutoCompleteInput
-                          variant="outline"
-                          placeholder="Search user..."
-                          autoFocus
-                        />
-                        <AutoCompleteList>
-                          {options.map((option, oid) => (
-                            <AutoCompleteItem
-                              key={`option-${oid}`}
-                              value={option}
-                              label={option}
-                              textTransform="capitalize"
-                            >
-                              {option}
-                            </AutoCompleteItem>
-                          ))}
-                        </AutoCompleteList>
-                      </AutoComplete>
-                    </Stack>
-                  </FormControl>
-
-                  <FormControl as={GridItem} colSpan={[4, 1]}>
-                    <FormLabel
-                      htmlFor="price"
-                      fontSize="sm"
-                      fontWeight="md"
-                      color={"blue.700"}
-                    >
-                      Role
-                    </FormLabel>
-                    <NumberInput step={1} min={0} max={form.roles} onChange={(e) => handleChangeNumber("collateral", e)} name="collateral">
-                      <NumberInputField />
-                      <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                      </NumberInputStepper>
-                    </NumberInput>
-                  </FormControl>
-
-                  <FormControl as={GridItem} colSpan={[2, 1]} display="flex" alignItems="flex-end">
-                    <Button
-                      ml="1rem"
-                      mb="0.5rem"
-                      bg="blue.500"
-                      colorScheme="brand"
-                      fontWeight="sm"
-                      size="sm"
-                      _hover={{
-                        bg: 'blue.400',
-                      }}
-                      onClick={createNewUserRoles}
-                    >
-                      <AddIcon />
-                    </Button>
-                  </FormControl>
-                </SimpleGrid>
-
-              ))}
 
 
-            </>}
 
           <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true" p={15} pb={0}>
             <Heading fontSize="md" fontWeight="medium" lineHeight="6" color="blue.600">
@@ -457,9 +353,9 @@ export default function Component() {
           <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true" px={15} pt={0}>
             <Heading fontSize="sm" fontWeight="medium" lineHeight="6" color="blue.600">
               Inputs {"   "}
-              <Tooltip 
-                   placement='right'
-                  label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero velit, rhoncus n" aria-label='A tooltip'>
+              <Tooltip
+                placement='right'
+                label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero velit, rhoncus n" aria-label='A tooltip'>
                 <InfoOutlineIcon as={"a"} />
               </Tooltip>
             </Heading>
@@ -570,121 +466,120 @@ export default function Component() {
           <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true" p={15}>
             <Heading fontSize="sm" fontWeight="medium" lineHeight="6" color="blue.600">
               Triggers{"   "}
-              <Tooltip 
-                   placement='right'
-                  label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero velit, rhoncus n" aria-label='A tooltip'>
+              <Tooltip
+                placement='right'
+                label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero velit, rhoncus n" aria-label='A tooltip'>
                 <InfoOutlineIcon as={"a"} />
               </Tooltip>
             </Heading>
           </Box>
 
-          {triggers.map((triggger, index) => (
-            <SimpleGrid columns={6} spacing={6} p={5} key={`input-${index}`}>
-              <FormControl as={GridItem} colSpan={[2, 1]}>
-                <FormLabel
-                  htmlFor="price"
-                  fontSize="sm"
-                  fontWeight="md"
-                  color={"blue.700"}
-                >
-                  Question identifier
-                </FormLabel>
-                <Select variant="outline" onChange={e => handleChangeSelect("privacyType")} id="privacyType">
-                  {
-                    usersInputs.map((userInput, index) => (<option key={`option-inpt-${index}`} value={userInput.input}>{userInput.input}</option>))
-                  }
-                </Select>
-              </FormControl>
+          <Flex w={"100%"} alignItems={"center"} justifyContent={"flex"} px={5}>
+            <Box>
+              {usersInputs.map((triggger, index) => (
+                <SimpleGrid columns={4} spacing={4} py={1} key={`input-${index}`} >
+                  <FormControl as={GridItem} colSpan={[3, 1]}>
+                    <FormLabel
+                      htmlFor="price"
+                      fontSize="sm"
+                      fontWeight="md"
+                      color={"blue.700"}
+                    >
+                      Question identifier
+                    </FormLabel>
+                    <Select variant="outline" onChange={e => handleChangeSelect("privacyType")} id="privacyType">
+                      {
+                        usersInputs.map((userInput, index) => (<option key={`option-inpt-${index}`} value={userInput.input}>{userInput.input}</option>))
+                      }
+                    </Select>
+                  </FormControl>
 
-              <FormControl as={GridItem} colSpan={[6, 1]}>
-                <FormLabel
-                  htmlFor="price"
-                  fontSize="sm"
-                  fontWeight="md"
-                  color={"blue.700"}
-                >
-                  Operator
-                </FormLabel>
-                <Select variant="outline" onChange={e => handleChangeSelectTrigger("operator", index)} id="operator">
-                  <option value="INT">EQUALS</option>
-                  <option value="INT">GREATER THAN</option>
-                  <option value="BOOL">LESS THAN</option>
-                </Select>
+                  <FormControl as={GridItem} colSpan={[3, 1]}>
+                    <FormLabel
+                      htmlFor="price"
+                      fontSize="sm"
+                      fontWeight="md"
+                      color={"blue.700"}
+                    >
+                      Operator
+                    </FormLabel>
+                    <Select variant="outline" onChange={e => handleChangeSelectTrigger("operator", index)} id="operator">
+                      <option value="INT">EQUALS</option>
+                      <option value="INT">GREATER THAN</option>
+                      <option value="BOOL">LESS THAN</option>
+                    </Select>
 
-              </FormControl>
-              <FormControl as={GridItem} colSpan={[6, 1]}>
-                <FormLabel
-                  htmlFor="price"
-                  fontSize="sm"
-                  fontWeight="md"
-                  color={"blue.700"}
-                >
-                  Value
-                </FormLabel>
-                <Input
-                  type="text"
-                  name="title"
-                  onChange={handleChange}
-                  id="service_title"
-                  autoComplete="family-name"
-                  mt={1}
-                  focusBorderColor="blue.400"
-                  shadow="sm"
-                  size="md"
-                  w="full"
-                  rounded="md"
-                />
+                  </FormControl>
+                  <FormControl as={GridItem} colSpan={[2, , 1]}>
+                    <FormLabel
+                      htmlFor="price"
+                      fontSize="sm"
+                      fontWeight="md"
+                      color={"blue.700"}
+                    >
+                      Value
+                    </FormLabel>
+                    <Input
+                      type="text"
+                      name="title"
+                      onChange={handleChange}
+                      id="service_title"
+                      autoComplete="family-name"
+                      mt={1}
+                      focusBorderColor="blue.400"
+                      shadow="sm"
+                      size="md"
+                      w="full"
+                      rounded="md"
+                    />
 
-              </FormControl>
+                  </FormControl>
 
-              <FormControl as={GridItem} colSpan={[4, 1]}>
-                <FormLabel
-                  htmlFor="price"
-                  fontSize="sm"
-                  fontWeight="md"
-                  color={"blue.700"}
-                >
-                  Action Selector
-                </FormLabel>
-                <Select variant="outline" onChange={e => handleChangeSelectTrigger("actionSelector", index)} id="actionSelector">
-                  <option value="1">Decrease CAS</option>
-                  <option value="2">Suspend from contract</option>
-                  <option value="3">Pay from collateral</option>
-                  <option value="4">Do in real life</option>
-                </Select>
-              </FormControl>
 
-              <FormControl as={GridItem} colSpan={[4, 1]}>
-                <FormLabel
-                  htmlFor="price"
-                  fontSize="sm"
-                  fontWeight="md"
-                  color={"blue.700"}
-                >
-                  Action
-                </FormLabel>
-                {chooseInputAction(String(triggger.actionSelector), "action")}
-              </FormControl>
-
-              <FormControl as={GridItem} colSpan={[2, 1]} display="flex" alignItems="flex-end">
-                <Button
-                  ml="1rem"
-                  mb="0.5rem"
-                  bg="blue.500"
-                  colorScheme="brand"
-                  fontWeight="sm"
-                  size="sm"
-                  _hover={{
-                    bg: 'blue.400',
-                  }}
-                  onClick={createNewUserRoles}
-                >
-                  <AddIcon />
-                </Button>
-              </FormControl>
-
-            </SimpleGrid>
-          ))}
+                  <FormControl as={GridItem} colSpan={[2, 1]} display="flex" alignItems="flex-end">
+                    <Button
+                      ml="0.5rem"
+                      mb="0.5rem"
+                      bg="blue.500"
+                      colorScheme="brand"
+                      fontWeight="sm"
+                      size="sm"
+                      _hover={{
+                        bg: 'blue.400',
+                      }}
+                      onClick={createNewUserRoles}
+                    >
+                      AND  {"   "}
+                      <AddIcon marginLeft={2} />
+                    </Button>
+                  </FormControl>
+                </SimpleGrid>
+              ))}
+            </Box>
+            <FormControl as={GridItem} w="18%">
+              <FormLabel
+                htmlFor="price"
+                fontSize="sm"
+                fontWeight="md"
+                color={"blue.700"}
+              >
+                Action
+              </FormLabel>
+              <Input
+                type="text"
+                name="title"
+                onChange={handleChange}
+                id="service_title"
+                autoComplete="family-name"
+                mt={1}
+                focusBorderColor="blue.400"
+                shadow="sm"
+                size="md"
+                w={"full"}
+                rounded="md"
+              />
+            </FormControl>
+          </Flex>
 
           <Box
             px={{ base: 4, sm: 6 }}
