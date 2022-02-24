@@ -94,16 +94,18 @@ export default function Component() {
   }
 
   const verify_input_type = (input: string) => {
-    const element = (document.getElementById(input) as HTMLInputElement);
-    const value = element == null ? "" : element.value;
-    const filterd = usersInputs.filter(Input => (Input.input === value))
+    if (typeof window !== "undefined"){
+      const element = (document.getElementById(input) as HTMLInputElement);
+      const value = element == null ? "" : element.value;
+      const filterd = usersInputs.filter(Input => (Input.input === value))
 
-    console.log("GEEt - ", value, filterd)
-    if (filterd.length > 0) {
-      if (filterd[0].type == "INT")
-        return true
-      else
-        return false
+      if (filterd.length > 0) {
+        if (filterd[0].type == "INT")
+          return true
+        else
+          return false
+      }
+
     }
 
     return true
@@ -517,7 +519,7 @@ export default function Component() {
                           rounded="md"
                         />
                         :
-                        <Select 
+                        <Select
                           variant="outline"
                           mt={1}
                           focusBorderColor="blue.400"
