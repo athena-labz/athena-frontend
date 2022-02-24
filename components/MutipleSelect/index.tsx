@@ -29,7 +29,7 @@ const MultiSelectMenu = (props: MultiSelectMenuProps): JSX.Element => {
                         borderWidth={1}
                         p={2}
                         px={4}
-                        width={"12rem"}
+                        width={"60%"}
                         borderRadius="10px"
                         _focus={{
                             outline: "none"

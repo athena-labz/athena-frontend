@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import Router from 'next/router'
 import {
     Box,
     FormControl,
@@ -17,7 +17,7 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react';
 import { useUser } from '../../contexts/UserContext';
-  
+
   export default function LoginCard() {
     const [value, setValue] = useState("1")
     const [loginData, setLogin] = useState({user:"",password:"",name:""})
@@ -67,7 +67,7 @@ import { useUser } from '../../contexts/UserContext';
                   <Link href="/forgot-password" color={'blue.400'}>Forgot password?</Link>
                 </Stack>
                 <Button
-                  onClick={e => login(loginData.name,loginData.password)}
+                  onClick={e => {login(loginData.name,loginData.password);Router.push('/campaigns')}}
                   bg={'blue.400'}
                   color={'white'}
                   _hover={{
