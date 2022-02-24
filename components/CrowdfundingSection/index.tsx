@@ -45,7 +45,7 @@ const Feature = (props:any) => {
   );
 };
 return (
-    <Box mt={"1rem"} bg={"white"} rounded="xl" mb={"10rem"} id="crowdfunding" style={{scrollMarginTop:150}}>
+    <Box mt={"1rem"} bg={"white"} rounded="xl" mb={"5rem"} id="crowdfunding" style={{scrollMarginTop:150}}>
       <Box maxW="9xl" mx="0.9rem" px={1}>
         <Box textAlign={{ lg: "center" }}>
           <chakra.h2

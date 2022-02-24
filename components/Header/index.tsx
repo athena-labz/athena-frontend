@@ -245,7 +245,7 @@ const Header: NextPage = () => {
                   </PopoverBody>
                 </NextLink>
 
-                <NextLink href="/create-contract">
+                <NextLink href="/create-campaign">
                   <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} >
                     Create a campaign
                   </PopoverBody>
@@ -430,11 +430,6 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'The Problem',
-    href: "/#problem"
-
-  },
-  {
     label: 'Solution',
     href: "/#solution"
 
@@ -443,24 +438,17 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Crowdfunding ',
     href: "/#crowdfunding"
   },
-  {
+/*  {
     label: 'Roadmap',
     href: "/#roadmap"
 
-  },
+  },*/
   {
     label: 'Team',
     href: '/#team'
 
   },
-  {
-    label: 'Contracts',
-    href: "/contracts"
-  },
-  {
-    label: 'Campaigns',
-    href: "/campaigns"
-  },
+
   {
     label: 'Token',
     href: "/token"
@@ -469,7 +457,14 @@ const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'FAQ',
     href: '/#faq'
-
+  },
+  {
+    label: 'Contracts',
+    href: "/contracts"
+  },
+  {
+    label: 'Campaigns',
+    href: "/campaigns"
   },
 
 

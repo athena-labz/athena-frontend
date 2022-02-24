@@ -36,13 +36,15 @@ function StatsCard(props: StatsCardProps) {
   const { title,helpText,image } = props;
   return (
       <Box
-        maxW={'320px'}
+        maxW={'500px'}
         w={'full'}
         rounded={'lg'}
-        p={3}
+        p={4}
+        mx={10}
         textAlign={'center'}>
         <Avatar
-          size={'2xl'}
+          width={"11rem"}
+          height={"11rem"}
           src={image}
           alt={'Avatar Alt'}
           mb={0}
@@ -50,7 +52,7 @@ function StatsCard(props: StatsCardProps) {
           pos={'relative'}
           style={{marginBottom: ".5rem"}}
         />
-        <Heading fontSize={'2xl'} fontFamily={'body'}>
+        <Heading fontSize={'1.8rem'} fontFamily={'body'}>
           {title}
         </Heading>
         
@@ -60,9 +62,6 @@ function StatsCard(props: StatsCardProps) {
           px={3}>
           {helpText}
         </Text>
-
-       
-        
       </Box>
   );
 }

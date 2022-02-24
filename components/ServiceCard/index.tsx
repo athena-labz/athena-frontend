@@ -1,35 +1,34 @@
-import { chakra, Box, Flex, useColorModeValue, HStack,Image,Text,Center } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
-import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
-import { ArrowBackIcon,LockIcon,UnlockIcon } from '@chakra-ui/icons'
+import { chakra, Box, Flex, useColorModeValue, HStack, Image, Text, Center } from "@chakra-ui/react";
+import NextLink from 'next/link'
+import { ArrowBackIcon, LockIcon, UnlockIcon } from '@chakra-ui/icons'
 
-type ServiceCardProps ={
-    nft: {
-        currency_symbol: string,
-        token_name: string
-    },
-    relation_type: string,
-    privacy_type: string,
-    publisher_name?: string,
-    collateral: {
-            currency_symbol: string, // This is ADA's currency_symbol
-            value: number // 5 ADA
-    }
-    ,
-    title:string,
-    terms_hash: string,
+type ServiceCardProps = {
+  nft: {
+    currency_symbol: string,
+    token_name: string
+  },
+  relation_type: string,
+  privacy_type: string,
+  publisher_name?: string,
+  collateral: {
+    currency_symbol: string, // This is ADA's currency_symbol
+    value: number // 5 ADA
+  }
+  ,
+  title: string,
+  terms_hash: string,
 }
 
 interface RatingProps {
-    rating: number;
-    numReviews: number;
+  rating: number;
+  numReviews: number;
 }
 
 
-export default function ServiceCard(props:ServiceCardProps)  {
+export default function ServiceCard(props: ServiceCardProps) {
 
   return (
-     <Flex
+    <Flex
       p={2}
       w="full"
       alignItems="center"
@@ -57,24 +56,24 @@ export default function ServiceCard(props:ServiceCardProps)  {
           <chakra.p
             mt={1}
             fontSize="sm"
-            style={{display:"block",overflow: "hidden",wordWrap:"break-word",lineHeight:"1.4em",maxHeight: "3.6em"}}
+            style={{ display: "block", overflow: "hidden", wordWrap: "break-word", lineHeight: "1.4em", maxHeight: "3.6em" }}
 
             color={"gray.600"}
           >
-            Publisher: {props.publisher_name} 
+            Publisher: {props.publisher_name}
             <br />
-            
+
           </chakra.p>
 
         </Box>
 
-         <Center
+        <Center
           align="center"
           fontSize="1xl"
           fontWeight={["bold", "extrabold"]}
           lineHeight="tight"
         >
-           {props.privacy_type=="PRIVATE"?<LockIcon mx={2} color="#42A5F5"/> :<UnlockIcon mx={2} color="#42A5F5"/> }
+          {props.privacy_type == "PRIVATE" ? <LockIcon mx={2} color="#42A5F5" /> : <UnlockIcon mx={2} color="#42A5F5" />}
 
           {props.collateral.value}
           <chakra.span
@@ -87,8 +86,8 @@ export default function ServiceCard(props:ServiceCardProps)  {
             {props.collateral.currency_symbol}
           </chakra.span>
         </Center>
- 
-        
+
+
 
         <Flex
           alignItems="center"
@@ -98,26 +97,26 @@ export default function ServiceCard(props:ServiceCardProps)  {
 
           roundedBottom="lg"
         >
-         
-          <chakra.button
-             as={'a'} href={`/contract/${props.terms_hash}`}
-            px={2}
-            py={1}
-            bg="white"
-            fontSize="xs"
-            color="gray.900"
-            fontWeight="bold"
-            rounded="lg"
-            textTransform="uppercase"
-            _hover={{
-              bg: "gray.200",
-            }}
-            _focus={{
-              bg: "gray.400",
-            }}
-          >
-            See details
-          </chakra.button>
+          <NextLink  href={`/contract/${props.terms_hash}`}>
+            <chakra.button
+              px={2}
+              py={1}
+              bg="white"
+              fontSize="xs"
+              color="gray.900"
+              fontWeight="bold"
+              rounded="lg"
+              textTransform="uppercase"
+              _hover={{
+                bg: "gray.200",
+              }}
+              _focus={{
+                bg: "gray.400",
+              }}
+            >
+              See details
+            </chakra.button>
+          </NextLink>
         </Flex>
       </Box>
     </Flex>
