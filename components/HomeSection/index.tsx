@@ -96,13 +96,13 @@ export default function HomeSection() {
                     color="white"
                     bg={'#38b6ff'}
                     as="a"
-                    href="https://github.com/GabriIT/HackTh_Digiservices/raw/main/WP%20Digiservices%2017%20Aug%202021%20v1.pdf"
+                    href="/jobs"
                    _hover={{ bg: 'blue.500' }}
                     px={{ base: 8, md: 10 }}
                     py={{ base: 3, md: 4 }}
                     cursor="pointer"
                   >
-                    White Paper
+                    Find jobs
                   </chakra.a>
                 </Box>
                 <Box mt={[3, 0]} ml={[null, 3]}>
