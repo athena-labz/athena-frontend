@@ -1,46 +1,98 @@
-import { createContext,useState,ReactNode, useContext } from 'react';
+import { createContext, useState, ReactNode, useContext } from 'react';
 
-type UserContextData= {
-    isLogged:boolean;
-    name:string;
-    login:(username:string,password:string) => void ;
-    logout:() => void;
+type Role = "freelancer" | "customer" | "mediator";
+
+type UserInfoData = {
+  isLogged: boolean;
+  role: Role | null;
+  name: string | null;
+  email: string | null;
+  password: string | null;
+}
+
+type UserContextData = {
+  user: UserInfoData;
+  register: (role: Role, name: string, email: string, password: string) => void;
+  login: (role: Role, name: string, email: string, password: string) => void;
+  logout: () => void;
 }
 
 type UserContextProviderProps = {
-    children: ReactNode;
+  children: ReactNode;
 }
 
-export const UserContext_ = createContext( {} as UserContextData);
+export const UserContext_ = createContext({} as UserContextData);
 
-export function UserContextProvider({children}:UserContextProviderProps){
-    const [userInfo, setUserInfo] = useState({
-      isLogged:false,
-      name:""
-      });
-  
-    function saveInfo (name:string,password:string){
-        if(name !== "" && password !== "")
-          setUserInfo({name:name, isLogged:true})       
-    }
+export function UserContextProvider({ children }: UserContextProviderProps) {
+  const [userInfo, setUserInfo] = useState<UserInfoData>({
+    isLogged: false,
+    role: null,
+    name: null,
+    email: null,
+    password: null
+  })
 
-    function clearInfo(){
+  function saveInfo(role: Role, name: string, email: string, password: string) {
+    if (name !== "" && password !== "")
       setUserInfo({
-        isLogged:false,
-        name:""
-      });
-    }
+        ...userInfo,
+        role: role,
+        name: name,
+        email: email,
+        password: password
+      })
+  }
 
-    return(
-      <UserContext_.Provider value={{
-        isLogged:userInfo.isLogged,
-        name:userInfo.name,
-        login:saveInfo,
-        logout:clearInfo
-      }}>
-           {children}
-      </UserContext_.Provider>
-    )
+  function clearInfo() {
+    setUserInfo({
+      isLogged: false,
+      role: null,
+      name: null,
+      email: null,
+      password: null
+    });
+  }
+
+  function register(role: Role, name: string, email: string, password: string) {
+    saveInfo(role, name, email, password);
+
+    console.log("Registering user")
+    console.log({
+      role: role,
+      name: name,
+      email: email,
+      password: password
+    })
+
+    // Should then
+    // * Back-end make sure there is no such name or email yet
+    // * Send an email confirmation
+    // * Register user in the DB
+    // * Back-end register user info
+    // * Clear user password
+  }
+
+  function login(role: Role, name: string, email: string, password: string) {
+    // This is is just for now
+    saveInfo(role, name, email, password);
+    setUserInfo({ ...userInfo, isLogged: true })
+
+    // In the real application it should:
+    // * Back-end compare password hash to password in the DB
+    // * If it matches, return user info and let him log-in
+    // * Otherwise, warn user that he has the wrong password / email
+  }
+
+  return (
+    <UserContext_.Provider value={{
+      user: userInfo,
+      register: register,
+      login: login,
+      logout: clearInfo
+    }}>
+      {children}
+    </UserContext_.Provider>
+  )
 }
 
 export const useUser = () => {

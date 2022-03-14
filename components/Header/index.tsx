@@ -51,7 +51,7 @@ const Header: NextPage = () => {
   const scroll_ = pathnames_not_scroll_header.indexOf(router.pathname) === -1;
   const [state, setstate] = useState(scroll_ ? true : false)
   const [yPos, setYPos] = useState(0)
-  const { isLogged, name, logout } = useUser();
+  const { user, logout } = useUser();
 
 
   useEffect(function mount() {
@@ -122,7 +122,7 @@ const Header: NextPage = () => {
         </Flex>
 
 
-        {!isLogged ?
+        {!user.isLogged ?
           <Stack
             flex={{ base: 1, md: 0 }}
             justify={'flex-end'}
@@ -140,13 +140,13 @@ const Header: NextPage = () => {
             </Button>
 
             <Button
+              as={'a'}
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'md'}
               fontWeight={600}
               color={'white'}
               bg={'#38b6ff'}
-              onClick={(e) => setstate(!state)}
-              href={'#'}
+              href={'/register'}
               _hover={{
                 bg: 'blue.300',
               }}>
@@ -177,7 +177,7 @@ const Header: NextPage = () => {
                   }}>
 
                   <WrapItem>
-                    <Avatar name={name} bgColor="#38b6ff" size="sm" />
+                    <Avatar name={user.name || undefined} bgColor="#38b6ff" size="sm" />
                   </WrapItem>
 
                   <Text marginRight="0.3rem" marginLeft="0.5rem">7.0000</Text>
@@ -190,7 +190,7 @@ const Header: NextPage = () => {
               <PopoverContent w={"16rem"} _focus={{ boxShadow: "none" }} >
                 <PopoverArrow />
                 <PopoverHeader pt={4} fontWeight="bold" border="0" fontSize={'lg'} color={'gray.800'}>
-                  {name}
+                  {user.name}
                 </PopoverHeader>
                 <PopoverBody display="flex" flexDirection="row">
                   <Text fontWeight={600} color={'gray.500'}>
