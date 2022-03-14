@@ -27,7 +27,7 @@ type UserData = {
   password: string;
 }
 
-export default function LoginCard() {
+export default function RegisterCard() {
   const [userData, setUser] = useState<UserData>({
     email: "",
     password: "",
@@ -101,7 +101,7 @@ export default function LoginCard() {
             <Button
               onClick={e => {
                 register(userData.role, userData.name, userData.email, userData.password);
-                Router.push('/');
+                Router.push('/select-wallet');
               }}
               bg={'blue.400'}
               color={'white'}

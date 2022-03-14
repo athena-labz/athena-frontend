@@ -4,15 +4,15 @@ import styles from '../styles/Home.module.css'
 import {
     Flex
 } from '@chakra-ui/react';
-import RegisterCard from '../components/RegisterCard';
+import WalletSelector from '../components/WalletSelector';
 
 
 
-const Register: NextPage = () => {
+const SelectWallet: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Sign Up</title>
+        <title>Select Wallet</title>
       </Head>
 
      
@@ -21,11 +21,11 @@ const Register: NextPage = () => {
         align={'center'}
         justify={'center'}>
         
-        <RegisterCard />
+        <WalletSelector />
 
       </Flex>
     </div>
   )
 }
 
-export default Register
+export default SelectWallet

@@ -13,7 +13,7 @@ type UserInfoData = {
 type UserContextData = {
   user: UserInfoData;
   register: (role: Role, name: string, email: string, password: string) => void;
-  login: (role: Role, name: string, email: string, password: string) => void;
+  login: (email: string, password: string) => void;
   logout: () => void;
 }
 
@@ -72,10 +72,10 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     // * Clear user password
   }
 
-  function login(role: Role, name: string, email: string, password: string) {
-    // This is is just for now
-    saveInfo(role, name, email, password);
-    setUserInfo({ ...userInfo, isLogged: true })
+  function login(email: string, password: string) {
+    if (email === userInfo.email && password === userInfo.password) {
+      setUserInfo({ ...userInfo, isLogged: true })
+    }
 
     // In the real application it should:
     // * Back-end compare password hash to password in the DB
