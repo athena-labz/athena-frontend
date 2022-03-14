@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, useContext } from 'react';
+import { createContext, useState, ReactNode, useContext, useEffect } from 'react';
 
 type Role = "freelancer" | "customer" | "mediator";
 
@@ -31,6 +31,22 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     email: null,
     password: null
   })
+
+  if (typeof window !== "undefined") {
+    useEffect(() => {
+      setUserInfo((
+        window.sessionStorage.getItem('userInfo') !== null ? (
+          JSON.parse(sessionStorage.getItem('userInfo')!)
+        ) : userInfo
+      ))
+    }, [window])
+  }
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.sessionStorage.setItem('userInfo', JSON.stringify(userInfo));
+    }
+  }, [userInfo]);
 
   function saveInfo(role: Role, name: string, email: string, password: string) {
     if (name !== "" && password !== "")
