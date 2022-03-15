@@ -1,7 +1,6 @@
-import type { GetStaticProps, NextPage } from "next";
-import { useState, useCallback, useRef, useEffect } from "react";
+import type { GetStaticProps } from "next";
+import { useState, useEffect } from "react";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import ServiceCard from "../components/ServiceCard";
 import SearchSection from "../components/SearchSection";
 import {
@@ -15,9 +14,6 @@ import {
   Grid,
   Flex,
   GridItem,
-  Button,
-  Center,
-  CircularProgress,
 } from "@chakra-ui/react";
 
 import type Project from "../types/project";
@@ -45,7 +41,7 @@ const Discover = ({ projects }: Discoverprops) => {
     const element = document.getElementById(name) as HTMLInputElement;
     const value = element == null ? "" : element.value;
 
-    if (value != "ALL" && name == "category")
+    if (value != "All" && name == "category")
       setFiltered(projects.filter((e: Project) => e.category === value));
     else setFiltered(projects);
   };
@@ -103,6 +99,7 @@ const Discover = ({ projects }: Discoverprops) => {
                     onChange={(e) => handleChangeSelect("category")}
                     size="md"
                   >
+                    <option value="All">All</option>
                     <option value="Graphics & Design">Graphics & Design</option>
                     <option value="Digital Marketing">Digital Marketing</option>
                     <option value="Writing & Translation">

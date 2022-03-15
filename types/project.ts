@@ -1,16 +1,16 @@
-type Judge = {
+export type Judge = {
   name: string,
   email: string,
   address: string,
 }
 
-type Deliverable = {
+export type Deliverable = {
   promise: string,
   deadline: string,
   reward: number
 }
 
-type User = {
+export type User = {
   email: string,
   name: string,
   cas: number
