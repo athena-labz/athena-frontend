@@ -459,8 +459,8 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '/#faq'
   },
   {
-    label: 'Contracts',
-    href: "/contracts"
+    label: 'Jobs',
+    href: "/jobs"
   },
   {
     label: 'Campaigns',
