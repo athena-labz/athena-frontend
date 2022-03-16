@@ -53,8 +53,8 @@ export default function RegisterCard() {
   }
 
   return (
-    <Stack spacing={1} mx={'auto'} maxW={'md'} py={4} px={3}>
-      <Stack align={'center'}>
+    <Stack spacing={1} mx={'auto'} maxW={'lg'} py={4} px={3}>
+      <Stack align={'center'} py={4}>
         <Heading fontSize={'5xl'}>Create your account</Heading>
       </Stack>
       <Center>
