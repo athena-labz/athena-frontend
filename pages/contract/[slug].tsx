@@ -109,7 +109,7 @@ export default function Component({ service }: { service: Contract }) {
                 marginTop={0}
                 variant="outline"
                 as={'a'}
-                href={'/contracts'}>
+                href={'/jobs'}>
                 Back
               </Button>
 
