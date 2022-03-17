@@ -6,6 +6,8 @@ import {
   useEffect,
 } from "react";
 
+import Router from "next/router";
+
 type Role = "freelancer" | "customer" | "mediator";
 
 type UserInfoData = {
@@ -75,6 +77,13 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       ...userInfo,
       address,
     });
+
+    console.log({
+      ...userInfo,
+      address,
+    })
+
+    Router.push("/login");
 
     // Should then
     // * Back-end make sure there is no such name or email yet

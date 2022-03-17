@@ -17,17 +17,17 @@ declare global {
 }
 
 type API = {
-  getBalance: () => any,
-  signData: (address: any, payload: any) => any,
-  signTx: (tx: any, partialSign: any) => any,
-  submitTx: (tx: any) => any,
-  getUtxos: (amount: any, paginate: any) => any,
-  getUsedAddresses: () => [any],
-  getUnusedAddresses: () => [],
-  getChangeAddress: () => any,
-  getRewardAddresses: () => [any],
-  getNetworkId: () => any,
-  getCollateral: () => any
+  getBalance: () => Promise<any>,
+  signData: (address: any, payload: any) => Promise<any>,
+  signTx: (tx: any, partialSign: any) => Promise<any>,
+  submitTx: (tx: any) => Promise<any>,
+  getUtxos: (amount: any, paginate: any) => Promise<any>,
+  getUsedAddresses: () => Promise<[any]>,
+  getUnusedAddresses: () => Promise<[]>,
+  getChangeAddress: () => Promise<any>,
+  getRewardAddresses: () => Promise<[any]>,
+  getNetworkId: () => Promise<any>,
+  getCollateral: () => Promise<any>
 }
 
 type UninstalledWalletData = {

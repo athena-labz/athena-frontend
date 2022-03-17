@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Router from "next/router";
 import {
   Box,
   FormControl,
@@ -19,6 +18,7 @@ import {
 
 import { useWallet } from "../../contexts/WalletContext";
 import { useUser } from "../../contexts/UserContext";
+import { bech32addr } from "../../wallet/utils";
 
 export default function WalletSelector() {
   const { getWallets, connect } = useWallet();
@@ -49,10 +49,12 @@ export default function WalletSelector() {
                   }}
                   onClick={() => {
                     connect(key)
-                      .then((api) => {
-                        const address = api.getUsedAddresses()[0]
-                        register(address);
-                        Router.push("/login");
+                      .then(async (api) => {
+                        console.log(api);
+                        bech32addr(api).then((addr) => {
+                          console.log(addr);
+                          register(addr);
+                        });
                       })
                       .catch(() => {});
                   }}

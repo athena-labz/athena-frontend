@@ -15,6 +15,7 @@
     "@choc-ui/logo": "^1.0.0",
     "@emotion/react": "11",
     "@emotion/styled": "11",
+    "@emurgo/cardano-serialization-lib-browser": "^10.0.4",
     "@types/react-vertical-timeline-component": "^3.0.1",
     "axios": "^0.21.1",
     "chakra-ui-autocomplete": "^1.4.5",
