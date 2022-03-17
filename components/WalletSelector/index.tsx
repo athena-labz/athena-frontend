@@ -47,16 +47,20 @@ export default function WalletSelector() {
                     bgGradient: `linear(to-l, ${primaryColor}, ${secundaryColor})`,
                     transitionDelay: "500ms",
                   }}
-                  onClick={() => {
-                    connect(key)
-                      .then(async (api) => {
-                        console.log(api);
-                        bech32addr(api).then((addr) => {
-                          console.log(addr);
-                          register(addr);
-                        });
-                      })
-                      .catch(() => {});
+                  onClick={async () => {
+                    const result = await connect(key);
+
+                    if (result.success === true && "api" in result) {
+                      const addr = await bech32addr(result.api);
+                      register(addr);
+                    } else if (
+                      result.success === false &&
+                      "message" in result
+                    ) {
+                      console.log(result.message);
+                    } else {
+                      console.error("Something terribly wrong happened!");
+                    }
                   }}
                 >
                   {name}
