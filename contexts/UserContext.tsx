@@ -8,7 +8,11 @@ import {
 
 import Router from "next/router";
 
-type Role = "freelancer" | "customer" | "mediator";
+import axios from "axios";
+
+import jwt_decode from "jwt-decode";
+
+type Role = "Proposer" | "Contributor" | "Mediator";
 
 type UserInfoData = {
   isLogged: boolean;
@@ -31,6 +35,12 @@ type UserContextProviderProps = {
   children: ReactNode;
 };
 
+const backend = axios.create({
+  baseURL: "http://127.0.0.1:5000/",
+  headers: { "Content-Type": "application/json" },
+  withCredentials: true
+});
+
 export const UserContext_ = createContext({} as UserContextData);
 
 export function UserContextProvider({ children }: UserContextProviderProps) {
@@ -46,7 +56,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   if (typeof window !== "undefined") {
     useEffect(() => {
       setUserInfo(
-        window.sessionStorage.getItem("userInfo") !== null
+        window.localStorage.getItem("userInfo") !== null
           ? JSON.parse(sessionStorage.getItem("userInfo")!)
           : userInfo
       );
@@ -70,27 +80,66 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       });
   }
 
+  function getUser() {
+    const token = localStorage.getItem("user");
+    if (!token) {
+      return null;
+    }
+
+    return jwt_decode(token);
+  }
+
   function register(address: string) {
-    console.log("Registering user");
+    const arg = {
+      name: userInfo.name,
+      email: userInfo.email,
+      role: userInfo.role,
+      address: address,
+      password: userInfo.password,
+    }
 
-    setUserInfo({
-      ...userInfo,
-      address,
-    });
+    backend
+      .post("/register", arg)
+      .then((res) => {
+        setUserInfo({ ...userInfo, address, isLogged: true });
 
-    console.log({
-      ...userInfo,
-      address,
-    })
+        if (getUser() === null)
+          localStorage.setItem("user", res.data.access_token)
+        
+        console.log(getUser())
 
-    Router.push("/login");
+        // clearInfo();
+        Router.push("/");
+      })
+      .catch((error) => {
+        clearInfo();
 
-    // Should then
-    // * Back-end make sure there is no such name or email yet
-    // * Send an email confirmation
-    // * Register user in the DB
-    // * Back-end register user info
-    // * Clear user password
+        if (error.response && error.response.status === 400) {
+          console.error(error.response.data.message);
+        } else {
+          throw error;
+        }
+      });
+  }
+
+  function login(email: string, password: string) {
+    backend
+      .post("/login", { email: email, password: password })
+      .then(res => {
+        if (getUser() === null)
+          localStorage.setItem("user", res.data.access_token)
+  
+        console.log(getUser())
+
+        Router.push("/");
+      })
+      .catch(error => {
+          if (error.response && error.response.status === 401) {
+            console.error(error.response.data.message);
+          } else {
+              throw error;
+          }
+      });
   }
 
   function clearInfo() {
@@ -104,16 +153,16 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     });
   }
 
-  function login(email: string, password: string) {
-    if (email === userInfo.email && password === userInfo.password) {
-      setUserInfo({ ...userInfo, isLogged: true });
-    }
+  // function login(email: string, password: string) {
+  //   if (email === userInfo.email && password === userInfo.password) {
+  //     setUserInfo({ ...userInfo, isLogged: true });
+  //   }
 
-    // In the real application it should:
-    // * Back-end compare password hash to password in the DB
-    // * If it matches, return user info and let him log-in
-    // * Otherwise, warn user that he has the wrong password / email
-  }
+  //   // In the real application it should:
+  //   // * Back-end compare password hash to password in the DB
+  //   // * If it matches, return user info and let him log-in
+  //   // * Otherwise, warn user that he has the wrong password / email
+  // }
 
   return (
     <UserContext_.Provider

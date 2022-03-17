@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { useUser } from '../../contexts/UserContext';
 
-type Role = "freelancer" | "customer" | "mediator";
+type Role = "Proposer" | "Contributor" | "Mediator";
 
 type UserData = {
   role: Role;
@@ -32,7 +32,7 @@ export default function RegisterCard() {
     email: "",
     password: "",
     name: "",
-    role: "freelancer"
+    role: "Contributor"
   })
   const { saveInfo } = useUser();
 
@@ -60,13 +60,13 @@ export default function RegisterCard() {
       <Center>
         <RadioGroup defaultValue="2" onChange={setRole} value={userData.role}>
           <Stack spacing={5} direction="row" >
-            <Radio size="md" name="freelancer" value="freelancer" colorScheme="blue" >
-              Freelancer
+            <Radio size="md" name="Proposer" value="Proposer" colorScheme="blue" >
+              Proposer
             </Radio>
-            <Radio size="md" name="customer" value="customer" colorScheme="blue">
-              Customer
+            <Radio size="md" name="Contributor" value="Contributor" colorScheme="blue">
+              Contributor
             </Radio>
-            <Radio size="md" name="mediator" value="mediator" colorScheme="blue" >
+            <Radio size="md" name="Mediator" value="Mediator" colorScheme="blue" >
               Mediator
             </Radio>
           </Stack>
