@@ -6,6 +6,8 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { useRouter } from 'next/router'
 import { UserContextProvider } from '../contexts/UserContext'
+import { WalletContextProvider } from '../contexts/WalletContext';
+
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const pathnames_not_show_footer = ['/login', '/contracts', '/forgot-password', '/profile', '/reset-password', "/signup", "/create-contract", "/contract"]
@@ -25,19 +27,21 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <UserContextProvider>
-      <ChakraProvider theme={customtheme}>
-        <main style={{ flex: 1 }}>
-          <Header />
+    <WalletContextProvider>
+      <UserContextProvider>
+        <ChakraProvider theme={customtheme}>
+          <main style={{ flex: 1 }}>
+            <Header />
 
-          <Component {...pageProps} />
+            <Component {...pageProps} />
 
-          {show_footer(router.pathname) && <Footer />}
+            {show_footer(router.pathname) && <Footer />}
 
 
-        </main>
-      </ChakraProvider>
-    </UserContextProvider>
+          </main>
+        </ChakraProvider>
+      </UserContextProvider>
+    </WalletContextProvider>
   )
 
 

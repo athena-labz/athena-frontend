@@ -34,7 +34,7 @@ export default function RegisterCard() {
     name: "",
     role: "freelancer"
   })
-  const { register } = useUser();
+  const { saveInfo } = useUser();
 
   function setName(name: string) {
     setUser({ ...userData, name: name });
@@ -100,7 +100,7 @@ export default function RegisterCard() {
             </Stack>
             <Button
               onClick={e => {
-                register(userData.role, userData.name, userData.email, userData.password);
+                saveInfo(userData.role, userData.name, userData.email, userData.password);
                 Router.push('/select-wallet');
               }}
               bg={'blue.400'}
