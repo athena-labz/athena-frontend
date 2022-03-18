@@ -1,7 +1,10 @@
 import { useState } from "react";
 import Router from "next/router";
 import {
+  Alert,
+  AlertIcon,
   Box,
+  CloseButton,
   FormControl,
   FormLabel,
   Input,
@@ -42,6 +45,7 @@ export default function RegisterCard() {
     role: "Contributor",
   });
   const [openWalletSelector, setOpenWalletSelector] = useState(false);
+  const [failedAlert, setFailedAlert] = useState<string | null>(null);
   const { register } = useUser();
 
   function setName(name: string) {
@@ -61,51 +65,66 @@ export default function RegisterCard() {
   }
 
   function registrationFailed() {
-    console.log("Registration failed")
+    console.log("Registration failed");
   }
 
   return (
     <>
       <Stack spacing={1} mx={"auto"} maxW={"md"} py={4} px={3}>
+        <Alert status="error" hidden={failedAlert === null}>
+          <AlertIcon />
+          {failedAlert}
+          <CloseButton
+            onClick={() => setFailedAlert(null)}
+            position="absolute"
+            right="8px"
+            top="8px"
+          />
+        </Alert>
         <Stack align={"center"}>
           <Heading fontSize={"5xl"}>Create your account</Heading>
         </Stack>
-        <Center>
-          <RadioGroup defaultValue="2" onChange={setRole} value={userData.role}>
-            <Stack spacing={5} direction="row">
-              <Radio
-                size="md"
-                name="Proposer"
-                value="Proposer"
-                colorScheme="blue"
-              >
-                Proposer
-              </Radio>
-              <Radio
-                size="md"
-                name="Contributor"
-                value="Contributor"
-                colorScheme="blue"
-              >
-                Contributor
-              </Radio>
-              <Radio
-                size="md"
-                name="Mediator"
-                value="Mediator"
-                colorScheme="blue"
-              >
-                Mediator
-              </Radio>
-            </Stack>
-          </RadioGroup>
-        </Center>
         <Box
           rounded={"lg"}
           bg={useColorModeValue("white", "gray.700")}
           boxShadow={"lg"}
           p={8}
         >
+          <Center>
+            <RadioGroup
+              defaultValue="2"
+              onChange={setRole}
+              value={userData.role}
+            >
+              <Stack spacing={5} direction="row">
+                <Radio
+                  size="md"
+                  name="Contributor"
+                  value="Contributor"
+                  colorScheme="blue"
+                >
+                  Contributor
+                </Radio>
+                <Radio
+                  size="md"
+                  name="Proposer"
+                  value="Proposer"
+                  colorScheme="blue"
+                >
+                  Proposer
+                </Radio>
+                <Radio
+                  size="md"
+                  name="Mediator"
+                  value="Mediator"
+                  colorScheme="blue"
+                >
+                  Mediator
+                </Radio>
+              </Stack>
+            </RadioGroup>
+          </Center>
+          <br />
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Name</FormLabel>
@@ -130,6 +149,7 @@ export default function RegisterCard() {
                 onChange={(evt) => setPassword(evt.target.value)}
               />
             </FormControl>
+
             <Stack spacing={10}>
               <Stack
                 direction={{ base: "column", sm: "row" }}
@@ -170,12 +190,23 @@ export default function RegisterCard() {
 
           if (result.success === true && "api" in result) {
             const addr = await bech32addr(result.api);
-            register(userData.role, userData.name, userData.email, addr, userData.password);
-          } else if (
-            result.success === false &&
-            "message" in result
-          ) {
-            console.log(result.message);
+            register(
+              userData.role,
+              userData.name,
+              userData.email,
+              addr,
+              userData.password
+            )
+              .then(() => {
+                Router.push("/");
+              })
+              .catch((err) => {
+                setFailedAlert(err);
+                setOpenWalletSelector(false);
+              });
+          } else if (result.success === false && "message" in result) {
+            setFailedAlert("Wallet not installed, please install wallet and refresh page!")
+            setOpenWalletSelector(false);
           } else {
             throw new Error("This message shouldn't be possible");
           }

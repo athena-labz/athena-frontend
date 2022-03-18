@@ -17,7 +17,13 @@ type Role = "Proposer" | "Contributor" | "Mediator";
 type UserContextData = {
   isSignedIn: () => boolean;
   getUser: () => any;
-  register: (role: Role, name: string, email: string, address: string, password: string) => void;
+  register: (
+    role: Role,
+    name: string,
+    email: string,
+    address: string,
+    password: string
+  ) => Promise<void>;
   login: (email: string, password: string) => void;
   logout: () => void;
 };
@@ -52,7 +58,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     return false;
   }
 
-  function register(
+  async function register(
     role: Role,
     name: string,
     email: string,
@@ -67,23 +73,23 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       password,
     };
 
-    console.log(arg);
+    try {
+      const res = await backend.post("/register", arg);
 
-    backend
-      .post("/register", arg)
-      .then((res) => {
-        if (getUser() === null)
-          localStorage.setItem("user", res.data.access_token);
+      if (getUser() === null)
+        localStorage.setItem("user", res.data.access_token);
 
-        Router.push("/");
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 400) {
-          console.error(error.response.data.message);
-        } else {
-          throw error;
-        }
-      });
+      Router.push("/");
+
+      return Promise.resolve();
+    } catch (error: any) {
+      if (error.response && error.response.status === 400) {
+        console.log(error.response.data.message)
+        return Promise.reject("Account already registered");
+      } else {
+        throw error;
+      }
+    }
   }
 
   function login(email: string, password: string) {
