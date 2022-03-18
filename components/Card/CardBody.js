@@ -22,7 +22,10 @@ function CardBody(props) {
   const styles = useStyleConfig("CardBody", { variant });
   // Pass the computed styles into the `__css` prop
   return (
-    <Box __css={styles} {...rest}>
+    <Box __css={{
+      display: "flex",
+      width: "100%",
+    }} {...rest}>
       {children}
     </Box>
   );

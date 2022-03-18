@@ -19,10 +19,16 @@
 import { Box, useStyleConfig } from "@chakra-ui/react";
 function Card(props) {
   const { variant, children, ...rest } = props;
-  const styles = useStyleConfig("Card", { variant });
   // Pass the computed styles into the `__css` prop
   return (
-    <Box __css={styles} {...rest}>
+    <Box __css={{
+      p: "15px",
+      display: "flex",
+      flexDirection: "column",
+      backdropFilter: "blur(120px)",
+      width: "100%",
+      borderRadius: "20px",
+    }} {...rest}>
       {children}
     </Box>
   );
