@@ -24,7 +24,7 @@ type UserContextData = {
     address: string,
     password: string
   ) => Promise<void>;
-  login: (email: string, password: string) => void;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 };
 
@@ -92,22 +92,38 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     }
   }
 
-  function login(email: string, password: string) {
-    backend
-      .post("/login", { email: email, password: password })
-      .then((res) => {
-        if (getUser() === null)
-          localStorage.setItem("user", res.data.access_token);
+  async function login(email: string, password: string) {
+    try {
+      const res = await backend.post("/login", { email: email, password: password });
 
-        Router.push("/");
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 401) {
-          console.error(error.response.data.message);
-        } else {
-          throw error;
-        }
-      });
+      if (getUser() === null)
+        localStorage.setItem("user", res.data.access_token);
+
+      return Promise.resolve();
+    } catch(error: any) {
+      if (error.response && error.response.status === 401) {
+        console.error(error.response.data.message);
+        return Promise.reject("Incorrect email or password");
+      } else {
+        throw error;
+      }
+    }
+
+    // backend
+    //   .post("/login", { email: email, password: password })
+    //   .then((res) => {
+    //     if (getUser() === null)
+    //       localStorage.setItem("user", res.data.access_token);
+
+    //     Router.push("/");
+    //   })
+    //   .catch((error) => {
+    //     if (error.response && error.response.status === 401) {
+    //       console.error(error.response.data.message);
+    //     } else {
+    //       throw error;
+    //     }
+    //   });
   }
 
   function logout() {
