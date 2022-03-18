@@ -1,4 +1,12 @@
-import { createContext, useState, ReactNode, useContext, useEffect } from 'react';
+import {
+  createContext,
+  useState,
+  ReactNode,
+  useContext,
+  useEffect,
+} from "react";
+
+import Router from "next/router";
 
 type Role = "freelancer" | "customer" | "mediator";
 
@@ -7,19 +15,21 @@ type UserInfoData = {
   role: Role | null;
   name: string | null;
   email: string | null;
+  address: string | null;
   password: string | null;
-}
+};
 
 type UserContextData = {
   user: UserInfoData;
-  register: (role: Role, name: string, email: string, password: string) => void;
+  saveInfo: (role: Role, name: string, email: string, password: string) => void;
+  register: (address: string) => void;
   login: (email: string, password: string) => void;
   logout: () => void;
-}
+};
 
 type UserContextProviderProps = {
   children: ReactNode;
-}
+};
 
 export const UserContext_ = createContext({} as UserContextData);
 
@@ -29,22 +39,23 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     role: null,
     name: null,
     email: null,
-    password: null
-  })
+    address: null,
+    password: null,
+  });
 
   if (typeof window !== "undefined") {
     useEffect(() => {
-      setUserInfo((
-        window.sessionStorage.getItem('userInfo') !== null ? (
-          JSON.parse(sessionStorage.getItem('userInfo')!)
-        ) : userInfo
-      ))
-    }, [window])
+      setUserInfo(
+        window.sessionStorage.getItem("userInfo") !== null
+          ? JSON.parse(sessionStorage.getItem("userInfo")!)
+          : userInfo
+      );
+    }, [window]);
   }
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      window.sessionStorage.setItem('userInfo', JSON.stringify(userInfo));
+      window.sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
     }
   }, [userInfo]);
 
@@ -55,30 +66,24 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         role: role,
         name: name,
         email: email,
-        password: password
-      })
+        password: password,
+      });
   }
 
-  function clearInfo() {
+  function register(address: string) {
+    console.log("Registering user");
+
     setUserInfo({
-      isLogged: false,
-      role: null,
-      name: null,
-      email: null,
-      password: null
+      ...userInfo,
+      address,
     });
-  }
 
-  function register(role: Role, name: string, email: string, password: string) {
-    saveInfo(role, name, email, password);
-
-    console.log("Registering user")
     console.log({
-      role: role,
-      name: name,
-      email: email,
-      password: password
+      ...userInfo,
+      address,
     })
+
+    Router.push("/login");
 
     // Should then
     // * Back-end make sure there is no such name or email yet
@@ -88,9 +93,20 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     // * Clear user password
   }
 
+  function clearInfo() {
+    setUserInfo({
+      isLogged: false,
+      role: null,
+      name: null,
+      email: null,
+      address: null,
+      password: null,
+    });
+  }
+
   function login(email: string, password: string) {
     if (email === userInfo.email && password === userInfo.password) {
-      setUserInfo({ ...userInfo, isLogged: true })
+      setUserInfo({ ...userInfo, isLogged: true });
     }
 
     // In the real application it should:
@@ -100,17 +116,20 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   }
 
   return (
-    <UserContext_.Provider value={{
-      user: userInfo,
-      register: register,
-      login: login,
-      logout: clearInfo
-    }}>
+    <UserContext_.Provider
+      value={{
+        user: userInfo,
+        saveInfo: saveInfo,
+        register: register,
+        login: login,
+        logout: clearInfo,
+      }}
+    >
       {children}
     </UserContext_.Provider>
-  )
+  );
 }
 
 export const useUser = () => {
-  return useContext(UserContext_)
-}
+  return useContext(UserContext_);
+};
