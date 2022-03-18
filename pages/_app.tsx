@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from "@chakra-ui/react"
-import customtheme from '../theme/theme.js'
+import customtheme from '../theme'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { useRouter } from 'next/router'
