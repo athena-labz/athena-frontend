@@ -4,10 +4,24 @@ import Loader from "./loader";
 
 import { Buffer } from "buffer";
 
+function toHex(bytes) {
+  return Buffer.from(bytes).toString("hex");
+}
+
 export async function bech32addr(api) {
   return Loader.Cardano.Address.from_bytes(
     Buffer.from(await api.getChangeAddress(), "hex")
   ).to_bech32();
+}
+
+export function addrToPubKeyHash(bech32Addr) {
+  const pkh = Loader.Cardano.BaseAddress.from_address(
+    Loader.Cardano.Address.from_bech32(bech32Addr)
+  )
+    .payment_cred()
+    .to_keyhash();
+
+  return toHex(pkh.to_bytes());
 }
 
 export async function getProtocolParameters(endpoint) {
@@ -37,6 +51,55 @@ export async function getProtocolParameters(endpoint) {
   };
 
   return value;
+}
+
+export async function signTx(api, cbor) {
+  // load tx cbor
+  const txCli = Loader.Cardano.Transaction.from_bytes(Buffer.from(cbor, "hex"));
+
+  // get tx body
+  const txBody = txCli.body();
+
+  // get tx witness-set
+  const witnessSet = txCli.witness_set();
+
+  // TODO: Add redeemer and datum to witness set
+
+  // clear vkeys from witness-set
+  witnessSet.vkeys()?.free();
+
+  const decodedAddress = Loader.Cardano.Address.from_bytes(
+    Buffer.from(await api.getChangeAddress(), "hex")
+  );
+
+  // create required signers
+  const walletAddress = Loader.Cardano.BaseAddress.from_address(decodedAddress);
+
+  const requiredSigners = Loader.Cardano.Ed25519KeyHashes.new();
+  requiredSigners.add(walletAddress.payment_cred().to_keyhash());
+
+  // set newly created required signer to our tx body
+  txBody.set_required_signers(requiredSigners);
+
+  // re-assemble transaction
+  const tx = Loader.Cardano.Transaction.new(txBody, witnessSet);
+
+  const witneses = await cardano.signTx(
+    Buffer.from(tx.to_bytes(), "hex").toString("hex")
+  );
+
+  const signedTx = Loader.Cardano.Transaction.new(
+    tx.body(),
+    Loader.Cardano.TransactionWitnessSet.from_bytes(
+      Buffer.from(witneses, "hex")
+    )
+  );
+
+  const txhash = await api.submitTx(
+    Buffer.from(signedTx.to_bytes(), "hex").toString("hex")
+  );
+
+  return txhash;
 }
 
 export async function sendWithWallet(cardano, addr, adaAmount, endpoint) {

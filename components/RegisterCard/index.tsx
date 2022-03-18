@@ -186,29 +186,36 @@ export default function RegisterCard() {
       <WalletSelector
         isOpen={openWalletSelector}
         onSelect={async (wallet) => {
-          const result = await connect(wallet);
+          try {
+            const result = await connect(wallet);
 
-          if (result.success === true && "api" in result) {
-            const addr = await bech32addr(result.api);
-            register(
-              userData.role,
-              userData.name,
-              userData.email,
-              addr,
-              userData.password
-            )
-              .then(() => {
-                Router.push("/");
-              })
-              .catch((err) => {
-                setFailedAlert(err);
-                setOpenWalletSelector(false);
-              });
-          } else if (result.success === false && "message" in result) {
-            setFailedAlert("Wallet not installed, please install wallet and refresh page!")
+            if (result.success === true && "api" in result) {
+              const addr = await bech32addr(result.api);
+              register(
+                userData.role,
+                userData.name,
+                userData.email,
+                addr,
+                userData.password,
+                result.api
+              )
+                .then(() => {
+                  Router.push("/");
+                })
+                .catch((err) => {
+                  setFailedAlert(err);
+                  setOpenWalletSelector(false);
+                });
+            } else if (result.success === false && "message" in result) {
+              setFailedAlert(
+                "Wallet not installed, please install wallet and refresh page!"
+              );
+              setOpenWalletSelector(false);
+            }
+          } catch (err: any) {
+            console.error(err);
+            setFailedAlert("Invalid wallet selected");
             setOpenWalletSelector(false);
-          } else {
-            throw new Error("This message shouldn't be possible");
           }
         }}
         onClose={() => setOpenWalletSelector(false)}

@@ -1,16 +1,14 @@
-import {
-  createContext,
-  useState,
-  ReactNode,
-  useContext,
-  useEffect,
-} from "react";
+import { createContext, ReactNode, useContext } from "react";
 
 import Router from "next/router";
 
 import axios from "axios";
 
 import jwt_decode from "jwt-decode";
+
+import { addrToPubKeyHash, signTx } from "../wallet/utils";
+
+import { API } from "../contexts/WalletContext";
 
 type Role = "Proposer" | "Contributor" | "Mediator";
 
@@ -22,7 +20,8 @@ type UserContextData = {
     name: string,
     email: string,
     address: string,
-    password: string
+    password: string,
+    api: API
   ) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
@@ -63,7 +62,8 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     name: string,
     email: string,
     address: string,
-    password: string
+    password: string,
+    api: API
   ) {
     const arg = {
       name,
@@ -71,6 +71,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       role,
       address,
       password,
+      pubkeyhash: addrToPubKeyHash(address),
     };
 
     try {
@@ -79,12 +80,14 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       if (getUser() === null)
         localStorage.setItem("user", res.data.access_token);
 
+      signTx(api, res.data.transaction)
+
       Router.push("/");
 
       return Promise.resolve();
     } catch (error: any) {
       if (error.response && error.response.status === 400) {
-        console.log(error.response.data.message)
+        console.log(error.response.data.message);
         return Promise.reject("Account already registered");
       } else {
         throw error;
@@ -94,13 +97,16 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
 
   async function login(email: string, password: string) {
     try {
-      const res = await backend.post("/login", { email: email, password: password });
+      const res = await backend.post("/login", {
+        email: email,
+        password: password,
+      });
 
       if (getUser() === null)
         localStorage.setItem("user", res.data.access_token);
 
       return Promise.resolve();
-    } catch(error: any) {
+    } catch (error: any) {
       if (error.response && error.response.status === 401) {
         console.error(error.response.data.message);
         return Promise.reject("Incorrect email or password");
@@ -108,22 +114,6 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         throw error;
       }
     }
-
-    // backend
-    //   .post("/login", { email: email, password: password })
-    //   .then((res) => {
-    //     if (getUser() === null)
-    //       localStorage.setItem("user", res.data.access_token);
-
-    //     Router.push("/");
-    //   })
-    //   .catch((error) => {
-    //     if (error.response && error.response.status === 401) {
-    //       console.error(error.response.data.message);
-    //     } else {
-    //       throw error;
-    //     }
-    //   });
   }
 
   function logout() {
