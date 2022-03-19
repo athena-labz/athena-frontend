@@ -10,7 +10,6 @@ import {
   Center,
 
 } from '@chakra-ui/react';
-import { extendTheme } from "@chakra-ui/react";
 import { Search2Icon } from '@chakra-ui/icons';
 import type Project from '../../types/project'
 
