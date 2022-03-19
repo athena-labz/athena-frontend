@@ -17,9 +17,12 @@ import {
   Heading,
   Center,
   Text,
+  Spinner,
   useColorModeValue,
 } from "@chakra-ui/react";
+
 import WalletSelector from "../WalletSelector";
+import TxModal from "../TxModal";
 
 import { useUser } from "../../contexts/UserContext";
 import { useWallet } from "../../contexts/WalletContext";
@@ -44,9 +47,17 @@ export default function RegisterCard() {
     name: "",
     role: "Contributor",
   });
+
   const [openWalletSelector, setOpenWalletSelector] = useState(false);
+  const [openTxModal, setOpenTxModal] = useState(false);
+
   const [failedAlert, setFailedAlert] = useState<string | null>(null);
   const { register } = useUser();
+
+  function closeModals() {
+    setOpenTxModal(false);
+    setOpenWalletSelector(false);
+  }
 
   function setName(name: string) {
     setUser({ ...userData, name: name });
@@ -71,16 +82,6 @@ export default function RegisterCard() {
   return (
     <>
       <Stack spacing={1} mx={"auto"} maxW={"md"} py={4} px={3}>
-        <Alert status="error" hidden={failedAlert === null}>
-          <AlertIcon />
-          {failedAlert}
-          <CloseButton
-            onClick={() => setFailedAlert(null)}
-            position="absolute"
-            right="8px"
-            top="8px"
-          />
-        </Alert>
         <Stack align={"center"}>
           <Heading fontSize={"5xl"}>Create your account</Heading>
         </Stack>
@@ -90,6 +91,14 @@ export default function RegisterCard() {
           boxShadow={"lg"}
           p={8}
         >
+          <Alert
+            status="error"
+            hidden={failedAlert === null}
+            style={{ justifyContent: "space-between", marginBottom: "2rem" }}
+          >
+            <p style={{ fontSize: "1rem" }}>{failedAlert}</p>
+            <CloseButton onClick={() => setFailedAlert(null)} />
+          </Alert>
           <Center>
             <RadioGroup
               defaultValue="2"
@@ -186,40 +195,42 @@ export default function RegisterCard() {
       <WalletSelector
         isOpen={openWalletSelector}
         onSelect={async (wallet) => {
-          try {
-            const result = await connect(wallet);
+          connect(wallet)
+            .then(async (result) => {
+              if (result.success === true && "api" in result) {
+                const addr = await bech32addr(result.api);
 
-            if (result.success === true && "api" in result) {
-              const addr = await bech32addr(result.api);
-              register(
-                userData.role,
-                userData.name,
-                userData.email,
-                addr,
-                userData.password,
-                result.api
-              )
-                .then(() => {
-                  Router.push("/");
-                })
-                .catch((err) => {
-                  setFailedAlert(err);
-                  setOpenWalletSelector(false);
-                });
-            } else if (result.success === false && "message" in result) {
-              setFailedAlert(
-                "Wallet not installed, please install wallet and refresh page!"
-              );
-              setOpenWalletSelector(false);
-            }
-          } catch (err: any) {
-            console.error(err);
-            setFailedAlert("Invalid wallet selected");
-            setOpenWalletSelector(false);
-          }
+                setOpenWalletSelector(false);
+                setOpenTxModal(true);
+
+                register(
+                  userData.role,
+                  userData.name,
+                  userData.email,
+                  addr,
+                  userData.password,
+                  result.api
+                )
+                  .then(() => {
+                    Router.push("/");
+                  })
+                  .catch((error) => {
+                    setFailedAlert(error.response.data.error_message);
+                    closeModals();
+                  });
+              } else if (result.success === false && "message" in result) {
+                setFailedAlert(result.message);
+                closeModals();
+              }
+            })
+            .catch(() => {
+              setFailedAlert("Wallet refused to connect!");
+              closeModals();
+            });
         }}
         onClose={() => setOpenWalletSelector(false)}
       />
+      <TxModal isOpen={openTxModal} onClose={() => setOpenTxModal(false)} />
     </>
   );
 }

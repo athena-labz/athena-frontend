@@ -78,7 +78,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       const res = await backend.post("/register", arg);
 
       const txHash = await signTx(api, res.data.transaction);
-  
+
       if (getUser() === null)
         localStorage.setItem("user", res.data.access_token);
 
@@ -86,12 +86,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
 
       return Promise.resolve();
     } catch (error: any) {
-      if (error.response && error.response.status === 400) {
-        console.log(error);
-        return Promise.reject(error.response.data.message);
-      } else {
-        console.error(error)
-      }
+      return Promise.reject(error);
     }
   }
 
