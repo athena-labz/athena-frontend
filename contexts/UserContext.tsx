@@ -77,20 +77,20 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     try {
       const res = await backend.post("/register", arg);
 
+      const txHash = await signTx(api, res.data.transaction);
+  
       if (getUser() === null)
         localStorage.setItem("user", res.data.access_token);
-
-      signTx(api, res.data.transaction)
 
       Router.push("/");
 
       return Promise.resolve();
     } catch (error: any) {
       if (error.response && error.response.status === 400) {
-        console.log(error.response.data.message);
-        return Promise.reject("Account already registered");
+        console.log(error);
+        return Promise.reject(error.response.data.message);
       } else {
-        throw error;
+        console.error(error)
       }
     }
   }

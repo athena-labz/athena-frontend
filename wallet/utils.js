@@ -53,9 +53,9 @@ export async function getProtocolParameters(endpoint) {
   return value;
 }
 
-export async function signTx(api, cbor) {
+export async function signTx(api, txCbor) {
   // load tx cbor
-  const txCli = Loader.Cardano.Transaction.from_bytes(Buffer.from(cbor, "hex"));
+  const txCli = Loader.Cardano.Transaction.from_bytes(Buffer.from(txCbor, "hex"));
 
   // get tx body
   const txBody = txCli.body();
@@ -63,43 +63,37 @@ export async function signTx(api, cbor) {
   // get tx witness-set
   const witnessSet = txCli.witness_set();
 
-  // TODO: Add redeemer and datum to witness set
+  console.log("before", witnessSet)
 
   // clear vkeys from witness-set
   witnessSet.vkeys()?.free();
 
-  const decodedAddress = Loader.Cardano.Address.from_bytes(
-    Buffer.from(await api.getChangeAddress(), "hex")
-  );
-
-  // create required signers
-  const walletAddress = Loader.Cardano.BaseAddress.from_address(decodedAddress);
-
-  const requiredSigners = Loader.Cardano.Ed25519KeyHashes.new();
-  requiredSigners.add(walletAddress.payment_cred().to_keyhash());
-
-  // set newly created required signer to our tx body
-  txBody.set_required_signers(requiredSigners);
-
   // re-assemble transaction
   const tx = Loader.Cardano.Transaction.new(txBody, witnessSet);
 
-  const witneses = await cardano.signTx(
-    Buffer.from(tx.to_bytes(), "hex").toString("hex")
+  // encode tx
+  const encodedTx = Buffer.from(tx.to_bytes()).toString("hex");
+  // sign tx using nami wallet
+  const encodedTxVkeyWitnesses = await api.signTx(encodedTx, true);
+
+  // decode witness-set produced by signature
+  const txVkeyWitnesses = Loader.Cardano.TransactionWitnessSet.from_bytes(
+    Buffer.from(encodedTxVkeyWitnesses, "hex")
   );
 
-  const signedTx = Loader.Cardano.Transaction.new(
-    tx.body(),
-    Loader.Cardano.TransactionWitnessSet.from_bytes(
-      Buffer.from(witneses, "hex")
-    )
-  );
+  // set vkeys to our tx from decoded witness-set
+  witnessSet.set_vkeys(txVkeyWitnesses.vkeys());
 
-  const txhash = await api.submitTx(
-    Buffer.from(signedTx.to_bytes(), "hex").toString("hex")
-  );
+  // re-assemble signed transaction
+  const txSigned = Loader.Cardano.Transaction.new(tx.body(), witnessSet);
 
-  return txhash;
+  // encode signed transaction
+  const encodedSignedTx = Buffer.from(txSigned.to_bytes()).toString("hex");
+
+  // submit the transaction
+  const txHash = await api.submitTx(encodedSignedTx);
+
+  return txHash;
 }
 
 export async function sendWithWallet(cardano, addr, adaAmount, endpoint) {
