@@ -51,6 +51,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     else return true;
   };
 
+  // Chakra UI has weird margin-right by default
+  if (typeof document !== "undefined")
+    document.body.setAttribute('style', 'margin-right: 0 !important');
+
   if (loading === false)
     return (
       <WalletContextProvider>

@@ -4,10 +4,24 @@ import Loader from "./loader";
 
 import { Buffer } from "buffer";
 
+function toHex(bytes) {
+  return Buffer.from(bytes).toString("hex");
+}
+
 export async function bech32addr(api) {
   return Loader.Cardano.Address.from_bytes(
     Buffer.from(await api.getChangeAddress(), "hex")
   ).to_bech32();
+}
+
+export function addrToPubKeyHash(bech32Addr) {
+  const pkh = Loader.Cardano.BaseAddress.from_address(
+    Loader.Cardano.Address.from_bech32(bech32Addr)
+  )
+    .payment_cred()
+    .to_keyhash();
+
+  return toHex(pkh.to_bytes());
 }
 
 export async function getProtocolParameters(endpoint) {
@@ -37,6 +51,49 @@ export async function getProtocolParameters(endpoint) {
   };
 
   return value;
+}
+
+export async function signTx(api, txCbor) {
+  // load tx cbor
+  const txCli = Loader.Cardano.Transaction.from_bytes(Buffer.from(txCbor, "hex"));
+
+  // get tx body
+  const txBody = txCli.body();
+
+  // get tx witness-set
+  const witnessSet = txCli.witness_set();
+
+  console.log("before", witnessSet)
+
+  // clear vkeys from witness-set
+  witnessSet.vkeys()?.free();
+
+  // re-assemble transaction
+  const tx = Loader.Cardano.Transaction.new(txBody, witnessSet);
+
+  // encode tx
+  const encodedTx = Buffer.from(tx.to_bytes()).toString("hex");
+  // sign tx using nami wallet
+  const encodedTxVkeyWitnesses = await api.signTx(encodedTx, true);
+
+  // decode witness-set produced by signature
+  const txVkeyWitnesses = Loader.Cardano.TransactionWitnessSet.from_bytes(
+    Buffer.from(encodedTxVkeyWitnesses, "hex")
+  );
+
+  // set vkeys to our tx from decoded witness-set
+  witnessSet.set_vkeys(txVkeyWitnesses.vkeys());
+
+  // re-assemble signed transaction
+  const txSigned = Loader.Cardano.Transaction.new(tx.body(), witnessSet);
+
+  // encode signed transaction
+  const encodedSignedTx = Buffer.from(txSigned.to_bytes()).toString("hex");
+
+  // submit the transaction
+  const txHash = await api.submitTx(encodedSignedTx);
+
+  return txHash;
 }
 
 export async function sendWithWallet(cardano, addr, adaAmount, endpoint) {

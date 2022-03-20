@@ -16,7 +16,7 @@ declare global {
   }
 }
 
-type API = {
+export type API = {
   getBalance: () => Promise<any>;
   signData: (address: any, payload: any) => Promise<any>;
   signTx: (tx: any, partialSign: any) => Promise<any>;

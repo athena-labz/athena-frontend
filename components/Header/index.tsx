@@ -42,6 +42,7 @@ import {
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Router from "next/router";
 import { useUser } from "../../contexts/UserContext";
 
 const Header: NextPage = () => {
@@ -49,9 +50,8 @@ const Header: NextPage = () => {
   const router = useRouter();
   const pathnames_not_scroll_header = ["/create-contract", "/profile"];
   const scroll_ = pathnames_not_scroll_header.indexOf(router.pathname) === -1;
-  const [state, setstate] = useState(scroll_ ? true : false);
   const [yPos, setYPos] = useState(0);
-  const { user, logout } = useUser();
+  const { isSignedIn, getUser, logout } = useUser();
 
   useEffect(function mount() {
     function onScroll() {
@@ -64,6 +64,8 @@ const Header: NextPage = () => {
       window.removeEventListener("scroll", onScroll);
     };
   });
+
+  const user = getUser();
 
   return (
     <Box w="100%">
@@ -118,7 +120,7 @@ const Header: NextPage = () => {
           </Flex>
         </Flex>
 
-        {!user.isLogged ? (
+        {!isSignedIn() ? (
           <Stack
             flex={{ base: 1, md: 0 }}
             justify={"flex-end"}
@@ -174,7 +176,7 @@ const Header: NextPage = () => {
                 >
                   <WrapItem>
                     <Avatar
-                      name={user.name || undefined}
+                      name={user?.name || undefined}
                       bgColor="#38b6ff"
                       size="sm"
                     />
@@ -200,11 +202,16 @@ const Header: NextPage = () => {
                   fontSize={"lg"}
                   color={"gray.800"}
                 >
-                  {user.name}
+                  {user?.name}
                 </PopoverHeader>
                 <PopoverBody display="flex" flexDirection="row">
-                  <Text fontWeight={600} color={"gray.500"} width="100%" isTruncated>
-                    {user.address}
+                  <Text
+                    fontWeight={600}
+                    color={"gray.500"}
+                    width="100%"
+                    isTruncated
+                  >
+                    {user?.address}
                   </Text>
                   <BiKey style={{ color: "#1E88E5", fontSize: "1.5rem" }} />
                 </PopoverBody>
@@ -300,7 +307,10 @@ const Header: NextPage = () => {
                   fontWeight="bold"
                   _hover={{ color: "#1E88E5" }}
                   as="button"
-                  onClick={(e) => logout()}
+                  onClick={(e) => {
+                    logout();
+                    Router.push("/login");
+                  }}
                 >
                   Logout
                 </PopoverBody>
