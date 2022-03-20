@@ -52,7 +52,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   // Chakra UI has weird margin-right by default
-  document.body.setAttribute('style', 'margin-right: 0 !important');
+  if (typeof document !== "undefined")
+    document.body.setAttribute('style', 'margin-right: 0 !important');
 
   if (loading === false)
     return (
