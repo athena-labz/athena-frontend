@@ -215,7 +215,11 @@ export default function RegisterCard() {
                     Router.push("/");
                   })
                   .catch((error) => {
-                    setFailedAlert(error.response.data.error_message);
+                    if (error?.response?.data?.error_message)
+                      setFailedAlert(error.response.data.error_message);
+                    else
+                      setFailedAlert("User declined to sign transaction")
+
                     closeModals();
                   });
               } else if (result.success === false && "message" in result) {
