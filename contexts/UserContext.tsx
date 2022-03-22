@@ -65,22 +65,25 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     password: string,
     api: API
   ) {
-    const arg = {
-      name,
-      email,
-      role,
-      address,
-      password,
-      pubkeyhash: addrToPubKeyHash(address),
-    };
-
     try {
-      const res = await backend.post("/register", arg);
+      const res = await backend.post("/register", {
+        name,
+        email,
+        role,
+        address,
+        password,
+        pubkeyhash: addrToPubKeyHash(address),
+      });
 
       const txHash = await signTx(api, res.data.transaction);
 
+      const confirm_res = await backend.post("/confirm-register", {
+        token: res.data.access_token,
+        tx_hash: txHash,
+      });
+
       if (getUser() === null)
-        localStorage.setItem("user", res.data.access_token);
+        localStorage.setItem("user", confirm_res.data.access_token);
 
       Router.push("/");
 
@@ -102,12 +105,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
 
       return Promise.resolve();
     } catch (error: any) {
-      if (error.response && error.response.status === 401) {
-        console.error(error.response.data.message);
-        return Promise.reject("Incorrect email or password");
-      } else {
-        throw error;
-      }
+      return Promise.reject(error);
     }
   }
 

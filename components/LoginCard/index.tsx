@@ -85,8 +85,8 @@ export default function LoginCard() {
                   .then(() => {
                     Router.push("/");
                   })
-                  .catch((err) => {
-                    setFailedAlert(err);
+                  .catch((error) => {
+                    setFailedAlert("Email or password invalid");
                   });
               }}
               bg={"blue.400"}

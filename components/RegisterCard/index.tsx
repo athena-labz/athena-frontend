@@ -218,7 +218,8 @@ export default function RegisterCard() {
                     if (error?.response?.data?.error_message)
                       setFailedAlert(error.response.data.error_message);
                     else
-                      setFailedAlert("User declined to sign transaction")
+                      console.log(error)
+                      setFailedAlert("Transaction cancelled by user or wallet failed!")
 
                     closeModals();
                   });

@@ -20,19 +20,26 @@ import {
   Button,
   Select,
   Flex,
-  Link
+  Link,
 } from "@chakra-ui/react";
-import Head from 'next/head'
+import Head from "next/head";
 import MultiSelectMenu from "../components/MutipleSelect";
-import { AddIcon, InfoOutlineIcon, QuestionOutlineIcon } from '@chakra-ui/icons';
-import { useState } from 'react';
+import AuthenticationRequired from "../components/AuthenticationRequired";
+import {
+  AddIcon,
+  InfoOutlineIcon,
+  QuestionOutlineIcon,
+} from "@chakra-ui/icons";
+import { useState } from "react";
 import {
   AutoComplete,
   AutoCompleteInput,
   AutoCompleteItem,
-  AutoCompleteList
+  AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
 import hash_generator from "../utils/hash";
+import { useUser } from "../contexts/UserContext";
+import Router from "next/router";
 
 export interface Item {
   label: string;
@@ -40,25 +47,37 @@ export interface Item {
 }
 
 interface GenericObject {
-  [key: string]: any
+  [key: string]: any;
 }
 
 export default function Component() {
-  const [triggers_ofc, setTriggersOfc] = useState([{ key: "ASDERS", conditions: [""] }]);
-  const [usersRoleValues, setUserRole] = useState(["PUBLISHER", "ASSIGNEE"])
-  const [usersInputs, setUserInputs] = useState<GenericObject[]>([{
-    input: "",
-    question: "",
-    type: "INT",
-  }])
+  const { isSignedIn } = useUser();
+  if (isSignedIn() === false) {
+    // Router.push("/");
+    return <AuthenticationRequired />
+  }
 
-  const [triggers, setTriggers] = useState<GenericObject[]>([{
-    "input": "",
-    "operator": "",
-    "value": "",
-    "action": "",
-    "actionSelector": ""
-  }])
+  const [triggers_ofc, setTriggersOfc] = useState([
+    { key: "ASDERS", conditions: [""] },
+  ]);
+  const [usersRoleValues, setUserRole] = useState(["PUBLISHER", "ASSIGNEE"]);
+  const [usersInputs, setUserInputs] = useState<GenericObject[]>([
+    {
+      input: "",
+      question: "",
+      type: "INT",
+    },
+  ]);
+
+  const [triggers, setTriggers] = useState<GenericObject[]>([
+    {
+      input: "",
+      operator: "",
+      value: "",
+      action: "",
+      actionSelector: "",
+    },
+  ]);
 
   const [form, setForm] = useState({
     title: "",
@@ -66,128 +85,140 @@ export default function Component() {
     relationType: "DISTRIBUTED",
     judge: "asdasd",
     privacyType: "",
-    roles: 0
-  })
-  const options = ["Noa Rahman", "Julie Molina", "Leonidas Browning", "Qiang He", "Dong Liu", "Zack Jacobs"];
+    roles: 0,
+  });
+  const options = [
+    "Noa Rahman",
+    "Julie Molina",
+    "Leonidas Browning",
+    "Qiang He",
+    "Dong Liu",
+    "Zack Jacobs",
+  ];
 
   const createNewUserInput = (e: any) => {
-    setUserInputs([...usersInputs, {
-      input: "",
-      question: "",
-      type: "INT",
-    }])
-  }
+    setUserInputs([
+      ...usersInputs,
+      {
+        input: "",
+        question: "",
+        type: "INT",
+      },
+    ]);
+  };
 
   const createNewTrigger = (e: any) => {
-    setTriggersOfc([...triggers_ofc, { key: hash_generator(), conditions: [hash_generator()] }])
-  }
+    setTriggersOfc([
+      ...triggers_ofc,
+      { key: hash_generator(), conditions: [hash_generator()] },
+    ]);
+  };
   const createNewTriggerCondition = (e: any, index: number) => {
-    let clone = triggers_ofc[index]
-    clone.conditions.push(hash_generator())
+    let clone = triggers_ofc[index];
+    clone.conditions.push(hash_generator());
 
     setTriggersOfc([
       ...triggers_ofc.slice(0, index),
       clone,
-      ...triggers_ofc.slice(index + 1)
-    ]
-    )
-  }
+      ...triggers_ofc.slice(index + 1),
+    ]);
+  };
 
   const verify_input_type = (input: string) => {
-    if (typeof window !== "undefined"){
-      const element = (document.getElementById(input) as HTMLInputElement);
+    if (typeof window !== "undefined") {
+      const element = document.getElementById(input) as HTMLInputElement;
       const value = element == null ? "" : element.value;
-      const filterd = usersInputs.filter(Input => (Input.input === value))
+      const filterd = usersInputs.filter((Input) => Input.input === value);
 
       if (filterd.length > 0) {
-        if (filterd[0].type == "INT")
-          return true
-        else
-          return false
+        if (filterd[0].type == "INT") return true;
+        else return false;
       }
-
     }
 
-    return true
-  }
+    return true;
+  };
 
   const handleChange = (e: any) => {
-    console.log(e)
+    console.log(e);
     //setForm({...form,[e.target.name]:e.target.value})
-  }
+  };
 
   const handleChangeInput = (e: any, index: number) => {
     //console.log(e.target.name, index)
-    let clone = usersInputs[index]
+    let clone = usersInputs[index];
     clone[e.target.name] = e.target.value;
 
     setUserInputs([
       ...usersInputs.slice(0, index),
       clone,
-      ...usersInputs.slice(index + 1)
-    ]
-    )
-  }
+      ...usersInputs.slice(index + 1),
+    ]);
+  };
 
   const handleChangeNumber = (name: string, value: any) => {
-    setForm({ ...form, [name]: value })
+    setForm({ ...form, [name]: value });
 
     if (name == "roles") {
       const value_ = parseInt(value);
-      setUserRole(Array.from(Array(value_ + 1).keys()).map(e => String(e)))
+      setUserRole(Array.from(Array(value_ + 1).keys()).map((e) => String(e)));
     }
-  }
+  };
 
   const handleChangeSelect = (name: string, index: number) => {
-    const element = (document.getElementById(name) as HTMLInputElement);
+    const element = document.getElementById(name) as HTMLInputElement;
     const value = element == null ? "" : element.value;
 
-    let clone = usersInputs[index]
+    let clone = usersInputs[index];
     clone[name] = value;
-    console.log("CLONE", clone)
+    console.log("CLONE", clone);
 
     setUserInputs([
       ...usersInputs.slice(0, index),
       clone,
-      ...usersInputs.slice(index + 1)
-    ]
-    )
-  }
+      ...usersInputs.slice(index + 1),
+    ]);
+  };
 
   const handleChangeSelectTrigger = (name: string, index: number) => {
-    const element = (document.getElementById(name) as HTMLInputElement);
+    const element = document.getElementById(name) as HTMLInputElement;
     const value = element == null ? "" : element.value;
 
-    let clone = triggers[index]
+    let clone = triggers[index];
     clone[name] = value;
 
     setTriggers([
       ...triggers.slice(0, index),
       clone,
-      ...triggers.slice(index + 1)
-    ]
-    )
-  }
+      ...triggers.slice(index + 1),
+    ]);
+  };
 
   return (
     <Box bg={"gray.50"} p={12}>
       <Head>
         <title>Create a Contract</title>
       </Head>
-      <Heading fontSize="lg" fontWeight="medium" lineHeight="6" color="blue.600">
+      <Heading
+        fontSize="lg"
+        fontWeight="medium"
+        lineHeight="6"
+        color="blue.600"
+      >
         Create a Project {"  "}
-        <Tooltip label="Article about contracts" aria-label='A tooltip'>
-          <Link isExternal href="https://github.com/athena-labz/athena-frontend"  ><InfoOutlineIcon as={"a"} /></Link>
+        <Tooltip label="Article about contracts" aria-label="A tooltip">
+          <Link
+            isExternal
+            href="https://github.com/athena-labz/athena-frontend"
+          >
+            <InfoOutlineIcon as={"a"} />
+          </Link>
         </Tooltip>
-
       </Heading>
 
       <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true">
         <Box py={5}>
-          <Box
-            borderTop="solid 1px"
-            borderTopColor={"blue.200"}
-          ></Box>
+          <Box borderTop="solid 1px" borderTopColor={"blue.200"}></Box>
         </Box>
       </Box>
 
@@ -197,13 +228,7 @@ export default function Component() {
           rounded={[null, "md"]}
           overflow={{ sm: "hidden" }}
         >
-          <Stack
-            px={4}
-            py={5}
-            p={[null, 6]}
-            bg={"white"}
-            spacing={6}
-          >
+          <Stack px={4} py={5} p={[null, 6]} bg={"white"} spacing={6}>
             <SimpleGrid columns={2} spacing={6}>
               <FormControl as={GridItem} colSpan={[1, 0]}>
                 <FormLabel
@@ -254,7 +279,6 @@ export default function Component() {
                   rounded="md"
                 />
               </FormControl>
-
             </SimpleGrid>
 
             <SimpleGrid columns={2} spacing={6}>
@@ -267,7 +291,12 @@ export default function Component() {
                 >
                   Collateral
                 </FormLabel>
-                <NumberInput step={1} min={0} onChange={(e) => handleChangeNumber("collateral", e)} name="collateral">
+                <NumberInput
+                  step={1}
+                  min={0}
+                  onChange={(e) => handleChangeNumber("collateral", e)}
+                  name="collateral"
+                >
                   <NumberInputField />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
@@ -309,30 +338,45 @@ export default function Component() {
                 </Stack>
               </FormControl>
             </SimpleGrid>
-
-
           </Stack>
 
-
-
-          <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true" p={15} pb={0}>
-            <Heading fontSize="md" fontWeight="medium" lineHeight="6" color="blue.600">
+          <Box
+            visibility={{ base: "hidden", sm: "visible" }}
+            aria-hidden="true"
+            p={15}
+            pb={0}
+          >
+            <Heading
+              fontSize="md"
+              fontWeight="medium"
+              lineHeight="6"
+              color="blue.600"
+            >
               Goals
             </Heading>
             <Box py={3}>
-              <Box
-                borderTop="solid 1px"
-                borderTopColor={"blue.200"}
-              ></Box>
+              <Box borderTop="solid 1px" borderTopColor={"blue.200"}></Box>
             </Box>
           </Box>
 
-          <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true" px={15} pt={0}>
-            <Heading fontSize="sm" fontWeight="medium" lineHeight="6" color="blue.600">
+          <Box
+            visibility={{ base: "hidden", sm: "visible" }}
+            aria-hidden="true"
+            px={15}
+            pt={0}
+          >
+            <Heading
+              fontSize="sm"
+              fontWeight="medium"
+              lineHeight="6"
+              color="blue.600"
+            >
               Inputs {"   "}
               <Tooltip
-                placement='right'
-                label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero velit, rhoncus n" aria-label='A tooltip'>
+                placement="right"
+                label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero velit, rhoncus n"
+                aria-label="A tooltip"
+              >
                 <InfoOutlineIcon as={"a"} />
               </Tooltip>
             </Heading>
@@ -353,7 +397,7 @@ export default function Component() {
                   type="text"
                   placeholder="Question identifier"
                   name="input"
-                  onChange={e => handleChangeInput(e, index)}
+                  onChange={(e) => handleChangeInput(e, index)}
                   value={userInput.input}
                   id="service_input"
                   autoComplete="family-name"
@@ -389,7 +433,6 @@ export default function Component() {
                   w="full"
                   rounded="md"
                 />
-
               </FormControl>
               <FormControl as={GridItem} colSpan={[6, 1]}>
                 <FormLabel
@@ -401,26 +444,36 @@ export default function Component() {
                   Type
                 </FormLabel>
 
-                <Select variant="outline" onChange={e => handleChangeSelect("type", index)} id="type">
+                <Select
+                  variant="outline"
+                  onChange={(e) => handleChangeSelect("type", index)}
+                  id="type"
+                >
                   <option value="INT">QUANTITY</option>
                   <option value="BOOL">TRUE/FALSE</option>
-
                 </Select>
               </FormControl>
 
-              {usersRoleValues.length > 0 && <FormControl as={GridItem} colSpan={[3, 2]}>
-                <FormLabel
-                  htmlFor="price"
-                  fontSize="sm"
-                  fontWeight="md"
-                  color={"white"}
-                >
-                  {"."}
-                </FormLabel>
-                <MultiSelectMenu label="Roles" options={usersRoleValues} />
-              </FormControl>}
+              {usersRoleValues.length > 0 && (
+                <FormControl as={GridItem} colSpan={[3, 2]}>
+                  <FormLabel
+                    htmlFor="price"
+                    fontSize="sm"
+                    fontWeight="md"
+                    color={"white"}
+                  >
+                    {"."}
+                  </FormLabel>
+                  <MultiSelectMenu label="Roles" options={usersRoleValues} />
+                </FormControl>
+              )}
 
-              <FormControl as={GridItem} colSpan={[2, 1]} display="flex" alignItems="flex-end">
+              <FormControl
+                as={GridItem}
+                colSpan={[2, 1]}
+                display="flex"
+                alignItems="flex-end"
+              >
                 <Button
                   ml="-8rem"
                   mb="0.5rem"
@@ -429,33 +482,56 @@ export default function Component() {
                   fontWeight="sm"
                   size="sm"
                   _hover={{
-                    bg: 'blue.400',
+                    bg: "blue.400",
                   }}
                   onClick={createNewUserInput}
                 >
                   <AddIcon />
                 </Button>
               </FormControl>
-
             </SimpleGrid>
           ))}
 
-          <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true" p={15}>
-            <Heading fontSize="sm" fontWeight="medium" lineHeight="6" color="blue.600">
+          <Box
+            visibility={{ base: "hidden", sm: "visible" }}
+            aria-hidden="true"
+            p={15}
+          >
+            <Heading
+              fontSize="sm"
+              fontWeight="medium"
+              lineHeight="6"
+              color="blue.600"
+            >
               Triggers{"   "}
               <Tooltip
-                placement='right'
-                label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero velit, rhoncus n" aria-label='A tooltip'>
+                placement="right"
+                label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero velit, rhoncus n"
+                aria-label="A tooltip"
+              >
                 <InfoOutlineIcon as={"a"} />
               </Tooltip>
             </Heading>
           </Box>
 
           {triggers_ofc.map((trigger_, index_) => (
-            <Flex w={"100%"} alignItems={"center"} justifyContent={"flex"} px={5} pb={4} key={trigger_.key} mb={10}>
+            <Flex
+              w={"100%"}
+              alignItems={"center"}
+              justifyContent={"flex"}
+              px={5}
+              pb={4}
+              key={trigger_.key}
+              mb={10}
+            >
               <Box>
                 {trigger_.conditions.map((condition, index) => (
-                  <SimpleGrid columns={4} spacing={4} py={1} key={`input-${index}`} >
+                  <SimpleGrid
+                    columns={4}
+                    spacing={4}
+                    py={1}
+                    key={`input-${index}`}
+                  >
                     <FormControl as={GridItem} colSpan={[3, 1]}>
                       <FormLabel
                         htmlFor="price"
@@ -466,9 +542,14 @@ export default function Component() {
                         Question identifier
                       </FormLabel>
                       <Select variant="outline" id={`qi-${condition}`}>
-                        {
-                          usersInputs.map((userInput, index) => (<option key={`option-inpt-${index}`} value={userInput.input}>{userInput.input}</option>))
-                        }
+                        {usersInputs.map((userInput, index) => (
+                          <option
+                            key={`option-inpt-${index}`}
+                            value={userInput.input}
+                          >
+                            {userInput.input}
+                          </option>
+                        ))}
                       </Select>
                     </FormControl>
 
@@ -481,19 +562,23 @@ export default function Component() {
                       >
                         Operator
                       </FormLabel>
-                      <Select variant="outline" onChange={e => handleChangeSelectTrigger("operator", index)} id="operator">
-
-                        {verify_input_type(`qi-${condition}`) ?
+                      <Select
+                        variant="outline"
+                        onChange={(e) =>
+                          handleChangeSelectTrigger("operator", index)
+                        }
+                        id="operator"
+                      >
+                        {verify_input_type(`qi-${condition}`) ? (
                           <>
                             <option value="INT">EQUALS</option>
                             <option value="INT">GREATER THAN</option>
                             <option value="BOOL">LESS THAN</option>
                           </>
-                          :
+                        ) : (
                           <option value="INT">EQUALS</option>
-                        }
+                        )}
                       </Select>
-
                     </FormControl>
                     <FormControl as={GridItem} colSpan={[2, 2, 1]}>
                       <FormLabel
@@ -504,7 +589,7 @@ export default function Component() {
                       >
                         Value
                       </FormLabel>
-                      {verify_input_type(`qi-${condition}`) ?
+                      {verify_input_type(`qi-${condition}`) ? (
                         <Input
                           type="text"
                           name="title"
@@ -518,7 +603,7 @@ export default function Component() {
                           w="full"
                           rounded="md"
                         />
-                        :
+                      ) : (
                         <Select
                           variant="outline"
                           mt={1}
@@ -530,14 +615,16 @@ export default function Component() {
                         >
                           <option value="TRUE">TRUE</option>
                           <option value="FALSE">FALSE</option>
-
                         </Select>
-                      }
-
+                      )}
                     </FormControl>
 
-
-                    <FormControl as={GridItem} colSpan={[2, 1]} display="flex" alignItems="flex-end">
+                    <FormControl
+                      as={GridItem}
+                      colSpan={[2, 1]}
+                      display="flex"
+                      alignItems="flex-end"
+                    >
                       <Button
                         ml="0.5rem"
                         mb="0.5rem"
@@ -546,11 +633,11 @@ export default function Component() {
                         fontWeight="sm"
                         size="sm"
                         _hover={{
-                          bg: 'blue.400',
+                          bg: "blue.400",
                         }}
-                        onClick={e => createNewTriggerCondition(e, index_)}
+                        onClick={(e) => createNewTriggerCondition(e, index_)}
                       >
-                        AND  {"   "}
+                        AND {"   "}
                         <AddIcon marginLeft={2} />
                       </Button>
                     </FormControl>
@@ -559,7 +646,7 @@ export default function Component() {
               </Box>
               <FormControl as={GridItem} w="20%" ml={"-2rem"}>
                 <Flex alignItems={"center"} justifyContent={"space-between"}>
-                  <Box >
+                  <Box>
                     <FormLabel
                       htmlFor="price"
                       fontSize="sm"
@@ -583,7 +670,6 @@ export default function Component() {
                     />
                   </Box>
 
-
                   <Button
                     p={4}
                     ml="0.5rem"
@@ -593,26 +679,18 @@ export default function Component() {
                     fontWeight="sm"
                     size="sm"
                     _hover={{
-                      bg: 'blue.400',
+                      bg: "blue.400",
                     }}
                     onClick={createNewTrigger}
                   >
                     <AddIcon />
                   </Button>
-
-
                 </Flex>
-
               </FormControl>
+            </Flex>
+          ))}
 
-            </Flex>))}
-
-          <Box
-            px={{ base: 4, sm: 6 }}
-            py={3}
-            bg={"white"}
-            textAlign="right"
-          >
+          <Box px={{ base: 4, sm: 6 }} py={3} bg={"white"} textAlign="right">
             <Button
               type="submit"
               bg="#38b6ff"
@@ -620,7 +698,7 @@ export default function Component() {
               _focus={{ shadow: "" }}
               fontWeight="md"
               _hover={{
-                bg: 'blue.400',
+                bg: "blue.400",
               }}
             >
               Save
@@ -628,7 +706,6 @@ export default function Component() {
           </Box>
         </chakra.form>
       </Box>
-
     </Box>
   );
 }
