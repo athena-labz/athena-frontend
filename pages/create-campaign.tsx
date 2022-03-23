@@ -23,6 +23,8 @@ import {
   Link,
   Textarea,
 } from "@chakra-ui/react";
+import DatePicker from "../components/DatePicker";
+
 import Head from "next/head";
 import MultiSelectMenu from "../components/MutipleSelect";
 import AuthenticationRequired from "../components/AuthenticationRequired";
@@ -52,6 +54,12 @@ interface GenericObject {
   [key: string]: any;
 }
 
+interface Deliverable {
+  deliverable: string;
+  days: number;
+  tokens: number;
+}
+
 export default function Component() {
   const { isSignedIn } = useUser();
   if (isSignedIn() === false) {
@@ -62,8 +70,14 @@ export default function Component() {
   const [collateral, setCollateral] = useState<number>(0);
   const [description, setDescription] = useState<string>("");
   const [judges, setJudges] = useState<string[]>([""]);
-  // TODO: Make this deliverable, deadline, funds
-  const [deliverables, setDeliverables] = useState<string[]>([""]);
+  const [deliverables, setDeliverables] = useState<Deliverable[]>([
+    {
+      deliverable: "",
+      days: 0,
+      tokens: 0,
+    },
+  ]);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   const options = [
     "Noa Rahman",
@@ -93,7 +107,14 @@ export default function Component() {
   };
 
   const createNewDeliverable = (e: any) => {
-    setDeliverables([...deliverables, ""]);
+    setDeliverables([
+      ...deliverables,
+      {
+        deliverable: "",
+        days: 0,
+        tokens: 0,
+      },
+    ]);
   };
 
   const removeDeliverable = (idx: number) => {
@@ -105,7 +126,30 @@ export default function Component() {
 
   const setDeliverable = (idx: number, val: string) => {
     let deliverablesCopy = JSON.parse(JSON.stringify(deliverables));
-    deliverablesCopy[idx] = val;
+    deliverablesCopy[idx] = {
+      ...deliverablesCopy[idx],
+      deliverable: val,
+    };
+
+    setDeliverables(deliverablesCopy);
+  };
+
+  const setDays = (idx: number, val: number) => {
+    let deliverablesCopy = JSON.parse(JSON.stringify(deliverables));
+    deliverablesCopy[idx] = {
+      ...deliverablesCopy[idx],
+      days: val,
+    };
+
+    setDeliverables(deliverablesCopy);
+  };
+
+  const setTokens = (idx: number, val: number) => {
+    let deliverablesCopy = JSON.parse(JSON.stringify(deliverables));
+    deliverablesCopy[idx] = {
+      ...deliverablesCopy[idx],
+      tokens: val,
+    };
 
     setDeliverables(deliverablesCopy);
   };
@@ -310,22 +354,59 @@ export default function Component() {
                 </FormLabel>
 
                 <Stack direction="column" width="100%" alignItems="center">
-                  {deliverables.map((val, idx) => (
+                  {deliverables.map(({ deliverable, days, tokens }, idx) => (
                     <Stack direction="row" width="100%" alignItems="center">
-                      <Input
-                        type="text"
-                        placeholder="I will..."
-                        name="deliverable"
-                        id="deliverable"
-                        value={val}
-                        onChange={(e) => setDeliverable(idx, e.target.value)}
-                        mt={1}
-                        focusBorderColor="blue.400"
-                        shadow="sm"
-                        size="md"
-                        w="full"
-                        rounded="md"
-                      />
+                      <SimpleGrid
+                        columns={3}
+                        spacing={6}
+                        width="100%"
+                        alignItems="center"
+                      >
+                        <Input
+                          type="text"
+                          placeholder="I will complete X..."
+                          name="deliverable"
+                          id="deliverable"
+                          value={deliverable}
+                          onChange={(e) => setDeliverable(idx, e.target.value)}
+                          mt={1}
+                          focusBorderColor="blue.400"
+                          shadow="sm"
+                          size="md"
+                          w="full"
+                          rounded="md"
+                        />
+                        <Input
+                          type="number"
+                          placeholder="In Y days..."
+                          name="days"
+                          id="days"
+                          value={days === 0 ? "" : days}
+                          onChange={(e) => setDays(idx, Number(e.target.value))}
+                          mt={1}
+                          focusBorderColor="blue.400"
+                          shadow="sm"
+                          size="md"
+                          w="full"
+                          rounded="md"
+                        />
+                        <Input
+                          type="number"
+                          placeholder="For Z tokens..."
+                          name="tokens"
+                          id="tokens"
+                          value={tokens === 0 ? "" : tokens}
+                          onChange={(e) =>
+                            setTokens(idx, Number(e.target.value))
+                          }
+                          mt={1}
+                          focusBorderColor="blue.400"
+                          shadow="sm"
+                          size="md"
+                          w="full"
+                          rounded="md"
+                        />
+                      </SimpleGrid>
                       {idx === deliverables.length - 1 ? (
                         <Button
                           ml="0"
