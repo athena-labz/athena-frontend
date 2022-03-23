@@ -25,6 +25,7 @@ const tablesTableData = [
     domain: "Organization",
     status: "Progress",
     date: "14/06/21",
+    link:"http://localhost:3000/campaign/93fb923456f9f955908f6092a6c58057"
   },
   {
     name: "Thunder Road: Vendetta",
@@ -33,6 +34,7 @@ const tablesTableData = [
     domain: "Developer",
     status: "Dispute",
     date: "12/05/21",
+    link:"http://localhost:3000/campaign/259bf04f526341c498ebf1ce582d1291"
   },
   {
     name: "Floating Floors",
@@ -41,22 +43,7 @@ const tablesTableData = [
     domain: "Projects",
     status: "Finished",
     date: "07/06/21",
-  },
-  {
-    name: "Freduardo Hill",
-    email: "freduardo@simmmple.com",
-    subdomain: "Judge",
-    domain: "Mediation",
-    status: "Dispute",
-    date: "14/11/21",
-  },
-  {
-    name: "Daniel Thomas",
-    email: "daniel@simmmple.com",
-    subdomain: "Programmer",
-    domain: "Developer",
-    status: "Progress",
-    date: "21/01/21",
+    link:"http://localhost:3000/campaign/27b4039a42d9d632a5e791b166127c42"
   }
 ];
 
@@ -223,7 +210,7 @@ function Profile() {
                     PROJECTS
                   </Text>
                   <Text color='#fff' fontSize='22px' fontWeight='bold'>
-                    4
+                    3
                   </Text>
                 </Flex>
                 <IconBox bg='brand.200' w='56px' h='56px' direction='column'>
@@ -242,7 +229,7 @@ function Profile() {
                     DISPUTES
                   </Text>
                   <Text color='#fff' fontSize='22px' fontWeight='bold'>
-                    3
+                    1
                   </Text>
                 </Flex>
                 <IconBox bg='brand.200' w='56px' h='56px' direction='column'>
@@ -300,6 +287,7 @@ function Profile() {
               {tablesTableData.map((row, index, arr) => {
                 return (
                   <TablesTableRow
+                    key={row.name}
                     name={row.name}
                     email={row.email}
                     subdomain={row.subdomain}
@@ -307,6 +295,7 @@ function Profile() {
                     status={row.status}
                     date={row.date}
                     lastItem={index === arr.length - 1 ? true : false}
+                    link={row.link}
                   />
                 );
               })}

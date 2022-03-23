@@ -28,10 +28,12 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import NextLink from 'next/link'
+import '../../styles/Home.module.css'
 
 function TablesTableRow(props) {
   const {
-    logo,
+    link,
     name,
     email,
     subdomain,
@@ -43,31 +45,32 @@ function TablesTableRow(props) {
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
+  const [colorState, setColorState] = React.useState(true);
 
-  const get_status_bg = (status) =>  {
+  const get_status_bg = (status) => {
     switch (status) {
       case "Progress":
-          return "green.400" 
+        return "green.400"
       case "Finished":
         return "#38b6ff"
       case "Dispute":
         return "yellow.500"
-    
+
       default:
         return "transparent"
 
     }
   }
 
-  const get_status_border = (status) =>  {
+  const get_status_border = (status) => {
     switch (status) {
       case "Progress":
-          return "none" 
+        return "none"
       case "Finished":
         return "1px solid #fff"
       case "Dispute":
         return "none"
-    
+
       default:
         return "none"
 
@@ -127,10 +130,19 @@ function TablesTableRow(props) {
           {date}
         </Text>
       </Td>
-      <Td border={lastItem ? "none" : null} borderBottomColor='#56577A'>
-        <Button p='0px' bg='transparent' variant='no-hover'>
-         <AiOutlineInfoCircle size={29} color="#38b6ff" />
-        </Button>
+      <Td
+        border={lastItem ? "none" : null}
+        cursor={"pointer"}
+        borderBottomColor='#56577A'
+        p={4}
+      >
+        <NextLink href={link}>
+          <AiOutlineInfoCircle
+            size={25}
+            color={colorState ? "#38b6ff" : "#0b7cbd"}
+            onMouseOver={e => { setColorState(!colorState) }}
+            onMouseLeave={e => { setColorState(!colorState) }} />
+        </NextLink>
       </Td>
     </Tr>
   );
