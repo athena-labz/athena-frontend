@@ -210,7 +210,7 @@ function Profile() {
                     PROJECTS
                   </Text>
                   <Text color='#fff' fontSize='22px' fontWeight='bold'>
-                    4
+                    3
                   </Text>
                 </Flex>
                 <IconBox bg='brand.200' w='56px' h='56px' direction='column'>
@@ -229,7 +229,7 @@ function Profile() {
                     DISPUTES
                   </Text>
                   <Text color='#fff' fontSize='22px' fontWeight='bold'>
-                    3
+                    1
                   </Text>
                 </Flex>
                 <IconBox bg='brand.200' w='56px' h='56px' direction='column'>
@@ -287,6 +287,7 @@ function Profile() {
               {tablesTableData.map((row, index, arr) => {
                 return (
                   <TablesTableRow
+                    key={row.name}
                     name={row.name}
                     email={row.email}
                     subdomain={row.subdomain}

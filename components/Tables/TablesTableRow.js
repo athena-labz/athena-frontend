@@ -45,6 +45,7 @@ function TablesTableRow(props) {
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
+  const [colorState, setColorState] = React.useState(true);
 
   const get_status_bg = (status) => {
     switch (status) {
@@ -129,9 +130,18 @@ function TablesTableRow(props) {
           {date}
         </Text>
       </Td>
-      <Td  border={lastItem ? "none" : null} borderBottomColor='#56577A' style={{"&:hover .infoButton":{color:"red"}}} >
+      <Td
+        border={lastItem ? "none" : null}
+        cursor={"pointer"}
+        borderBottomColor='#56577A'
+        p={4}
+      >
         <NextLink href={link}>
-          <AiOutlineInfoCircle size={25} color="#38b6ff" className="infoButton" />
+          <AiOutlineInfoCircle
+            size={25}
+            color={colorState ? "#38b6ff" : "#0b7cbd"}
+            onMouseOver={e => { setColorState(!colorState) }}
+            onMouseLeave={e => { setColorState(!colorState) }} />
         </NextLink>
       </Td>
     </Tr>
