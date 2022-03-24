@@ -44,6 +44,7 @@ import {
 import hash_generator from "../utils/hash";
 import { useUser } from "../contexts/UserContext";
 import Router from "next/router";
+import axios from 'axios';
 
 export interface Item {
   label: string;
@@ -61,7 +62,7 @@ interface Deliverable {
 }
 
 export default function Component() {
-  const { isSignedIn } = useUser();
+  const { isSignedIn, getUser } = useUser();
   if (isSignedIn() === false) {
     return <AuthenticationRequired />;
   }
@@ -78,14 +79,15 @@ export default function Component() {
     },
   ]);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [apiBeingUsed, setApiBeingUsed] = useState(false);
 
   const options = [
-    "Noa Rahman",
-    "Julie Molina",
-    "Leonidas Browning",
-    "Qiang He",
-    "Dong Liu",
-    "Zack Jacobs",
+    "Noa.Rahman@email.com",
+    "Julie.Molina@email.com",
+    "Leonidas.Browning@email.com",
+    "Qiang.He@email.com",
+    "Dong.Liu@email.com",
+    "Zack.Jacobs@email.com",
   ];
 
   const createNewJudge = (e: any) => {
@@ -153,6 +155,31 @@ export default function Component() {
 
     setDeliverables(deliverablesCopy);
   };
+
+  const createProject = () => {
+    const backend = axios.create({
+      baseURL: "http://127.0.0.1:5000/",
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    });
+
+    setApiBeingUsed(true);
+    backend.post('/create-project', {
+      name: title,
+      description: description,
+      collateral: collateral,
+      judges: judges,
+      deliverables: deliverables,
+      token: getUser()
+    }).then(res => {
+      console.log("cool")
+      console.log(res)
+      setApiBeingUsed(false);
+    }).catch(err => {
+      console.error(err)
+      setApiBeingUsed(false);
+    })
+  }
 
   return (
     <Box bg={"gray.50"} p={12}>
@@ -457,8 +484,10 @@ export default function Component() {
               _hover={{
                 bg: "blue.400",
               }}
+              disabled={apiBeingUsed}
+              onClick={createProject}
             >
-              Save
+              Create
             </Button>
           </Box>
         </chakra.form>
