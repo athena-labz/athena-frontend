@@ -13,19 +13,19 @@ import {
 
 import { MdNotificationsActive, MdCheck } from "react-icons/md";
 import { ReactElement } from 'react';
-import { FcAssistant, FcManager, FcInTransit } from 'react-icons/fc';
-import { GiChessKnight,GiChessRook,GiChessQueen } from 'react-icons/gi';
+import { FcCalendar } from 'react-icons/fc';
+import { GiChessKnight, GiChessRook, GiChessQueen } from 'react-icons/gi';
 
 interface FeatureProps {
     title: string;
     name: string;
-    email:string;
-    address:string;
+    email: string;
+    address: string;
     icon: ReactElement;
 }
 
 function ParticipantsSection() {
-    const Feature = ({ title, name,email,address, icon }: FeatureProps) => {
+    const Feature = ({ title, name, email, address, icon }: FeatureProps) => {
         return (
             <Stack>
                 <Flex
@@ -55,7 +55,7 @@ function ParticipantsSection() {
                     name='Alice Jones'
                     email="alice@email.com"
                     address="addr_16aasd23...."
-                    
+
                 />
                 <Feature
                     icon={<Icon as={GiChessRook} w={10} h={10} />}
@@ -120,13 +120,14 @@ export default function Component() {
                     <Box w="full" px={[6, 4]} mx="auto">
                         <Text
                             mb={5}
+                        
                             fontSize="3xl"
                             fontWeight="bold"
                             lineHeight="tight"
                             bgGradient="linear(to-r, blue.300, blue.600)"
                             bgClip="text"
                         >
-                            Lifetime Membership
+                            {"Lifetime Membership".toUpperCase()}
                         </Text>
                     </Box>
                     <Box bgGradient={`linear(to-b, ${topBg} 50%, ${bottomBg} 50%)`}>
@@ -199,9 +200,20 @@ export default function Component() {
                                 bg={useColorModeValue("#F9FAFB", "gray.900")}
                                 borderRightRadius="md"
                             >
-                                <Text fontSize="xl" fontWeight="semibold">
-                                    Collateral
-                                </Text>
+                                <Flex
+                                    align="center"
+                                    fontSize="5xl"
+                                    fontWeight={["bold", "extrabold"]}
+                                    lineHeight="tight"
+                                >
+                                    <FcCalendar size={"30"} style={{marginRight:10}} />
+                                    <Text fontSize="xl" fontWeight="semibold">
+                                        Apr 24 2022
+                                    </Text>
+
+                                </Flex>
+
+
                                 <Flex
                                     align="center"
                                     fontSize="5xl"
