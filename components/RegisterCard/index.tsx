@@ -188,6 +188,50 @@ export default function RegisterCard() {
               >
                 Sign up
               </Button>
+    <Stack spacing={1} mx={'auto'} maxW={'lg'} py={4} px={3}>
+      <Stack align={'center'} py={4}>
+        <Heading fontSize={'5xl'}>Create your account</Heading>
+      </Stack>
+      <Center>
+        <RadioGroup defaultValue="2" onChange={setRole} value={userData.role}>
+          <Stack spacing={5} direction="row" >
+            <Radio size="md" name="freelancer" value="freelancer" colorScheme="blue" >
+              Freelancer
+            </Radio>
+            <Radio size="md" name="customer" value="customer" colorScheme="blue">
+              Customer
+            </Radio>
+            <Radio size="md" name="mediator" value="mediator" colorScheme="blue" >
+              Mediator
+            </Radio>
+          </Stack>
+        </RadioGroup></Center>
+      <Box
+        rounded={'lg'}
+        bg={useColorModeValue('white', 'gray.700')}
+        boxShadow={'lg'}
+        p={8}>
+
+        <Stack spacing={4}>
+          <FormControl id="email">
+            <FormLabel>Name</FormLabel>
+            <Input value={userData.name} onChange={evt => setName(evt.target.value)} />
+          </FormControl>
+          <FormControl id="email">
+            <FormLabel>Email address</FormLabel>
+            <Input type="email" value={userData.email} onChange={evt => setEmail(evt.target.value)} />
+          </FormControl>
+          <FormControl id="password">
+            <FormLabel>Password</FormLabel>
+            <Input type="password" value={userData.password} onChange={evt => setPassword(evt.target.value)} />
+          </FormControl>
+          <Stack spacing={10}>
+            <Stack
+              direction={{ base: 'column', sm: 'row' }}
+              align={'start'}
+              justify={'space-between'}>
+              <Checkbox>Remember me</Checkbox>
+              <Link href=/forgot-password" color={'blue.400'}>Forgot password?</Link>
             </Stack>
           </Stack>
         </Box>
