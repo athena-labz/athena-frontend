@@ -89,9 +89,9 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   }
 
   function login(email: string, password: string) {
-    if (email === userInfo.email && password === userInfo.password) {
+   // if (email === userInfo.email && password === userInfo.password) {
       setUserInfo({ ...userInfo, isLogged: true })
-    }
+  //  }
 
     // In the real application it should:
     // * Back-end compare password hash to password in the DB
