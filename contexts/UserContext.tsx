@@ -1,116 +1,135 @@
-import { createContext, useState, ReactNode, useContext, useEffect } from 'react';
+import { createContext, ReactNode, useContext } from "react";
 
-type Role = "freelancer" | "customer" | "mediator";
+import Router from "next/router";
 
-type UserInfoData = {
-  isLogged: boolean;
-  role: Role | null;
-  name: string | null;
-  email: string | null;
-  password: string | null;
-}
+import axios from "axios";
+
+import jwt_decode from "jwt-decode";
+
+import { addrToPubKeyHash, signTx } from "../wallet/utils";
+
+import { API } from "../contexts/WalletContext";
+
+type Role = "Proposer" | "Contributor" | "Mediator";
 
 type UserContextData = {
-  user: UserInfoData;
-  register: (role: Role, name: string, email: string, password: string) => void;
-  login: (email: string, password: string) => void;
+  isSignedIn: () => boolean;
+  getUser: () => any;
+  register: (
+    role: Role,
+    name: string,
+    email: string,
+    address: string,
+    password: string,
+    api: API
+  ) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-}
+};
 
 type UserContextProviderProps = {
   children: ReactNode;
-}
+};
+
+const backend = axios.create({
+  baseURL: "http://127.0.0.1:5000/",
+  headers: { "Content-Type": "application/json" },
+  withCredentials: true,
+});
 
 export const UserContext_ = createContext({} as UserContextData);
 
 export function UserContextProvider({ children }: UserContextProviderProps) {
-  const [userInfo, setUserInfo] = useState<UserInfoData>({
-    isLogged: false,
-    role: null,
-    name: null,
-    email: null,
-    password: null
-  })
+  function getUser() {
+    const token = localStorage.getItem("user");
+    if (!token) {
+      return null;
+    }
 
-  if (typeof window !== "undefined") {
-    useEffect(() => {
-      setUserInfo((
-        window.sessionStorage.getItem('userInfo') !== null ? (
-          JSON.parse(sessionStorage.getItem('userInfo')!)
-        ) : userInfo
-      ))
-    }, [window])
+    return jwt_decode(token);
   }
 
-  useEffect(() => {
+  function isSignedIn() {
     if (typeof window !== "undefined") {
-      window.sessionStorage.setItem('userInfo', JSON.stringify(userInfo));
+      return getUser() !== null;
     }
-  }, [userInfo]);
 
-  function saveInfo(role: Role, name: string, email: string, password: string) {
-    if (name !== "" && password !== "")
-      setUserInfo({
-        ...userInfo,
-        role: role,
-        name: name,
+    return false;
+  }
+
+  async function register(
+    role: Role,
+    name: string,
+    email: string,
+    address: string,
+    password: string,
+    api: API
+  ) {
+    const arg = {
+      name,
+      email,
+      role,
+      address,
+      password,
+      pubkeyhash: addrToPubKeyHash(address),
+    };
+
+    try {
+      const res = await backend.post("/register", arg);
+
+      const txHash = await signTx(api, res.data.transaction);
+
+      if (getUser() === null)
+        localStorage.setItem("user", res.data.access_token);
+
+      Router.push("/");
+
+      return Promise.resolve();
+    } catch (error: any) {
+      return Promise.reject(error);
+    }
+  }
+
+  async function login(email: string, password: string) {
+    try {
+      const res = await backend.post("/login", {
         email: email,
-        password: password
-      })
-  }
+        password: password,
+      });
 
-  function clearInfo() {
-    setUserInfo({
-      isLogged: false,
-      role: null,
-      name: null,
-      email: null,
-      password: null
-    });
-  }
+      if (getUser() === null)
+        localStorage.setItem("user", res.data.access_token);
 
-  function register(role: Role, name: string, email: string, password: string) {
-    saveInfo(role, name, email, password);
-
-    console.log("Registering user")
-    console.log({
-      role: role,
-      name: name,
-      email: email,
-      password: password
-    })
-
-    // Should then
-    // * Back-end make sure there is no such name or email yet
-    // * Send an email confirmation
-    // * Register user in the DB
-    // * Back-end register user info
-    // * Clear user password
-  }
-
-  function login(email: string, password: string) {
-    if (email === userInfo.email && password === userInfo.password) {
-      setUserInfo({ ...userInfo, isLogged: true })
+      return Promise.resolve();
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        console.error(error.response.data.message);
+        return Promise.reject("Incorrect email or password");
+      } else {
+        throw error;
+      }
     }
+  }
 
-    // In the real application it should:
-    // * Back-end compare password hash to password in the DB
-    // * If it matches, return user info and let him log-in
-    // * Otherwise, warn user that he has the wrong password / email
+  function logout() {
+    localStorage.removeItem("user");
   }
 
   return (
-    <UserContext_.Provider value={{
-      user: userInfo,
-      register: register,
-      login: login,
-      logout: clearInfo
-    }}>
+    <UserContext_.Provider
+      value={{
+        isSignedIn,
+        getUser,
+        register: register,
+        login: login,
+        logout: logout,
+      }}
+    >
       {children}
     </UserContext_.Provider>
-  )
+  );
 }
 
 export const useUser = () => {
-  return useContext(UserContext_)
-}
+  return useContext(UserContext_);
+};

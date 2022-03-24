@@ -1,68 +1,62 @@
-import { useState } from 'react';
-import Router from 'next/router'
 import {
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  RadioGroup,
-  Radio,
-  Checkbox,
   Stack,
-  Link,
   Button,
-  Heading,
-  Center,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "@chakra-ui/react";
 
-export default function WalletSelector() {
+import { useWallet } from "../../contexts/WalletContext";
+
+type WalletSelectorProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  onSelect: (wallet: string) => void;
+};
+
+export default function WalletSelector({
+  isOpen,
+  onClose,
+  onSelect,
+}: WalletSelectorProps) {
+  const { getWallets } = useWallet();
+
   return (
-    <Stack spacing={5} mx={'auto'} maxW={'md'} py={4} px={3} width='100%'>
-      <Stack align={'center'}>
-        <Heading fontSize={'5xl'}>Select Wallet</Heading>
-      </Stack>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <ModalOverlay />
 
-      <Box
-        rounded={'lg'}
-        bg={useColorModeValue('white', 'gray.700')}
-        boxShadow={'lg'}
-        p={8}>
-
-        <Stack spacing={8}>
-          <Stack spacing={4} direction='column'>
-            <Button
-              size={"lg"}
-              bgGradient='linear(to-r, #139687, #dce58b)'
-              _hover={{ bgGradient: 'linear(to-l, #139687, #dce58b)', transitionDelay: '500ms' }}
-              onClick={() => {Router.push('/login')}}
-            >
-              Nami Wallet
-            </Button>
-            <Button
-              size={"lg"}
-              bgGradient='linear(to-r, #7b127c, #c9488b)'
-              _hover={{ bgGradient: 'linear(to-l, #7b127c, #c9488b)', transitionDelay: '500ms' }}
-              onClick={() => {Router.push('/login')}}
-            >
-              CC Vault
-            </Button>
-            <Button
-              size={"lg"}
-              bgGradient='linear(to-r, #0e2093, #09877e)'
-              _hover={{ bgGradient: 'linear(to-l, #0e2093, #09877e)', transitionDelay: '500ms' }}
-              onClick={() => {Router.push('/login')}}
-            >
-              Gero Wallet
-            </Button>
+      <ModalContent>
+        <ModalHeader>Select Wallet</ModalHeader>
+        <ModalBody>
+          <Stack spacing={8}>
+            <Stack spacing={4} direction="column">
+              {Object.entries(getWallets()).map(
+                ([key, { name, primaryColor, secundaryColor }]) => (
+                  <Button
+                    size="lg"
+                    bgGradient={`linear(to-r, ${primaryColor}, ${secundaryColor})`}
+                    _hover={{
+                      bgGradient: `linear(to-l, ${primaryColor}, ${secundaryColor})`,
+                      transitionDelay: "500ms",
+                    }}
+                    onClick={() => onSelect(key)}
+                  >
+                    {name}
+                  </Button>
+                )
+              )}
+            </Stack>
           </Stack>
-
-          <Stack direction='row' spacing={4} justify='end'>
-            <Button variant='outline' colorScheme={"red"}>Cancel</Button>
-          </Stack>
-        </Stack>
-      </Box>
-    </Stack>
+        </ModalBody>
+        <ModalFooter>
+          <Button variant="outline" colorScheme={"red"} onClick={onClose}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 }
