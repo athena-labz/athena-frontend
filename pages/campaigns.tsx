@@ -23,7 +23,7 @@ type Discoverprops = {
 
 const Discover = ({ campaigns }: Discoverprops) => {
   const [filtered, setFiltered] = useState(campaigns);
-  const {isLogged} = useUser(); 
+  const {user} = useUser(); 
   return (
     <div >
       <Head>
@@ -34,9 +34,9 @@ const Discover = ({ campaigns }: Discoverprops) => {
       <section>
 
         <Flex width={"100%"} style={{  justifyContent: "space-between" }}>
-          <SearchSection contracts={[]} filterServ={[]} setfilter={setFiltered} isCampaign={true} />
+          <SearchSection projects={[]} filterServ={[]} setfilter={setFiltered} isCampaign={true} />
 
-          {isLogged && 
+          {user.isLogged && 
           <Flex maxW={'6xl'} p="2rem" ml="1.1rem" alignItems="start" >
             <NextLink href={"/create-campaign"}>
               <Button
