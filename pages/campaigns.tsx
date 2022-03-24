@@ -1,57 +1,65 @@
-import type { GetStaticProps, NextPage } from 'next'
-import { useState, useCallback, useRef, useEffect } from 'react';
-import Head from 'next/head'
-import { campaigns_resume } from './api/campaingns'
-import SearchSection from '../components/SearchSection'
-import CampaignCard from '../components/CampaignCard'
+import type { GetStaticProps, NextPage } from "next";
+import { useState, useCallback, useRef, useEffect } from "react";
+import Head from "next/head";
+import { campaigns_resume } from "./api/campaingns";
+import SearchSection from "../components/SearchSection";
+import CampaignCard from "../components/CampaignCard";
 import {
   Flex,
   SimpleGrid,
   useColorModeValue,
-  Link, Stack, Button
-} from '@chakra-ui/react'
-import type Campaign from '../types/campaign'
-import NextLink from 'next/link'
-import { useUser } from '../contexts/UserContext';
+  Link,
+  Stack,
+  Button,
+} from "@chakra-ui/react";
+import type Campaign from "../types/campaign";
+import NextLink from "next/link";
+import { useUser } from "../contexts/UserContext";
 
 // https://react-icons.github.io/react-icons
 
 type Discoverprops = {
-  campaigns: Campaign[]
-}
-
+  campaigns: Campaign[];
+};
 
 const Discover = ({ campaigns }: Discoverprops) => {
   const [filtered, setFiltered] = useState(campaigns);
-  const {user} = useUser(); 
+  const { isSignedIn } = useUser();
+        
   return (
-    <div >
+    <div>
       <Head>
         <title>ATHENA - Campaigns</title>
       </Head>
 
-
       <section>
 
-        <Flex width={"100%"} style={{  justifyContent: "space-between" }}>
-          <SearchSection projects={[]} filterServ={[]} setfilter={setFiltered} isCampaign={true} />
+        <Flex width={"100%"} style={{ justifyContent: "space-between" }}>
+          <SearchSection
+            projects={[]}
+            filterServ={[]}
+            setfilter={setFiltered}
+            isCampaign={true}
+          />
 
-          {user.isLogged && 
-          <Flex maxW={'6xl'} p="2rem" ml="1.1rem" alignItems="start" >
-            <NextLink href={"/create-campaign"}>
-              <Button
-                bg={'#38b6ff'}
-                color={'white'}
-                p={6}
-                _hover={{
-                  bg: 'blue.500',
-                }}>
-                Create a project
-              </Button>
-            </NextLink>
-          </Flex>}
+          {isSignedIn() && (
+            <Flex maxW={"6xl"} p="2rem" ml="1.1rem" alignItems="start">
+              <NextLink href={"/create-campaign"}>
+                <Button
+                  bg={"#38b6ff"}
+                  color={"white"}
+                  p={6}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                >
+                  Create a project
+                </Button>
+              </NextLink>
+            </Flex>
+          )}
+
         </Flex>
-
 
         <Flex
           w="full"
@@ -82,17 +90,14 @@ const Discover = ({ campaigns }: Discoverprops) => {
                 currency={campaign.currency}
               />
             ))}
-
           </SimpleGrid>
         </Flex>
-      </section >
-
+      </section>
     </div>
-  )
-}
+  );
+};
 
 export const getStaticProps: GetStaticProps = async () => {
-
   //const {data} =  await api("services"
   const data = campaigns_resume();
 
@@ -100,11 +105,10 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      campaigns: data.campaigns
-
+      campaigns: data.campaigns,
     },
-    revalidate: 60 * 60 * 80// 24 hours
-  }
-}
+    revalidate: 60 * 60 * 80, // 24 hours
+  };
+};
 
-export default Discover
+export default Discover;

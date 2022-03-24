@@ -14,7 +14,7 @@ type ServiceCardProps = {
 
 export default function ServiceCard({ project }: ServiceCardProps) {
   return (
-    <NextLink href={`/contract/${project.projectId}`}>
+    <NextLink href={`/job/${project.projectId}`}>
       <Flex
         p={2}
         w="full"

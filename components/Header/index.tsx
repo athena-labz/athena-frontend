@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { NextPage } from "next";
 import {
   Box,
   Center,
@@ -29,8 +29,8 @@ import {
   PopoverHeader,
   PopoverBody,
   chakra,
-} from '@chakra-ui/react';
-import NextLink from 'next/link'
+} from "@chakra-ui/react";
+import NextLink from "next/link";
 import { BiKey, BiLogOut } from "react-icons/bi";
 import {
   HamburgerIcon,
@@ -38,24 +38,22 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   PhoneIcon,
-} from '@chakra-ui/icons';
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import { useRouter } from 'next/router'
-import { useUser } from '../../contexts/UserContext'
+} from "@chakra-ui/icons";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import Router from "next/router";
+import { useUser } from "../../contexts/UserContext";
 
 const Header: NextPage = () => {
   const { isOpen, onToggle } = useDisclosure();
-  const router = useRouter()
-  const pathnames_not_scroll_header = ['/create-contract', '/profile']
+  const router = useRouter();
+  const pathnames_not_scroll_header = ["/create-contract", "/profile"];
   const scroll_ = pathnames_not_scroll_header.indexOf(router.pathname) === -1;
-  const [state, setstate] = useState(scroll_ ? true : false)
-  const [yPos, setYPos] = useState(0)
-  const { user, logout } = useUser();
-
+  const [yPos, setYPos] = useState(0);
+  const { isSignedIn, getUser, logout } = useUser();
 
   useEffect(function mount() {
-
     function onScroll() {
       setYPos(window.pageYOffset);
     }
@@ -67,154 +65,170 @@ const Header: NextPage = () => {
     };
   });
 
+  const user = getUser();
 
   return (
-    <Box w="100%" >
+    <Box w="100%">
       <Flex
-        as={'header'}
+        as={"header"}
         pos={yPos > 70 && scroll_ ? "fixed" : "relative"}
         top="0"
-        w={'full'}
-        boxShadow={'sm'}
+        w={"full"}
+        boxShadow={"sm"}
         zIndex="9999"
-        justify={'center'}
+        justify={"center"}
         css={{
-          backdropFilter: 'saturate(180%) blur(5px)',
+          backdropFilter: "saturate(180%) blur(5px)",
           backgroundColor: useColorModeValue(
-            'rgba(255, 255, 255, 0.8)',
-            'rgba(26, 32, 44, 0.8)'
+            "rgba(255, 255, 255, 0.8)",
+            "rgba(26, 32, 44, 0.8)"
           ),
         }}
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
-        minH={'4rem'}
+        bg={useColorModeValue("white", "gray.800")}
+        color={useColorModeValue("gray.600", "white")}
+        minH={"4rem"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
-        align={'center'}>
+        borderStyle={"solid"}
+        borderColor={useColorModeValue("gray.200", "gray.900")}
+        align={"center"}
+      >
         <Flex
-          flex={{ base: 1, md: 'auto' }}
+          flex={{ base: 1, md: "auto" }}
           ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}>
+          display={{ base: "flex", md: "none" }}
+        >
           <IconButton
             onClick={onToggle}
             icon={
               isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
             }
-            variant={'ghost'}
-            aria-label={'Toggle Navigation'}
+            variant={"ghost"}
+            aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}  >
-
+        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Box ml={10}>
-            <a href={'/'} >
+            <a href={"/"}>
               <Image src="/logo.png" width="200rem" height="50rem" />
             </a>
           </Box>
 
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+          <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
-
         </Flex>
 
-
-        {!user.isLogged ?
+        {!isSignedIn() ? (
           <Stack
             flex={{ base: 1, md: 0 }}
-            justify={'flex-end'}
-            direction={'row'}
+            justify={"flex-end"}
+            direction={"row"}
             marginRight="6rem"
-            spacing={6}>
-
+            spacing={6}
+          >
             <Button
-              as={'a'}
-              fontSize={'md'}
+              as={"a"}
+              fontSize={"md"}
               fontWeight={400}
-              variant={'link'}
-              href={'/login'}>
+              variant={"link"}
+              href={"/login"}
+            >
               Sign In
             </Button>
 
             <Button
-              as={'a'}
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'md'}
+              as={"a"}
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"md"}
               fontWeight={600}
-              color={'white'}
-              bg={'#38b6ff'}
-              href={'/register'}
+              color={"white"}
+              bg={"#38b6ff"}
+              href={"/register"}
               _hover={{
-                bg: 'blue.300',
-              }}>
+                bg: "blue.300",
+              }}
+            >
               Sign Up
             </Button>
           </Stack>
-
-          :
+        ) : (
           <Stack
             flex={{ base: 1, md: 0 }}
-            justify={'flex-end'}
-            direction={'row'}
+            justify={"flex-end"}
+            direction={"row"}
             marginRight="6rem"
-            spacing={6}>
-
-            <Popover >
-              <PopoverTrigger >
+            spacing={6}
+          >
+            <Popover>
+              <PopoverTrigger>
                 <Button
                   variant="outline"
                   size="lg"
-                  fontSize={'md'}
+                  fontSize={"md"}
                   fontWeight={400}
                   borderRadius="35px"
                   paddingLeft="0.5rem"
-
                   _hover={{
-                    bg: 'black.300',
-                  }}>
-
+                    bg: "black.300",
+                  }}
+                >
                   <WrapItem>
-                    <Avatar name={user.name || undefined} bgColor="#38b6ff" size="sm" />
+                    <Avatar
+                      name={user?.name || undefined}
+                      bgColor="#38b6ff"
+                      size="sm"
+                    />
                   </WrapItem>
 
-                  <Text marginRight="0.3rem" marginLeft="0.5rem">7.0000</Text>
+                  <Text marginRight="0.3rem" marginLeft="0.5rem">
+                    7.0000
+                  </Text>
 
-                  <Text color="#38b6ff" fontWeight="700" > DSET </Text>
-
+                  <Text color="#38b6ff" fontWeight="700">
+                    {" "}
+                    DSET{" "}
+                  </Text>
                 </Button>
               </PopoverTrigger>
 
-              <PopoverContent w={"16rem"} _focus={{ boxShadow: "none" }} >
+              <PopoverContent w={"16rem"} _focus={{ boxShadow: "none" }}>
                 <PopoverArrow />
-                <PopoverHeader pt={4} fontWeight="bold" border="0" fontSize={'lg'} color={'gray.800'}>
-                  {user.name}
+                <PopoverHeader
+                  pt={4}
+                  fontWeight="bold"
+                  border="0"
+                  fontSize={"lg"}
+                  color={"gray.800"}
+                >
+                  {user?.name}
                 </PopoverHeader>
                 <PopoverBody display="flex" flexDirection="row">
-                  <Text fontWeight={600} color={'gray.500'}>
-                    0xc4c16a645...b21a
+                  <Text
+                    fontWeight={600}
+                    color={"gray.500"}
+                    width="100%"
+                    isTruncated
+                  >
+                    {user?.address}
                   </Text>
-                  <BiKey style={{ color: "#1E88E5", fontSize: "1.5em" }} />
+                  <BiKey style={{ color: "#1E88E5", fontSize: "1.5rem" }} />
                 </PopoverBody>
                 <Divider orientation="horizontal" />
                 <PopoverBody>
-                  <Box
-                    w={'full'}
-                    bg={'white'}
-
-                    rounded={'lg'}
-
-                  >
-
-                    <Stack pt={0} align={'center'}>
-                      <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
+                  <Box w={"full"} bg={"white"} rounded={"lg"}>
+                    <Stack pt={0} align={"center"}>
+                      <Text
+                        color={"gray.500"}
+                        fontSize={"sm"}
+                        textTransform={"uppercase"}
+                      >
                         Balance
                       </Text>
 
-                      <Stack direction={'row'} align={'center'}>
-                        <Text fontWeight={800} fontSize={'xl'}>
+                      <Stack direction={"row"} align={"center"}>
+                        <Text fontWeight={800} fontSize={"xl"}>
                           4.689 DST
                         </Text>
                       </Stack>
@@ -222,61 +236,88 @@ const Header: NextPage = () => {
                       <Button
                         variant="outline"
                         size="sm"
-                        fontSize={'md'}
+                        fontSize={"md"}
                         fontWeight={400}
                         borderRadius="35px"
                         _hover={{
-                          bg: 'blue.400',
-                          color: "#fff"
-                        }}>
-
-                        <Text  >Manage your wallet</Text>
-
+                          bg: "blue.400",
+                          color: "#fff",
+                        }}
+                      >
+                        <Text>Manage your wallet</Text>
                       </Button>
                     </Stack>
                   </Box>
-
                 </PopoverBody>
 
                 <Divider orientation="horizontal" />
                 <NextLink href="/create-contract">
-                  <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} >
+                  <PopoverBody
+                    color={"gray.600"}
+                    fontWeight="bold"
+                    _hover={{ color: "#1E88E5" }}
+                  >
                     Create a contract
                   </PopoverBody>
                 </NextLink>
 
                 <NextLink href="/create-campaign">
-                  <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} >
+                  <PopoverBody
+                    color={"gray.600"}
+                    fontWeight="bold"
+                    _hover={{ color: "#1E88E5" }}
+                  >
                     Create a campaign
                   </PopoverBody>
                 </NextLink>
                 <Divider orientation="horizontal" />
                 <NextLink href="/profile">
-                  <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }}>
+                  <PopoverBody
+                    color={"gray.600"}
+                    fontWeight="bold"
+                    _hover={{ color: "#1E88E5" }}
+                  >
                     Profile
                   </PopoverBody>
                 </NextLink>
                 <NextLink href="#">
-                  <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }} as="a" href="#">
+                  <PopoverBody
+                    color={"gray.600"}
+                    fontWeight="bold"
+                    _hover={{ color: "#1E88E5" }}
+                    as="a"
+                    href="#"
+                  >
                     CAS History
                   </PopoverBody>
                 </NextLink>
                 <NextLink href="#">
-                  <PopoverBody color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }}>
+                  <PopoverBody
+                    color={"gray.600"}
+                    fontWeight="bold"
+                    _hover={{ color: "#1E88E5" }}
+                  >
                     Rewards History
                   </PopoverBody>
                 </NextLink>
                 <Divider orientation="horizontal" />
-                <PopoverBody textAlign="left" color={'gray.600'} fontWeight="bold" _hover={{ color: "#1E88E5" }}
-                  as="button" onClick={(e) => logout()}>
+                <PopoverBody
+                  textAlign="left"
+                  color={"gray.600"}
+                  fontWeight="bold"
+                  _hover={{ color: "#1E88E5" }}
+                  as="button"
+                  onClick={(e) => {
+                    logout();
+                    Router.push("/login");
+                  }}
+                >
                   Logout
                 </PopoverBody>
-
               </PopoverContent>
             </Popover>
           </Stack>
-        }
-
+        )}
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -284,30 +325,30 @@ const Header: NextPage = () => {
       </Collapse>
     </Box>
   );
-}
+};
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+  const linkColor = useColorModeValue("gray.600", "gray.200");
+  const linkHoverColor = useColorModeValue("gray.800", "white");
+  const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Stack direction={'row'} spacing={2} style={{ alignItems: "center" }} >
-
+    <Stack direction={"row"} spacing={2} style={{ alignItems: "center" }}>
       {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label} >
-          <Popover trigger={'hover'} placement={'bottom-start'}>
+        <Box key={navItem.label}>
+          <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-              <NextLink href={navItem.href ?? '#'}>
+              <NextLink href={navItem.href ?? "#"}>
                 <Link
                   p={2}
-                  fontSize={'md'}
+                  fontSize={"md"}
                   fontWeight={500}
                   color={linkColor}
                   _hover={{
-                    textDecoration: 'none',
+                    textDecoration: "none",
                     color: "blue.400",
-                  }}>
+                  }}
+                >
                   {navItem.label}
                 </Link>
               </NextLink>
@@ -321,33 +362,35 @@ const DesktopNav = () => {
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
-    <NextLink href={href ?? '#'}>
+    <NextLink href={href ?? "#"}>
       <Link
-
-        role={'group'}
-        display={'block'}
+        role={"group"}
+        display={"block"}
         p={2}
-        rounded={'md'}
-        _hover={{ bg: useColorModeValue('blue.50', 'gray.900') }}>
-        <Stack direction={'row'} align={'center'}>
+        rounded={"md"}
+        _hover={{ bg: useColorModeValue("blue.50", "gray.900") }}
+      >
+        <Stack direction={"row"} align={"center"}>
           <Box>
             <Text
-              transition={'all .3s ease'}
-              _groupHover={{ color: 'blue.500' }}
-              fontWeight={500}>
+              transition={"all .3s ease"}
+              _groupHover={{ color: "blue.500" }}
+              fontWeight={500}
+            >
               {label}
             </Text>
-            <Text fontSize={'md'}>{subLabel}</Text>
+            <Text fontSize={"md"}>{subLabel}</Text>
           </Box>
           <Flex
-            transition={'all .3s ease'}
-            transform={'translateX(-10px)'}
+            transition={"all .3s ease"}
+            transform={"translateX(-10px)"}
             opacity={0}
-            _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-            justify={'flex-end'}
-            align={'center'}
-            flex={1}>
-            <Icon color={'blue.500'} w={5} h={5} as={ChevronRightIcon} />
+            _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
+            justify={"flex-end"}
+            align={"center"}
+            flex={1}
+          >
+            <Icon color={"blue.500"} w={5} h={5} as={ChevronRightIcon} />
           </Flex>
         </Stack>
       </Link>
@@ -358,9 +401,10 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 const MobileNav = () => {
   return (
     <Stack
-      bg={useColorModeValue('white', 'gray.800')}
+      bg={useColorModeValue("white", "gray.800")}
       p={4}
-      display={{ md: 'none' }}>
+      display={{ md: "none" }}
+    >
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
@@ -376,41 +420,43 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
       <Flex
         py={3}
         as={Link}
-        href={href ?? '#'}
-        justify={'space-between'}
-        align={'center'}
+        href={href ?? "#"}
+        justify={"space-between"}
+        align={"center"}
         _hover={{
-          textDecoration: 'none',
-        }}>
+          textDecoration: "none",
+        }}
+      >
         <Text
           fontWeight={600}
-
-          color={useColorModeValue('gray.600', 'gray.200')}>
+          color={useColorModeValue("gray.600", "gray.200")}
+        >
           {label}
         </Text>
         {children && (
           <Icon
             as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
+            transition={"all .25s ease-in-out"}
+            transform={isOpen ? "rotate(180deg)" : ""}
             w={6}
             h={6}
           />
         )}
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
+      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
         <Stack
           mt={2}
           pl={4}
           borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}>
+          borderStyle={"solid"}
+          borderColor={useColorModeValue("gray.200", "gray.700")}
+          align={"start"}
+        >
           {children &&
             children.map((child) => (
-              <NextLink href={child?.href ??  "#"}>
-                <Link key={child.label} py={2} >
+              <NextLink href={child?.href ?? "#"}>
+                <Link key={child.label} py={2}>
                   {child.label}
                 </Link>
               </NextLink>
@@ -430,43 +476,38 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Solution',
-    href: "/#solution"
-
+    label: "Solution",
+    href: "/#solution",
   },
   {
-    label: 'Crowdfunding ',
-    href: "/#crowdfunding"
+    label: "Crowdfunding ",
+    href: "/#crowdfunding",
   },
-/*  {
+  /*  {
     label: 'Roadmap',
     href: "/#roadmap"
 
   },*/
   {
-    label: 'Team',
-    href: '/#team'
-
+    label: "Team",
+    href: "/#team",
   },
 
   {
-    label: 'Token',
-    href: "/token"
-
+    label: "Token",
+    href: "/token",
   },
   {
-    label: 'FAQ',
-    href: '/#faq'
+    label: "FAQ",
+    href: "/#faq",
   },
   {
-    label: 'Jobs',
-    href: "/jobs"
+    label: "Jobs",
+    href: "/jobs",
   },
   {
-    label: 'Campaigns',
-    href: "/campaigns"
+    label: "Campaigns",
+    href: "/campaigns",
   },
-
-
 ];
-export default Header
+export default Header;
