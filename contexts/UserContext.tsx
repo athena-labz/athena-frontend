@@ -25,6 +25,7 @@ type UserContextData = {
   ) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  applyProject: (id:string) => void;
 };
 
 type UserContextProviderProps = {
@@ -115,6 +116,10 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     localStorage.removeItem("user");
   }
 
+  function applyProject(id:string) {
+    localStorage.setItem(`project-${id}`,"applyed" );
+  }
+
   return (
     <UserContext_.Provider
       value={{
@@ -123,6 +128,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         register: register,
         login: login,
         logout: logout,
+        applyProject
       }}
     >
       {children}
