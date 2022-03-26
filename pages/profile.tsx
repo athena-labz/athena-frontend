@@ -23,18 +23,18 @@ const tablesTableData = [
     email: "Humanoid robots conceived with the final objective to have",
     subdomain: "Manager",
     domain: "Organization",
-    status: "Progress",
+    status: "Dispute",
     date: "14/06/21",
-    link:"http://localhost:3000/campaign/93fb923456f9f955908f6092a6c58057"
+    link:"/dispute/43e3627c6b2b63dc3ff9fdfb4b7af4231416eeb8688a31ed0cbfd8d5f13b03cf"
   },
   {
     name: "Thunder Road: Vendetta",
     email: "The classic 1986 game about the world's most lethal",
     subdomain: "Programmer",
     domain: "Developer",
-    status: "Dispute",
+    status: "Progress",
     date: "12/05/21",
-    link:"http://localhost:3000/campaign/259bf04f526341c498ebf1ce582d1291"
+    link:"/campaign/259bf04f526341c498ebf1ce582d1291"
   },
   {
     name: "Floating Floors",
@@ -43,7 +43,7 @@ const tablesTableData = [
     domain: "Projects",
     status: "Finished",
     date: "07/06/21",
-    link:"http://localhost:3000/campaign/27b4039a42d9d632a5e791b166127c42"
+    link:"/campaign/27b4039a42d9d632a5e791b166127c42"
   }
 ];
 

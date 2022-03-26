@@ -25,7 +25,7 @@ import { useUser } from '../../contexts/UserContext'
 import { GiInjustice } from 'react-icons/gi';
 
 export default function Campaign_Page({ campaign }: { campaign: Campaign }) {
-    const { user } = useUser();
+    const { isSignedIn } = useUser();
 
     return (
         <Container maxW={'7xl'}>
@@ -130,7 +130,7 @@ export default function Campaign_Page({ campaign }: { campaign: Campaign }) {
                             transform: 'translateY(2px)',
                             boxShadow: 'lg',
                         }}>
-                        {user.isLogged ? "ACCUSE" : "BACK THIS PROJECT"}
+                        {isSignedIn() ? "ACCUSE" : "BACK THIS PROJECT"}
                     </Button>
                 </Stack>
             </SimpleGrid>
@@ -240,7 +240,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     const data = campaign(slug);
 
-    console.log("RETURN", data)
     if (data == null)
         return { notFound: true }
 
