@@ -62,7 +62,7 @@ interface Deliverable {
 }
 
 export default function Component() {
-  const { isSignedIn, getUser } = useUser();
+  const { isSignedIn, getToken } = useUser();
   if (isSignedIn() === false) {
     return <AuthenticationRequired />;
   }
@@ -170,7 +170,7 @@ export default function Component() {
       collateral: collateral,
       judges: judges,
       deliverables: deliverables,
-      token: getUser()
+      token: getToken()
     }).then(res => {
       console.log("cool")
       console.log(res)

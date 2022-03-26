@@ -8,6 +8,10 @@ function toHex(bytes) {
   return Buffer.from(bytes).toString("hex");
 }
 
+function fromHex(hex) {
+  return Buffer.from(hex, "hex");
+}
+
 export async function bech32addr(api) {
   return Loader.Cardano.Address.from_bytes(
     Buffer.from(await api.getChangeAddress(), "hex")
@@ -55,7 +59,9 @@ export async function getProtocolParameters(endpoint) {
 
 export async function signTx(api, txCbor) {
   // load tx cbor
-  const txCli = Loader.Cardano.Transaction.from_bytes(Buffer.from(txCbor, "hex"));
+  const txCli = Loader.Cardano.Transaction.from_bytes(
+    Buffer.from(txCbor, "hex")
+  );
 
   // get tx body
   const txBody = txCli.body();
@@ -63,7 +69,7 @@ export async function signTx(api, txCbor) {
   // get tx witness-set
   const witnessSet = txCli.witness_set();
 
-  console.log("before", witnessSet)
+  console.log("before", witnessSet);
 
   // clear vkeys from witness-set
   witnessSet.vkeys()?.free();

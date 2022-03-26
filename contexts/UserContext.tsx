@@ -15,6 +15,7 @@ type Role = "Proposer" | "Contributor" | "Mediator";
 type UserContextData = {
   isSignedIn: () => boolean;
   getUser: () => any;
+  getToken: () => string | null;
   register: (
     role: Role,
     name: string,
@@ -47,6 +48,16 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     }
 
     return jwt_decode(token);
+  }
+
+  function getToken() {
+    const token = localStorage.getItem("user");
+
+    if (!token) {
+      return null;
+    } else {
+      return token
+    }
   }
 
   function isSignedIn() {
@@ -118,6 +129,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       value={{
         isSignedIn,
         getUser,
+        getToken,
         register: register,
         login: login,
         logout: logout,
