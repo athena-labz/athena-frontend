@@ -32,27 +32,24 @@ type UserContextProviderProps = {
   children: ReactNode;
 };
 
-const backend = axios.create({
-  baseURL: "http://127.0.0.1:5000/",
-  headers: { "Content-Type": "application/json" },
-  withCredentials: true,
-});
-
 export const UserContext_ = createContext({} as UserContextData);
 
 export function UserContextProvider({ children }: UserContextProviderProps) {
   function getUser() {
-    const token = localStorage.getItem("user");
-    if (!token) {
-      return null;
-    }
+    const user = localStorage.getItem("user");
 
-    return jwt_decode(token);
+    if (user === null)
+      return null
+    else
+      return JSON.parse(user);
   }
 
   function isSignedIn() {
     if (typeof window !== "undefined") {
-      return getUser() !== null;
+      const user = getUser();
+
+      if (user !== null)
+        return user.isSignedIn;
     }
 
     return false;
@@ -66,54 +63,36 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     password: string,
     api: API
   ) {
-    const arg = {
+    const user = {
       name,
       email,
       role,
       address,
       password,
       pubkeyhash: addrToPubKeyHash(address),
+      isSignedIn: true
     };
 
-    try {
-      const res = await backend.post("/register", arg);
-
-      const txHash = await signTx(api, res.data.transaction);
-
-      if (getUser() === null)
-        localStorage.setItem("user", res.data.access_token);
-
-      Router.push("/");
-
-      return Promise.resolve();
-    } catch (error: any) {
-      return Promise.reject(error);
-    }
+    localStorage.setItem("user", JSON.stringify(user));
   }
 
   async function login(email: string, password: string) {
-    try {
-      const res = await backend.post("/login", {
-        email: email,
-        password: password,
-      });
+    const user = getUser();
 
-      if (getUser() === null)
-        localStorage.setItem("user", res.data.access_token);
-
-      return Promise.resolve();
-    } catch (error: any) {
-      if (error.response && error.response.status === 401) {
-        console.error(error.response.data.message);
-        return Promise.reject("Incorrect email or password");
-      } else {
-        throw error;
-      }
+    if (user === null)
+      return Promise.reject("No user registered!")
+    else if (email !== user.email || password !== user.password)
+      return Promise.reject("Incorrect email or password")
+    else {
+      localStorage.setItem("user", JSON.stringify({...user, isSignedIn: true}));
     }
   }
 
   function logout() {
-    localStorage.removeItem("user");
+    const user = getUser();
+
+    if (user !== null)
+      localStorage.setItem("user", JSON.stringify({...user, isSignedIn: false}));
   }
 
   function applyProject(id:string) {
